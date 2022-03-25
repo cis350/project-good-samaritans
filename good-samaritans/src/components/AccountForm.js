@@ -3,7 +3,7 @@ import Profile from './Profile';
 
 function AccountForm() {
 
-  const userInput = useRef();
+  const userInput = useRef('');
   const userInputStreet = useRef();
   const userInputState = useRef();
   const userInputCountry = useRef();
@@ -38,7 +38,6 @@ function AccountForm() {
   }
 
   function handleFormSubmit(e) {
-    e.preventDefault();
     if (/^[a-z0-9A-Z ]+$/.test(userInput.current)) {
         console.log(userInput);
         console.log(userInputStreet);
