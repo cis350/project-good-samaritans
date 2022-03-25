@@ -4,6 +4,7 @@
     React, useState, useEffect, useRef,
   } from 'react';
   import Storage from '../modules/Storage';
+  import Training from './Training';
   import Request from './Request';
   import '../assets/Profile.css';
   
@@ -11,10 +12,10 @@
     console.log('in profile');
     const name = useRef('hi'); // name of the user after logging in
     const [, setFriends] = useState(false); // event if friends button was clicked
-    const [, setTraining] = useState(false); // event if the training button was clicked
+    const [training, setTraining] = useState(false); // event if the training button was clicked
+    const [tab, setTab] = useState('board'); // board or samaritan
     const [, setAccount] = useState(false); // event if the account button was clicked
     const [privacy, setPrivacy] = useState('Private');
-    const [tab, setTab] = useState('board'); // board or samaritan
     const [request, setRequest] = useState(false);
   
     useEffect(() => {
@@ -28,13 +29,22 @@
         setPrivacy('Private');
       }
     };
+    
+    const handleTraining = () => {
+      setTraining(true);
+    };  
 
     const handleRequest = () => {
       setRequest(true);
     };  
+    
 
-    // Goes to request page
-    if(request){
+    if(training) { // Goes to training page
+      return (
+        <Training />
+      );
+    } 
+    else if(request) { // Goes to request page
       return (
         <Request />
       );
@@ -49,7 +59,7 @@
           <button className="profile-button" type="button" onClick={() => { setFriends(true); }}>
             Friends
           </button>
-          <button className="profile-button" type="button" onClick={() => { setTraining(true); }}>
+          <button className="profile-button" type="button" onClick={handleTraining}>
             Training
           </button>
         </div>
