@@ -4,11 +4,11 @@ import Profile from './Profile';
 function AccountForm() {
 
   const userInput = useRef('');
-  const userInputStreet = useRef();
-  const userInputState = useRef();
-  const userInputCountry = useRef();
-  const userInputZIP = useRef();
-  const userInputCOVID = useRef();
+  const userInputStreet = useRef('');
+  const userInputState = useRef('');
+  const userInputCountry = useRef('');
+  const userInputZIP = useRef('');
+  const userInputCOVID = useRef('');
   
   const [, setStarted] = useState(false);
   const start = useRef(false);
