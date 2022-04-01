@@ -1,5 +1,6 @@
 import {React, useState, useRef} from 'react';
 import Profile from './Profile';
+import Login from './Login';
 
 function AccountForm() {
 
@@ -12,6 +13,7 @@ function AccountForm() {
   
   const [, setStarted] = useState(false);
   const start = useRef(false);
+  const cloggedin = useRef(false);
 
   function handleUser(e)  {
     userInput.current = e.target.value;
@@ -52,8 +54,18 @@ function AccountForm() {
       alert("must fill all values properly and alphanumerically");
     }
   }
-
-  if(!start.current){
+  function handleLogin(e) {
+    setStarted(true); 
+    cloggedin.current = true;
+  }
+  if (cloggedin.current) {
+    return (
+      <div className="Login">
+      <Login />
+      </div>
+    );
+  }
+  if(!start.current || !cloggedin.current){
     return(
       <div>
         <h1>Enter Account Information</h1>
@@ -76,10 +88,11 @@ function AccountForm() {
           COVID vaccination record: <input name="user" onChange={handleUserCOVID}/>
         </label>
         <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
+        <h1>Alrerady have an account? Login!</h1>
+        <button type="submit" onClick={handleLogin}>Login</button>
       </div>
         )
   }
-
   return (
     <div className="Profile">
     <Profile />
