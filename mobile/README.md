@@ -1,6 +1,6 @@
 **initialize project**
 - expo init my-project
-- (then move components folder and replace App.js to my-project)
+- (then move components folder to my-project and replace App.js in my-project)
 - (also move .eslint.js)
 
 **Downloads required**
