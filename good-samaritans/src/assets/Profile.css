@@ -1,39 +1,113 @@
 .Profile {
-    background: #E9E9E9;
+    background-color: #E9E9E9;
 }
 .title {
     font-family: 'Roboto';
-font-style: normal;
+    font-style: normal;
+    text-align: center;
 
-display: flex;
-align-items: center;
-text-align: center;
+    color: #000000;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    
+    position: 10px;
+    padding: 15px;
+    width: 250px;
+}
 
-color: #000000;
-background: #FFFFFF;
-border-radius: 10px;
+.leftButtons {
+    width: 100px;
+    /* border: solid; */
+    padding: 20px;
+    padding-right: 50px;
+    position: absolute;
+    left: 0px;
+    margin-top: 75px;
+    flex-direction: column;
+}
+
+#friends {
+    margin-bottom: 30px;
+    padding: 7px 40px 7px 40px;
+}
+
+#training {
+    padding: 7px 40px 7px 40px;
+}
+
+.middleButtons {
+    /* border: solid; */
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.tabs {
+    margin: auto;
+}
+
+#help {
+    border: none;
+    border-bottom: 2px solid rgb(238, 89, 89);
+    background-color: transparent;
+    margin-left: 10%;
+    font-size: 25px;
+}
+
+#samaritan {
+    border: none;
+    border-bottom: 2px solid gray;
+    background-color: transparent;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 25px;
+}
+
+.rightButtons {
+    width: 100px;
+    /* border: solid; */
+    padding: 20px;
+    position: absolute;
+    padding-right: 50px;
+    right: 0px;
+    margin-top: 75px;
+}
+
+.profileName {
+    text-align: center;
+    /* border: solid; */
+}
+
+#account {
+    margin-bottom: 30px;
+    padding: 7px 40px 7px 40px;
+}
+
+#privacy {
+    padding: 7px 40px 7px 40px;
 }
 .profile-button {
-
-background: #FFFFFF;
-border: 1px solid #FF8B8B;
-box-sizing: border-box;
-border-radius: 100px;
+    background: #FFFFFF;
+    border: 1px solid #FF8B8B;
+    box-sizing: border-box;
+    border-radius: 100px;
+}
+.request {
+    margin-top: 550px;
+    width: auto;
+    /* border: solid; */
 }
 .request-button {
-    display: flex;
-flex-direction: column;
-align-items: center;
-padding: 12px 32px;
+    border: transparent;
+    margin-left: 40%;
+    padding: 10px 50px 10px 50px;
+    
 
-background: #FF0000;
-border-radius: 100px;
+    background: #FF0000;
+    border-radius: 100px;
 
-font-family: 'Roboto';
-font-style: normal;
-color: #FFFFFF;
-
-display: flex;
-align-items: center;
-text-align: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
 }
