@@ -1,7 +1,7 @@
 import { React, useState, useRef } from 'react';
 import Profile from './Profile';
 
-function AccountForm() {
+function Signup() {
   const userInput = useRef('');
   const userInputStreet = useRef('');
   const userInputState = useRef('');
@@ -102,4 +102,4 @@ function AccountForm() {
   );
 }
 
-export default AccountForm;
+export default Signup;
