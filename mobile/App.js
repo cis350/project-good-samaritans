@@ -7,6 +7,7 @@ import { React } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './components/Signup';
+import Login from './components/Login';
 import Profile from './components/Profile';
 import Training from './components/Training';
 import Request from './components/Request';
@@ -18,6 +19,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Signup">
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Training" component={Training} />
         <Stack.Screen name="Request" component={Request} />

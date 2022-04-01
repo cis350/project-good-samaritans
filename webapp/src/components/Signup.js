@@ -1,5 +1,6 @@
 import { React, useState, useRef } from 'react';
 import Profile from './Profile';
+import Login from './Login';
 
 function Signup() {
   const userInput = useRef('');
@@ -11,6 +12,7 @@ function Signup() {
 
   const [, setStarted] = useState(false);
   const start = useRef(false);
+  const cloggedin = useRef(false);
 
   function handleUser(e) {
     userInput.current = e.target.value;
@@ -49,14 +51,27 @@ function Signup() {
       setStarted(true);
       start.current = true;
     } else {
-      // find something else to alert
+      //  eslint this later
       // eslint-disable-next-line no-alert
       alert('must fill all values properly and alphanumerically');
     }
   }
+
+  function handleLogin() {
+    setStarted(true);
+    cloggedin.current = true;
+  }
+  if (cloggedin.current) {
+    return (
+      <div className="Login">
+        <Login />
+      </div>
+    );
+  }
+
   // placeholder variable for eslint
   const domId = 123;
-  if (!start.current) {
+  if (!start.current && !cloggedin.current) {
     return (
       <div>
         <h1>Enter Account Information</h1>
@@ -91,6 +106,8 @@ function Signup() {
           <input name="user" onChange={handleUserCOVID} />
         </label>
         <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
+        <h2>Already have an account? Login!</h2>
+        <button type="submit" onClick={handleLogin}>Login</button>
       </div>
     );
   }
