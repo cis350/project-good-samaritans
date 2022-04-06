@@ -19,6 +19,10 @@ function Login({ navigation }) {
     }
   }
 
+  function handleSignUp() {
+    navigation.navigate('Signup');
+  }
+
   return (
     <View>
       <Text>
@@ -38,6 +42,13 @@ function Login({ navigation }) {
       <Button
         title="Login"
         onPress={(e) => handleFormSubmit(e)}
+      />
+      <Text>
+        Do not have an acount? Signup
+      </Text>
+      <Button
+        title="Signup"
+        onPress={(e) => handleSignUp(e)}
       />
     </View>
   );

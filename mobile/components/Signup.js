@@ -39,9 +39,6 @@ function Signup({ navigation }) {
       Alert.alert('must fill all values properly and alphanumerically');
     }
   }
-  function handleLogin() {
-    navigation.navigate('Login');
-  }
 
   return (
     <View style={styles.container}>
@@ -99,13 +96,6 @@ function Signup({ navigation }) {
       <Button
         title="Sign Up"
         onPress={(e) => handleFormSubmit(e)}
-      />
-      <Text>
-        Already have an acount? Login
-      </Text>
-      <Button
-        title="Login"
-        onPress={(e) => handleLogin(e)}
       />
       <StatusBar style={{ align: 'auto' }} />
     </View>
