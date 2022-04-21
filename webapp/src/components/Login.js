@@ -1,4 +1,5 @@
 import { React, useState, useRef } from 'react';
+import '../assets/Login.css';
 import Profile from './Profile';
 import Signup from './Signup';
 
@@ -41,21 +42,25 @@ function Login() {
   const domId = 124;
   if (!start.current && !clickedSignup.current) {
     return (
-      <div>
-        <h1>Login</h1>
-        <label htmlFor={domId}>
-          Full Name:
-          {' '}
-          <input name="user" onChange={handleUser} />
-        </label>
-        <label htmlFor={domId}>
-          Password:
-          {' '}
-          <input name="password" onChange={handleUserPass} />
-        </label>
-        <button type="submit" onClick={handleFormSubmit}>Login</button>
-        <h2>Do not have an Account? Signup</h2>
-        <button type="submit" onClick={handleSignUp}>Signup</button>
+      <div className="Login-background">
+        <h1 className="Login-title">Good Samaritans</h1>
+        <div className="Login-rectangle">
+          <label htmlFor={domId}>
+            Username:
+            {' '}
+            <input name="user" onChange={handleUser} />
+          </label>
+          <label htmlFor={domId}>
+            Password:
+            {' '}
+            <input name="password" onChange={handleUserPass} />
+          </label>
+          <button type="submit" onClick={handleFormSubmit}>Login</button>
+        </div>
+        <div className="Login-signup-box ">
+          <h2 className="Login-signup-name">Do not have an Account?</h2>
+          <button type="submit" onClick={handleSignUp}>Signup</button>
+        </div>
       </div>
     );
   }
