@@ -1,7 +1,9 @@
 import {
   React, useState, useEffect, useRef,
 } from 'react';
-import Storage from '../modules/Storage';
+import {
+  changePrivacy, getHelpPosts, getSamaritanTexts,
+} from '../modules/api';
 import Training from './Training';
 import Request from './Request';
 import '../assets/Profile.css';
@@ -16,6 +18,8 @@ function Profile({ accountName }) {
   const [, setAccount] = useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
+  const helpBoard = useRef();
+  const samaritanTexts = useRef();
 
   // const friendsList = Storage.getFriends(name.current); -
   // some array of friend objects with username, image
@@ -39,7 +43,7 @@ function Profile({ accountName }) {
   ];
 
   useEffect(() => {
-    Storage.changePrivacy(name.current, privacy);
+    changePrivacy(name.current, privacy);
   }, [privacy]);
 
   const handlePrivacy = () => {
@@ -64,6 +68,16 @@ function Profile({ accountName }) {
     } else {
       setFriends(true);
     }
+  };
+
+  const handleHelpPosts = () => {
+    setTab('board');
+    helpBoard.current = getHelpPosts();
+  };
+
+  const handleSamaritanTexts = () => {
+    setTab('samaritan');
+    samaritanTexts.current = getSamaritanTexts(name.current);
   };
 
   if (training) { // Goes to training page
@@ -103,14 +117,17 @@ function Profile({ accountName }) {
                 </li>
               ))}
             </ol>
+            <button id="cancel" type="button" onClick={() => { setFriends(false); }}>
+              Cancel
+            </button>
           </div>
         )
           : (
             <div className="tabs">
-              <button id="help" type="button" onClick={() => { setTab('board'); }}>
+              <button id="help" type="button" onClick={handleHelpPosts}>
                 Help Board
               </button>
-              <button id="samaritan" type="button" onClick={() => { setTab('samaritan'); }}>
+              <button id="samaritan" type="button" onClick={handleSamaritanTexts}>
                 Samaritan Help
               </button>
               {(tab === 'board') ? (<div className="help-board">HELP POSTS GO HERE</div>) : (<div className="samaritan-help">WHO YOU ARE CURRENTLY HELPING GOES HERE</div>)}

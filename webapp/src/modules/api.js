@@ -1,15 +1,16 @@
+/* eslint-disable no-useless-catch */
 const axios = require('axios');
 
 const rootURL = 'http://localhost:10000';
 
 // profile page - sends request to change the privacy setting
-export async function changePrivacy(name) {
-  if (!name) {
+export async function changePrivacy(name, setting) {
+  if (!name || !setting) {
     throw new Error('no privacy setting');
   }
 
   try {
-    await axios.put(`${rootURL}/privacy`, { privacy: name });
+    await axios.put(`${rootURL}/user/${name}/privacy`, { privacy: setting });
     return;
   } catch (err) {
     throw err;
@@ -53,4 +54,3 @@ export async function getSamaritanTexts(name) {
     throw err;
   }
 }
-
