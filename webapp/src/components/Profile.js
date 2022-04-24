@@ -6,6 +6,7 @@ import {
 } from '../modules/api';
 import Training from './Training';
 import Request from './Request';
+import Account from './Account';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
@@ -15,7 +16,7 @@ function Profile({ accountName }) {
   const [friends, setFriends] = useState(false); // event if friends button was clicked
   const [training, setTraining] = useState(false); // event if the training button was clicked
   const [tab, setTab] = useState('board'); // board or samaritan
-  const [, setAccount] = useState(false); // event if the account button was clicked
+  const [account, setAccount] = useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
   const helpBoard = useRef();
@@ -62,6 +63,10 @@ function Profile({ accountName }) {
     setRequest(true);
   };
 
+  const handleAccount = () => {
+    setAccount(true);
+  };
+
   const handleFriends = () => {
     if (friends) {
       setFriends(false);
@@ -90,7 +95,11 @@ function Profile({ accountName }) {
       <Request />
     );
   }
-
+  if (account) {
+    return (
+      <Account />
+    );
+  }
   return (
     <div className="Profile">
       <div className="title">
@@ -139,7 +148,7 @@ function Profile({ accountName }) {
         <div className="profileName">
           <h3>{ name.current }</h3>
         </div>
-        <button className="profile-button" id="account" type="button" onClick={() => { setAccount(true); }}>
+        <button className="profile-button" id="account" type="button" onClick={handleAccount}>
           Account
         </button>
         <button className="profile-button" id="privacy" type="button" onClick={handlePrivacy}>

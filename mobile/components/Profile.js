@@ -9,7 +9,6 @@ function Profile({ route, navigation }) {
 
   const [friends, setFriends] = React.useState(false); // event if friends button was clicked
   const [tab, setTab] = React.useState('board'); // board or samaritan
-  // const [account, setAccount] = React.useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = React.useState('Private');
 
   const handleTraining = () => {
@@ -39,6 +38,10 @@ function Profile({ route, navigation }) {
 
   const handleRequest = () => {
     navigation.navigate('Request');
+  };
+
+  const handleAccount = () => {
+    navigation.navigate('Account');
   };
 
   const handlePrivacy = () => {
@@ -110,6 +113,7 @@ function Profile({ route, navigation }) {
         </Text>
         <Button
           title="Account"
+          onPress={(e) => handleAccount(e)}
         />
         <Button
           title={privacy}

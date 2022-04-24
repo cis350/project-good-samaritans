@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Training from './components/Training';
 import Request from './components/Request';
+import Account from './components/Account';
 
 // create a navigation stack
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Training" component={Training} />
         <Stack.Screen name="Request" component={Request} />
+        <Stack.Screen name="Account" component={Account} />
       </Stack.Navigator>
     </NavigationContainer>
   );
