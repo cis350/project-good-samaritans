@@ -8,6 +8,7 @@ const connect = async (url) => {
       url,
       { useNewUrlParser: true, useUnifiedTopology: true },
     )).db();
+    console.log(`Connected to the database: ${conn.databaseName}`);
     return conn;
   } catch (err) {
     throw new Error('could not connect to the db');
@@ -15,13 +16,13 @@ const connect = async (url) => {
 };
 
 // change the privacy of a user
-const changePrivacy = async (db, name, setting) => {
+const changePrivacy = async (db, user, setting) => {
   try {
-    await db.collection('').updateOne(
-      { user: name },
+    await db.collection('Users').updateOne(
+      { name: user },
       { $set: { privacy: setting } },
     );
-    const result = await db.collection('').findOne({ user: name });
+    const result = await db.collection('Users').findOne({ name: user });
     return result;
   } catch (err) {
     throw new Error('could not change privacy');
@@ -29,9 +30,9 @@ const changePrivacy = async (db, name, setting) => {
 };
 
 // get the friends of a user
-const getFriends = async (db, name) => {
+const getFriends = async (db, user) => {
   try {
-    const result = await db.collection('').findOne({ user: name });
+    const result = await db.collection('Users').findOne({ name: user });
     return result.friends;
   } catch (err) {
     throw new Error('could not get friends');
@@ -41,7 +42,7 @@ const getFriends = async (db, name) => {
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
   try {
-    const result = await db.collection('').find({});
+    const result = await db.collection('Users').find({}).toArray();
     return result;
   } catch (err) {
     throw new Error('could not get help board');
@@ -49,9 +50,9 @@ const getHelpPosts = async (db) => {
 };
 
 // get the samaritan texts of a user
-const getSamaritanTexts = async (db, name) => {
+const getSamaritanTexts = async (db, user) => {
   try {
-    const result = await db.collection('').findOne({ user: name });
+    const result = await db.collection('Users').findOne({ name: user });
     return result.texts;
   } catch (err) {
     throw new Error('could not get samaritan texts of user');

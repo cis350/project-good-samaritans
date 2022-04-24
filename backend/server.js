@@ -23,7 +23,12 @@ const dbo = require('./dbOperations');
 let db;
 
 // MongoDB URL
-const url;
+const url = process.env.ATLAS_URI;
+
+// Root endpoint
+app.get('/', (_req, resp) => {
+  resp.json({ message: 'project good samaritans' });
+});
 
 // profile page - changePrivacy endpoint(change the user's privacy in db)
 app.put('/user/:name/privacy', async (req, resp) => {
@@ -66,13 +71,13 @@ app.get('/help-posts', async (_req, resp) => {
 });
 
 // profile page - getSamaritanTexts endpoint(find who the user is currently helping/texting)
-app.get('/samaritan/:name', async (req, resp) => {
+app.get('/texts/:name', async (req, resp) => {
   if (!req.params.name || req.params.name.length === 0) {
     resp.status(404).json({ error: 'username not provided' });
     return;
   }
-
   try {
+    console.log(req.params.name);
     const results = await dbo.getSamaritanTexts(db, req.params.name);
     resp.status(200).json({ data: results });
   } catch (err) {
@@ -84,10 +89,6 @@ app.get('/samaritan/:name', async (req, resp) => {
 const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   // perform a database connection when server starts
-  // dbo.connectToServer(function (err) {
-  //   if (err) console.error(err);
-
-  // });
   db = await dbo.connect(url);
   console.log(`Server is running on port: ${port}`);
 });
