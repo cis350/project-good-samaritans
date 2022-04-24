@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
 
 function Signup({ navigation }) {
   const [userInput, setUserInput] = React.useState('');
+  const [userInputPwd, setUserInputPwd] = React.useState('');
   const [userInputStreet, setUserInputStreet] = React.useState('');
   const [userInputState, setUserInputState] = React.useState('');
   const [userInputCountry, setUserInputCountry] = React.useState('');
@@ -52,6 +53,14 @@ function Signup({ navigation }) {
       <TextInput
         onChangeText={setUserInput}
         value={userInput}
+      />
+
+      <Text>
+        Password:
+      </Text>
+      <TextInput
+        onChangeText={setUserInputPwd}
+        value={userInputPwd}
       />
 
       <Text>

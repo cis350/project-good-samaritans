@@ -3,6 +3,7 @@ import Profile from './Profile';
 
 function Signup() {
   const userInput = useRef('');
+  const userPwd = useRef('');
   const userInputStreet = useRef('');
   const userInputState = useRef('');
   const userInputCountry = useRef('');
@@ -14,6 +15,10 @@ function Signup() {
 
   function handleUser(e) {
     userInput.current = e.target.value;
+  }
+
+  function handleUserPwd(e) {
+    userPwd.current = e.target.value;
   }
 
   function handleUserStreet(e) {
@@ -65,6 +70,11 @@ function Signup() {
           Full Name:
           {' '}
           <input name="user" onChange={handleUser} />
+        </label>
+        <label htmlFor={domId}>
+          Password:
+          {' '}
+          <input name="password" onChange={handleUserPwd} />
         </label>
         <label htmlFor={domId}>
           Street:
