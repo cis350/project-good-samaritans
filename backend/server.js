@@ -61,7 +61,7 @@ app.get('/friends/:name', async (req, resp) => {
 });
 
 // profile page - getHelpPosts endpoint(get the help board of posts)
-app.get('/help-posts', async (_req, resp) => {
+app.get('/help', async (_req, resp) => {
   try {
     const results = await dbo.getHelpPosts(db);
     resp.status(200).json({ data: results });

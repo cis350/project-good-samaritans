@@ -42,7 +42,7 @@ const getFriends = async (db, user) => {
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
   try {
-    const result = await db.collection('Users').find({}).toArray();
+    const result = await db.collection('Help').find({}).toArray();
     return result;
   } catch (err) {
     throw new Error('could not get help board');
