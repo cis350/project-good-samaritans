@@ -32,14 +32,14 @@ app.get('/', (_req, resp) => {
 
 // profile page - changePrivacy endpoint(change the user's privacy in db)
 app.put('/user/:name/privacy', async (req, resp) => {
-  if (!req.params.user || req.params.user.length === 0 || !req.body.privacy) {
+  if (!req.params.name || req.params.name.length === 0 || !req.body.privacy) {
     resp.status(404).json({ error: 'username or privacy setting not provided' });
     return;
   }
 
   try {
-    const results = await dbo.changePrivacy(db, req.params.user, req.body.privacy);
-    resp.status(200).json({ message: `Player with name ${results.user} changed privacy to ${results.privacy}` });
+    const results = await dbo.changePrivacy(db, req.params.name, req.body.privacy);
+    resp.status(200).json({ message: `Player with name ${results.name} changed privacy to ${results.privacy}` });
   } catch (err) {
     resp.status(400).json({ error: 'try again later' });
   }
@@ -77,7 +77,6 @@ app.get('/texts/:name', async (req, resp) => {
     return;
   }
   try {
-    console.log(req.params.name);
     const results = await dbo.getSamaritanTexts(db, req.params.name);
     resp.status(200).json({ data: results });
   } catch (err) {

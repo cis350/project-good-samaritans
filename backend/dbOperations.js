@@ -15,6 +15,19 @@ const connect = async (url) => {
   }
 };
 
+// get if login was successfull
+const getLoginTrue = async (db, user, pwd) => {
+  try {
+    const result = await db.collection('Users').findOne({ name: user });
+    if ((result.password).normalize() === pwd.normalize()) {
+      return true;
+    }
+    return false;
+  } catch (err) {
+    throw new Error('could not login in');
+  }
+};
+
 // change the privacy of a user
 const changePrivacy = async (db, user, setting) => {
   try {
@@ -61,8 +74,20 @@ const getSamaritanTexts = async (db, user) => {
 
 module.exports = {
   connect,
+  getLoginTrue,
   changePrivacy,
   getFriends,
   getHelpPosts,
   getSamaritanTexts,
 };
+
+// const main = async () => {
+//   const url = process.env.ATLAS_URI;
+//   const db = await connect(url);
+//   const login = await getLoginTrue(db, 'Bob', 'abcd');
+//   console.log(login);
+//   const loginfail = await getLoginTrue(db, 'Bob', 'dududu');
+//   console.log(loginfail);
+// };
+
+// main();
