@@ -84,6 +84,28 @@ app.get('/texts/:name', async (req, resp) => {
   }
 });
 
+app.put('/user/:name/:street/:state/:country/:zip/:password', async (req, resp) => {
+  if (!req.params.name) {
+    resp.status(404).json({ error: 'username not provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.addUser(
+      db,
+      req.params.name,
+      req.params.street,
+      req.params.state,
+      req.params.country,
+      req.params.zip,
+      req.params.password,
+    );
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
 // Start server
 const port = process.env.PORT || 5000;
 app.listen(port, async () => {

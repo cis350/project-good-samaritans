@@ -1,4 +1,5 @@
 import { React, useState, useRef } from 'react';
+import { addUser } from '../modules/api';
 import Profile from './Profile';
 
 function Signup() {
@@ -51,6 +52,14 @@ function Signup() {
       console.log(userInputZIP);
       console.log(userInputCOVID);
 
+      addUser(
+        userInput.current,
+        userInputStreet.current,
+        userInputState.current,
+        userInputCountry.current,
+        userInputZIP.current,
+        userPwd.current,
+      );
       setStarted(true);
       start.current = true;
     } else {

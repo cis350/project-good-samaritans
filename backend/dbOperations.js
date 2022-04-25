@@ -72,6 +72,20 @@ const getSamaritanTexts = async (db, user) => {
   }
 };
 
+const addUser = async (db, name, street, state, country, zip, password) => {
+  try {
+    const result = await db.collection('Users').insert(
+      {
+        name, street, state, country, zip, password,
+      },
+    );
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not add user');
+  }
+};
+
 module.exports = {
   connect,
   getLoginTrue,
@@ -79,6 +93,7 @@ module.exports = {
   getFriends,
   getHelpPosts,
   getSamaritanTexts,
+  addUser,
 };
 
 // const main = async () => {
