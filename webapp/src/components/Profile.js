@@ -84,7 +84,7 @@ function Profile({ accountName }) {
       <Account />
     );
   }
-  console.log(helpBoard);
+
   return (
     <div className="Profile">
       <div className="title">
