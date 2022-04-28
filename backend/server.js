@@ -106,6 +106,44 @@ app.put('/user/:name/:street/:state/:country/:zip/:password', async (req, resp) 
   }
 });
 
+app.put('/message/:name1/:name2/:message/:time', async (req, resp) => {
+  if (!req.params.name1) {
+    resp.status(404).json({ error: 'username not provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.addMessage(
+      db,
+      req.params.name1,
+      req.params.name2,
+      req.params.message,
+      req.params.time,
+    );
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
+app.get('/message/:name1/:name2', async (req, resp) => {
+  if (!req.params.name1) {
+    resp.status(404).json({ error: 'username not provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.getMessages(
+      db,
+      req.params.name1,
+      req.params.name2,
+    );
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
 // Start server
 const port = process.env.PORT || 5000;
 app.listen(port, async () => {

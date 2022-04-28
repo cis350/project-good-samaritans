@@ -86,6 +86,38 @@ const addUser = async (db, name, street, state, country, zip, password) => {
   }
 };
 
+const addMessage = async (db, name, name2, message, time) => {
+  try {
+    const result = await db.collection('Messages').insert(
+      {
+        from: name,
+        to: name2,
+        msg: message,
+        tme: time,
+      },
+    );
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not add message');
+  }
+};
+
+const getMessages = async (db, name, name2) => {
+  try {
+    const result = await db.collection('Messages').find(
+      {
+        $or: [{ from: name, to: name2 }, { from: name2, to: name },
+        ],
+      },
+    ).toArray();
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not find history of messages');
+  }
+};
+
 module.exports = {
   connect,
   getLoginTrue,
@@ -94,6 +126,8 @@ module.exports = {
   getHelpPosts,
   getSamaritanTexts,
   addUser,
+  addMessage,
+  getMessages,
 };
 
 // const main = async () => {

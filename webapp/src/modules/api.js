@@ -30,6 +30,32 @@ export async function addUser(name, street, state, country, zip, password) {
   }
 }
 
+export async function addMessage(name, name2, message, time) {
+  if (!name || !name2 || !message || !time) {
+    throw new Error('field error');
+  }
+
+  try {
+    await axios.put(`${rootURL}/message/${name}/${name2}/${message}/${time}`);
+    return;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function getMessages(name, name2) {
+  if (!name || !name2) {
+    throw new Error('field error');
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/message/${name}/${name2}`);
+    return result.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 // profile page - get the user's friends
 export async function getFriends(name) {
   if (!name) {

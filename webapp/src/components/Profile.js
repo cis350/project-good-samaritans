@@ -7,6 +7,7 @@ import {
 import Training from './Training';
 import Request from './Request';
 import Account from './Account';
+import Message from './Message';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
@@ -19,6 +20,7 @@ function Profile({ accountName }) {
   const [account, setAccount] = useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
+  const [message, setMessage] = useState(false);
   const helpBoard = useRef();
   const samaritanTexts = useRef();
 
@@ -80,6 +82,10 @@ function Profile({ accountName }) {
     helpBoard.current = getHelpPosts();
   };
 
+  const handleMessage = () => {
+    setMessage(true);
+  };
+
   const handleSamaritanTexts = () => {
     setTab('samaritan');
     samaritanTexts.current = getSamaritanTexts(name.current);
@@ -98,6 +104,11 @@ function Profile({ accountName }) {
   if (account) {
     return (
       <Account />
+    );
+  }
+  if (message) {
+    return (
+      <Message accountName={accountName} />
     );
   }
   return (
@@ -158,6 +169,11 @@ function Profile({ accountName }) {
       <div className="request">
         <button className="request-button" type="button" onClick={handleRequest}>
           Request
+        </button>
+      </div>
+      <div className="message">
+        <button className="message-button" type="button" onClick={handleMessage}>
+          Message
         </button>
       </div>
     </div>
