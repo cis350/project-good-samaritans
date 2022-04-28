@@ -19,7 +19,7 @@ const connect = async (url) => {
 const getLoginTrue = async (db, user, pwd) => {
   try {
     const result = await db.collection('Users').findOne({ name: user });
-    if ((result.password).normalize() === pwd.normalize()) {
+    if (result != null && (result.password).normalize() === pwd.normalize()) {
       return true;
     }
     return false;

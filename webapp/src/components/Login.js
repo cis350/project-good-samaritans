@@ -1,5 +1,8 @@
-import { React, useState, useRef } from 'react';
+import {
+  React, useState, useRef, useEffect,
+} from 'react';
 import '../assets/Login.css';
+import { getLoginTrue } from '../modules/api';
 import Profile from './Profile';
 import Signup from './Signup';
 
@@ -9,6 +12,8 @@ function Login() {
   const userName = useRef('');
   const userPass = useRef('');
   const clickedSignup = useRef(false);
+  const loggedIn = useRef(false);
+
   function handleUser(e) {
     userName.current = e.target.value;
   }
@@ -20,14 +25,30 @@ function Login() {
     setStarted(true);
     clickedSignup.current = true;
   }
+
+  // try logging in
+  useEffect(() => {
+    // async function tryLogin() {
+    //   loggedIn.current = await getLoginTrue(userName.current, userPass.current);
+    // }
+    // tryLogin();
+  });
+
+  async function tryLogin() {
+    loggedIn.current = await getLoginTrue(userName.current, userPass.current);
+  }
+
   function handleFormSubmit() {
-    if (/^[a-z0-9A-Z ]+$/.test(userName.current)) {
+    tryLogin();
+
+    console.log(loggedIn.current);
+    if (loggedIn.current) {
       setStarted(true);
       start.current = true;
     } else {
       // eslint this later
       // eslint-disable-next-line no-alert
-      alert('must fill all values properly and alphanumerically');
+      alert('wrong username or password');
     }
   }
 

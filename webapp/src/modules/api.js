@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-const rootURL = 'http://localhost:10000';
+const rootURL = 'http://localhost:5000';
 
 // profile page - sends request to change the privacy setting
 export async function changePrivacy(name, setting) {
@@ -25,6 +25,19 @@ export async function addUser(name, street, state, country, zip, password, priva
   try {
     await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`);
     return;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function getLoginTrue(name, password) {
+  if (!name || !password) {
+    throw new Error('field error: login');
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/login/${name}/${password}`);
+    return result.data.data;
   } catch (err) {
     throw err;
   }

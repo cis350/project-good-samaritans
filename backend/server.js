@@ -30,6 +30,19 @@ app.get('/', (_req, resp) => {
   resp.json({ message: 'project good samaritans' });
 });
 
+// login page - logged in successfully
+app.get('/login/:name/:password', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0 || !req.params.password) {
+    resp.status(404).json({ error: 'username or password not provided' });
+    return;
+  }
+  try {
+    const result = await dbo.getLoginTrue(db, req.params.name, req.params.password);
+    resp.status(200).json({ data: result });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
 // profile page - changePrivacy endpoint(change the user's privacy in db)
 app.put('/user/:name/privacy', async (req, resp) => {
   if (!req.params.name || req.params.name.length === 0 || !req.body.privacy) {
@@ -108,7 +121,7 @@ app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (re
 });
 
 // Start server
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   // perform a database connection when server starts
   db = await dbo.connect(url);
