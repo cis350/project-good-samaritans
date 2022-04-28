@@ -17,13 +17,13 @@ export async function changePrivacy(name, setting) {
   }
 }
 
-export async function addUser(name, street, state, country, zip, password) {
+export async function addUser(name, street, state, country, zip, password, privacy) {
   if (!name || !street || !state || !country || !zip || !password) {
     throw new Error('field error');
   }
 
   try {
-    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}`);
+    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`);
     return;
   } catch (err) {
     throw err;
@@ -56,25 +56,48 @@ export async function getMessages(name, name2) {
   }
 }
 
-// profile page - get the user's friends
-export async function getFriends(name) {
-  if (!name) {
-    throw new Error('no user given');
+export async function getLoginTrue(name, password) {
+  if (!name || !password) {
+    throw new Error('field error: login');
   }
 
   try {
-    const result = await axios.get(`${rootURL}/friends/${name}`);
-    return result;
+    const result = await axios.get(`${rootURL}/login/${name}/${password}`);
+    return result.data.data;
   } catch (err) {
     throw err;
   }
 }
 
 // profile page - gets the current list of help posts
+export async function postRequest(name, post) {
+  try {
+    const result = await axios.post(`${rootURL}/request/${name}/${post}`);
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+// profile page - get the user's friends
+// export async function getFriends(name) {
+//   if (!name) {
+//     throw new Error('no user given');
+//   }
+
+//   try {
+//     const result = await axios.get(`${rootURL}/friends/${name}`);
+//     return result;
+//   } catch (err) {
+//     throw err;
+//   }
+// }
+
+// profile page - gets the current list of help posts
 export async function getHelpPosts() {
   try {
-    const result = await axios.get(`${rootURL}/help-posts`);
-    return result;
+    const result = await axios.get(`${rootURL}/help`);
+    return result.data.data;
   } catch (err) {
     throw err;
   }
@@ -87,8 +110,8 @@ export async function getSamaritanTexts(name) {
   }
 
   try {
-    const result = await axios.get(`${rootURL}/samaritan/${name}`);
-    return result;
+    const result = await axios.get(`${rootURL}/texts/${name}`);
+    return result.data;
   } catch (err) {
     throw err;
   }

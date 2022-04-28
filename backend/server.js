@@ -30,6 +30,19 @@ app.get('/', (_req, resp) => {
   resp.json({ message: 'project good samaritans' });
 });
 
+// login page - logged in successfully
+app.get('/login/:name/:password', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0 || !req.params.password) {
+    resp.status(404).json({ error: 'username or password not provided' });
+    return;
+  }
+  try {
+    const result = await dbo.getLoginTrue(db, req.params.name, req.params.password);
+    resp.status(200).json({ data: result });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
 // profile page - changePrivacy endpoint(change the user's privacy in db)
 app.put('/user/:name/privacy', async (req, resp) => {
   if (!req.params.name || req.params.name.length === 0 || !req.body.privacy) {
@@ -46,19 +59,19 @@ app.put('/user/:name/privacy', async (req, resp) => {
 });
 
 // profile page - getFriends endpoint(get the user's friends)
-app.get('/friends/:name', async (req, resp) => {
-  if (!req.params.name || req.params.name.length === 0) {
-    resp.status(404).json({ error: 'username not provided' });
-    return;
-  }
+// app.get('/friends/:name', async (req, resp) => {
+//   if (!req.params.name || req.params.name.length === 0) {
+//     resp.status(404).json({ error: 'username not provided' });
+//     return;
+//   }
 
-  try {
-    const results = await dbo.getFriends(db, req.params.name);
-    resp.status(200).json({ data: results });
-  } catch (err) {
-    resp.status(400).json({ error: 'try again later' });
-  }
-});
+//   try {
+//     const results = await dbo.getFriends(db, req.params.name);
+//     resp.status(200).json({ data: results });
+//   } catch (err) {
+//     resp.status(400).json({ error: 'try again later' });
+//   }
+// });
 
 // profile page - getHelpPosts endpoint(get the help board of posts)
 app.get('/help', async (_req, resp) => {
@@ -84,7 +97,21 @@ app.get('/texts/:name', async (req, resp) => {
   }
 });
 
-app.put('/user/:name/:street/:state/:country/:zip/:password', async (req, resp) => {
+// request page - post request in Help db
+app.post('/request/:name/:post', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0) {
+    resp.status(404).json({ error: 'username not provided' });
+    return;
+  }
+  try {
+    const results = await dbo.postRequest(db, req.params.name, req.params.post);
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
+app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (req, resp) => {
   if (!req.params.name) {
     resp.status(404).json({ error: 'username not provided' });
     return;
@@ -99,6 +126,7 @@ app.put('/user/:name/:street/:state/:country/:zip/:password', async (req, resp) 
       req.params.country,
       req.params.zip,
       req.params.password,
+      req.params.privacy,
     );
     resp.status(200).json({ data: results });
   } catch (err) {

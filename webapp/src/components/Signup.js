@@ -59,6 +59,7 @@ function Signup() {
         userInputCountry.current,
         userInputZIP.current,
         userPwd.current,
+        'Private',
       );
       setStarted(true);
       start.current = true;

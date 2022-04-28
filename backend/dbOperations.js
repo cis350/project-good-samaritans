@@ -19,7 +19,7 @@ const connect = async (url) => {
 const getLoginTrue = async (db, user, pwd) => {
   try {
     const result = await db.collection('Users').findOne({ name: user });
-    if ((result.password).normalize() === pwd.normalize()) {
+    if (result != null && (result.password).normalize() === pwd.normalize()) {
       return true;
     }
     return false;
@@ -43,14 +43,14 @@ const changePrivacy = async (db, user, setting) => {
 };
 
 // get the friends of a user
-const getFriends = async (db, user) => {
-  try {
-    const result = await db.collection('Users').findOne({ name: user });
-    return result.friends;
-  } catch (err) {
-    throw new Error('could not get friends');
-  }
-};
+// const getFriends = async (db, user) => {
+//   try {
+//     const result = await db.collection('Users').findOne({ name: user });
+//     return result.friends;
+//   } catch (err) {
+//     throw new Error('could not get friends');
+//   }
+// };
 
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
@@ -72,11 +72,22 @@ const getSamaritanTexts = async (db, user) => {
   }
 };
 
-const addUser = async (db, name, street, state, country, zip, password) => {
+// get the samaritan texts of a user
+const postRequest = async (db, name, post) => {
   try {
-    const result = await db.collection('Users').insert(
+    const result = await db.collection('Help').insertOne({ name, post });
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not add request');
+  }
+};
+
+const addUser = async (db, name, street, state, country, zip, password, privacy) => {
+  try {
+    const result = await db.collection('Users').insertOne(
       {
-        name, street, state, country, zip, password,
+        name, street, state, country, zip, password, privacy,
       },
     );
     return result;
@@ -122,9 +133,9 @@ module.exports = {
   connect,
   getLoginTrue,
   changePrivacy,
-  getFriends,
   getHelpPosts,
   getSamaritanTexts,
+  postRequest,
   addUser,
   addMessage,
   getMessages,
