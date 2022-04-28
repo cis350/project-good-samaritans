@@ -46,19 +46,19 @@ app.put('/user/:name/privacy', async (req, resp) => {
 });
 
 // profile page - getFriends endpoint(get the user's friends)
-app.get('/friends/:name', async (req, resp) => {
-  if (!req.params.name || req.params.name.length === 0) {
-    resp.status(404).json({ error: 'username not provided' });
-    return;
-  }
+// app.get('/friends/:name', async (req, resp) => {
+//   if (!req.params.name || req.params.name.length === 0) {
+//     resp.status(404).json({ error: 'username not provided' });
+//     return;
+//   }
 
-  try {
-    const results = await dbo.getFriends(db, req.params.name);
-    resp.status(200).json({ data: results });
-  } catch (err) {
-    resp.status(400).json({ error: 'try again later' });
-  }
-});
+//   try {
+//     const results = await dbo.getFriends(db, req.params.name);
+//     resp.status(200).json({ data: results });
+//   } catch (err) {
+//     resp.status(400).json({ error: 'try again later' });
+//   }
+// });
 
 // profile page - getHelpPosts endpoint(get the help board of posts)
 app.get('/help', async (_req, resp) => {
@@ -100,7 +100,6 @@ app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (re
       req.params.zip,
       req.params.password,
       req.params.privacy,
-      req.body.friends,
     );
     resp.status(200).json({ data: results });
   } catch (err) {
@@ -109,7 +108,7 @@ app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (re
 });
 
 // Start server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 10000;
 app.listen(port, async () => {
   // perform a database connection when server starts
   db = await dbo.connect(url);

@@ -13,7 +13,6 @@ function Signup() {
 
   const [, setStarted] = useState(false);
   const start = useRef(false);
-  const friends = [];
 
   function handleUser(e) {
     userInput.current = e.target.value;
@@ -61,7 +60,6 @@ function Signup() {
         userInputZIP.current,
         userPwd.current,
         'Private',
-        friends,
       );
       setStarted(true);
       start.current = true;

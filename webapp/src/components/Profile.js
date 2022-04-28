@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import {
   React, useState, useEffect, useRef,
 } from 'react';
@@ -19,29 +20,12 @@ function Profile({ accountName }) {
   const [account, setAccount] = useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
-  const helpBoard = useRef();
+  // const [friendSearch, setFriendSearch] = useState();
+  let helpBoard = [];
   const samaritanTexts = useRef();
 
   // const friendsList = Storage.getFriends(name.current); -
-  // some array of friend objects with username, image
-  const friendsList = [
-    {
-      profile: 'Joe',
-      img: '',
-    },
-    {
-      profile: 'Elmo',
-      img: '',
-    },
-    {
-      profile: 'Hi',
-      img: '',
-    },
-    {
-      profile: 'abc',
-      img: '',
-    },
-  ];
+  // const friendsList = getFriends(name.current);
 
   useEffect(() => {
     changePrivacy(name.current, privacy);
@@ -77,7 +61,7 @@ function Profile({ accountName }) {
 
   const handleHelpPosts = () => {
     setTab('board');
-    helpBoard.current = getHelpPosts();
+    helpBoard = getHelpPosts();
   };
 
   const handleSamaritanTexts = () => {
@@ -114,35 +98,27 @@ function Profile({ accountName }) {
         </button>
       </div>
       <div className="middleButtons">
-        {(friends) ? (
-          <div className="friends">
-            <h3>Friends</h3>
-            <ol className="list">
-              {friendsList.map((user) => (
-                <li key={user.profile}>
-                  {user.img}
-                  {' '}
-                  {user.profile}
-                </li>
-              ))}
-            </ol>
-            <button id="cancel" type="button" onClick={() => { setFriends(false); }}>
-              Cancel
-            </button>
-          </div>
-        )
-          : (
-            <div className="tabs">
-              <button id="help" type="button" onClick={handleHelpPosts}>
-                Help Board
-              </button>
-              <button id="samaritan" type="button" onClick={handleSamaritanTexts}>
-                Samaritan Help
-              </button>
-              {(tab === 'board') ? (<div className="help-board">HELP POSTS GO HERE</div>) : (<div className="samaritan-help">WHO YOU ARE CURRENTLY HELPING GOES HERE</div>)}
+        <div className="tabs">
+          <button id="help" type="button" onClick={handleHelpPosts}>
+            Help Board
+          </button>
+          <button id="samaritan" type="button" onClick={handleSamaritanTexts}>
+            Samaritan Help
+          </button>
+          {(tab === 'board') ? (
+            <div className="help-board">
+              <ol className="helpList">
+                {helpBoard.map((post) => (
+                  <li key={post.name}>
+                    {post.name}
+                    {' '}
+                    {post.post}
+                  </li>
+                ))}
+              </ol>
             </div>
-          )}
-        ;
+          ) : (<div className="samaritan-help">WHO YOU ARE CURRENTLY HELPING GOES HERE</div>)}
+        </div>
       </div>
       <div className="rightButtons">
         <div className="profileName">

@@ -43,14 +43,14 @@ const changePrivacy = async (db, user, setting) => {
 };
 
 // get the friends of a user
-const getFriends = async (db, user) => {
-  try {
-    const result = await db.collection('Users').findOne({ name: user });
-    return result.friends;
-  } catch (err) {
-    throw new Error('could not get friends');
-  }
-};
+// const getFriends = async (db, user) => {
+//   try {
+//     const result = await db.collection('Users').findOne({ name: user });
+//     return result.friends;
+//   } catch (err) {
+//     throw new Error('could not get friends');
+//   }
+// };
 
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
@@ -72,11 +72,11 @@ const getSamaritanTexts = async (db, user) => {
   }
 };
 
-const addUser = async (db, name, street, state, country, zip, password, privacy, friends) => {
+const addUser = async (db, name, street, state, country, zip, password, privacy) => {
   try {
     const result = await db.collection('Users').insert(
       {
-        name, street, state, country, zip, password, privacy, friends,
+        name, street, state, country, zip, password, privacy,
       },
     );
     return result;
@@ -90,7 +90,6 @@ module.exports = {
   connect,
   getLoginTrue,
   changePrivacy,
-  getFriends,
   getHelpPosts,
   getSamaritanTexts,
   addUser,

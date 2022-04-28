@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-const rootURL = 'http://localhost:5000';
+const rootURL = 'http://localhost:10000';
 
 // profile page - sends request to change the privacy setting
 export async function changePrivacy(name, setting) {
@@ -17,13 +17,13 @@ export async function changePrivacy(name, setting) {
   }
 }
 
-export async function addUser(name, street, state, country, zip, password, privacy, friends) {
+export async function addUser(name, street, state, country, zip, password, privacy) {
   if (!name || !street || !state || !country || !zip || !password) {
     throw new Error('field error');
   }
 
   try {
-    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, friends);
+    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`);
     return;
   } catch (err) {
     throw err;
@@ -31,24 +31,24 @@ export async function addUser(name, street, state, country, zip, password, priva
 }
 
 // profile page - get the user's friends
-export async function getFriends(name) {
-  if (!name) {
-    throw new Error('no user given');
-  }
+// export async function getFriends(name) {
+//   if (!name) {
+//     throw new Error('no user given');
+//   }
 
-  try {
-    const result = await axios.get(`${rootURL}/friends/${name}`);
-    return result;
-  } catch (err) {
-    throw err;
-  }
-}
+//   try {
+//     const result = await axios.get(`${rootURL}/friends/${name}`);
+//     return result;
+//   } catch (err) {
+//     throw err;
+//   }
+// }
 
 // profile page - gets the current list of help posts
 export async function getHelpPosts() {
   try {
     const result = await axios.get(`${rootURL}/help-posts`);
-    return result;
+    return result.data;
   } catch (err) {
     throw err;
   }
@@ -62,7 +62,7 @@ export async function getSamaritanTexts(name) {
 
   try {
     const result = await axios.get(`${rootURL}/samaritan/${name}`);
-    return result;
+    return result.data;
   } catch (err) {
     throw err;
   }
