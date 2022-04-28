@@ -12,9 +12,9 @@ import '../assets/Profile.css';
 // import Friends from './Friends';
 
 function Profile({ accountName }) {
-  console.log('in profile');
+  console.log('in profile', accountName);
   const name = useRef(accountName); // name of the user after logging in
-  const [friends, setFriends] = useState(false); // event if friends button was clicked
+  // const [friends, setFriends] = useState(false); // event if friends button was clicked
   const [training, setTraining] = useState(false); // event if the training button was clicked
   const [tab, setTab] = useState('board'); // board or samaritan
   const [account, setAccount] = useState(false); // event if the account button was clicked
@@ -51,15 +51,15 @@ function Profile({ accountName }) {
     setAccount(true);
   };
 
-  const handleFriends = () => {
-    if (friends) {
-      setFriends(false);
-    } else {
-      setFriends(true);
-    }
-  };
+  // const handleFriends = () => {
+  //   if (friends) {
+  //     setFriends(false);
+  //   } else {
+  //     setFriends(true);
+  //   }
+  // };
 
-  const handleHelpPosts = () => {
+  const handleHelpPosts = async () => {
     setTab('board');
     helpBoard = getHelpPosts();
   };
@@ -76,7 +76,7 @@ function Profile({ accountName }) {
   }
   if (request) { // Goes to request page
     return (
-      <Request />
+      <Request name={name.current} />
     );
   }
   if (account) {
@@ -84,15 +84,16 @@ function Profile({ accountName }) {
       <Account />
     );
   }
+  console.log(helpBoard);
   return (
     <div className="Profile">
       <div className="title">
         <h1>Good Samaritans</h1>
       </div>
       <div className="leftButtons">
-        <button className="profile-button" id="friends" type="button" onClick={handleFriends}>
+        {/* <button className="profile-button" id="friends" type="button" onClick={handleFriends}>
           Friends
-        </button>
+        </button> */}
         <button className="profile-button" id="training" type="button" onClick={handleTraining}>
           Training
         </button>

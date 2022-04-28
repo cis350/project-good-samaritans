@@ -97,6 +97,20 @@ app.get('/texts/:name', async (req, resp) => {
   }
 });
 
+// request page - post request in Help db
+app.post('/request/:name/:post', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0) {
+    resp.status(404).json({ error: 'username not provided' });
+    return;
+  }
+  try {
+    const results = await dbo.postRequest(db, req.params.name, req.params.post);
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
 app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (req, resp) => {
   if (!req.params.name) {
     resp.status(404).json({ error: 'username not provided' });

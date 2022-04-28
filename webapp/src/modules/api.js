@@ -43,6 +43,16 @@ export async function getLoginTrue(name, password) {
   }
 }
 
+// profile page - gets the current list of help posts
+export async function postRequest(name, post) {
+  try {
+    const result = await axios.get(`${rootURL}/login/${name}/${post}`);
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 // profile page - get the user's friends
 // export async function getFriends(name) {
 //   if (!name) {
@@ -60,8 +70,8 @@ export async function getLoginTrue(name, password) {
 // profile page - gets the current list of help posts
 export async function getHelpPosts() {
   try {
-    const result = await axios.get(`${rootURL}/help-posts`);
-    return result.data;
+    const result = await axios.get(`${rootURL}/help`);
+    return result.data.data;
   } catch (err) {
     throw err;
   }
@@ -74,7 +84,7 @@ export async function getSamaritanTexts(name) {
   }
 
   try {
-    const result = await axios.get(`${rootURL}/samaritan/${name}`);
+    const result = await axios.get(`${rootURL}/texts/${name}`);
     return result.data;
   } catch (err) {
     throw err;

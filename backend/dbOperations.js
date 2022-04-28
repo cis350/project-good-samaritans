@@ -72,9 +72,20 @@ const getSamaritanTexts = async (db, user) => {
   }
 };
 
+// get the samaritan texts of a user
+const postRequest = async (db, name, post) => {
+  try {
+    const result = await db.collection('Help').insertOne({ name, post });
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not add request');
+  }
+};
+
 const addUser = async (db, name, street, state, country, zip, password, privacy) => {
   try {
-    const result = await db.collection('Users').insert(
+    const result = await db.collection('Users').insertOne(
       {
         name, street, state, country, zip, password, privacy,
       },
@@ -92,6 +103,7 @@ module.exports = {
   changePrivacy,
   getHelpPosts,
   getSamaritanTexts,
+  postRequest,
   addUser,
 };
 
