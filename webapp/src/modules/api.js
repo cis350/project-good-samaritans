@@ -58,7 +58,7 @@ export async function getMessages(name, name2) {
 
 export async function getLoginTrue(name, password) {
   if (!name || !password) {
-    throw new Error('field error: login');
+    return false;
   }
 
   try {

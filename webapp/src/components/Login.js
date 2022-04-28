@@ -1,5 +1,5 @@
 import {
-  React, useState, useRef, useEffect,
+  React, useState, useRef,
 } from 'react';
 import '../assets/Login.css';
 import { getLoginTrue } from '../modules/api';
@@ -7,12 +7,11 @@ import Profile from './Profile';
 import Signup from './Signup';
 
 function Login() {
-  const [, setStarted] = useState(false);
-  const start = useRef(false);
+  const [started, setStarted] = useState(false);
   const userName = useRef('');
   const userPass = useRef('');
   const clickedSignup = useRef(false);
-  const loggedIn = useRef(false);
+  let loggedIn = false;
 
   function handleUser(e) {
     userName.current = e.target.value;
@@ -26,27 +25,19 @@ function Login() {
     clickedSignup.current = true;
   }
 
-  // try logging in
-  useEffect(() => {
-    // async function tryLogin() {
-    //   loggedIn.current = await getLoginTrue(userName.current, userPass.current);
-    // }
-    // tryLogin();
-  });
+  async function handleFormSubmit() {
+    try {
+      loggedIn = await getLoginTrue(userName.current, userPass.current);
 
-  async function tryLogin() {
-    loggedIn.current = await getLoginTrue(userName.current, userPass.current);
-  }
-
-  function handleFormSubmit() {
-    tryLogin();
-
-    console.log(loggedIn.current);
-    if (loggedIn.current) {
-      setStarted(true);
-      start.current = true;
-    } else {
-      // eslint this later
+      console.log(loggedIn);
+      if (loggedIn) {
+        setStarted(true);
+      } else {
+        // eslint this later
+        // eslint-disable-next-line no-alert
+        alert('wrong username or password');
+      }
+    } catch {
       // eslint-disable-next-line no-alert
       alert('wrong username or password');
     }
@@ -61,7 +52,7 @@ function Login() {
   }
   // needed for eslint. Figure it out later
   const domId = 124;
-  if (!start.current && !clickedSignup.current) {
+  if (!started && !clickedSignup.current) {
     return (
       <div className="Login-background">
         <h1 className="Login-title">Good Samaritans</h1>
