@@ -72,7 +72,7 @@ const getSamaritanTexts = async (db, user) => {
   }
 };
 
-// get the samaritan texts of a user
+// post a request to the Help DB
 const postRequest = async (db, name, post) => {
   try {
     const result = await db.collection('Help').insertOne({ name, post });

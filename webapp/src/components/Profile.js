@@ -96,6 +96,7 @@ function Profile({ accountName }) {
     );
   }
   console.log(helpBoard);
+
   return (
     <div className="Profile">
       <div className="title">
