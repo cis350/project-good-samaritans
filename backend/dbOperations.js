@@ -72,11 +72,11 @@ const getSamaritanTexts = async (db, user) => {
   }
 };
 
-const addUser = async (db, name, street, state, country, zip, password) => {
+const addUser = async (db, name, street, state, country, zip, password, privacy, friends) => {
   try {
     const result = await db.collection('Users').insert(
       {
-        name, street, state, country, zip, password,
+        name, street, state, country, zip, password, privacy, friends,
       },
     );
     return result;

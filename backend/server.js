@@ -84,7 +84,7 @@ app.get('/texts/:name', async (req, resp) => {
   }
 });
 
-app.put('/user/:name/:street/:state/:country/:zip/:password', async (req, resp) => {
+app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (req, resp) => {
   if (!req.params.name) {
     resp.status(404).json({ error: 'username not provided' });
     return;
@@ -99,6 +99,8 @@ app.put('/user/:name/:street/:state/:country/:zip/:password', async (req, resp) 
       req.params.country,
       req.params.zip,
       req.params.password,
+      req.params.privacy,
+      req.body.friends,
     );
     resp.status(200).json({ data: results });
   } catch (err) {
