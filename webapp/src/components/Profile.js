@@ -29,7 +29,6 @@ function Profile({ accountName }) {
   // const friendsList = Storage.getFriends(name.current); -
   // const friendsList = getFriends(name.current);
 
-  // DOESN'T WORK YETs
   useEffect(() => {
     changePrivacy(name.current, privacy);
   }, [privacy]);
