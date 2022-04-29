@@ -1,7 +1,8 @@
-import { React, useRef } from 'react';
+import { React, useRef, useState } from 'react';
 import { postRequest } from '../modules/api';
 
 function Request({ name }) {
+  const [goBack, setGoBack] = useState(false);
   const reqPost = useRef('');
 
   function handleReqText(e) {
@@ -12,9 +13,15 @@ function Request({ name }) {
   function sendRequest() {
     console.log('sent request');
     postRequest(name, reqPost.current);
+    setGoBack(true);
     // window.location.reload(false);
   }
   const domId = 125;
+  if (goBack) {
+    // <div className="Profile">
+    //   <Profile accountName={name} />
+    // </div>;
+  }
   return (
     <div>
       <h1>

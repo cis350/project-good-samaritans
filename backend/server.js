@@ -105,8 +105,8 @@ app.post('/request/:name/:post', async (req, resp) => {
     return;
   }
   try {
-    const results = await dbo.postRequest(db, req.params.name, req.params.post);
-    resp.status(200).json({ data: results });
+    await dbo.postRequest(db, req.params.name, req.params.post);
+    resp.status(200).json({ data: 'done' });
   } catch (err) {
     resp.status(400).json({ error: 'try again later' });
   }

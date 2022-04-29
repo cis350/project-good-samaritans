@@ -72,8 +72,7 @@ export async function getLoginTrue(name, password) {
 // profile page - gets the current list of help posts
 export async function postRequest(name, post) {
   try {
-    const result = await axios.post(`${rootURL}/request/${name}/${post}`);
-    return result;
+    await axios.post(`${rootURL}/request/${name}/${post}`);
   } catch (err) {
     throw err;
   }

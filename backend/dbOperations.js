@@ -73,16 +73,25 @@ const getSamaritanTexts = async (db, user) => {
 };
 
 // post a request to the Help DB
-const postRequest = async (db, name, post) => {
+const postRequest = async (db, user, request) => {
   try {
-    const result = await db.collection('Help').insertOne({ name, post });
-    return result;
+    const found = await db.collection('Help').findOne({ name: user });
+    // edits the post
+    if (found !== null) {
+      await db.collection('Help').updateOne(
+        { name: user },
+        { $set: { post: request } },
+      );
+    } else {
+      await db.collection('Help').insertOne({ name: user, post: request });
+    }
   } catch (err) {
     console.log(err);
     throw new Error('could not add request');
   }
 };
 
+// adds the user
 const addUser = async (db, name, street, state, country, zip, password, privacy) => {
   try {
     const result = await db.collection('Users').insertOne(
