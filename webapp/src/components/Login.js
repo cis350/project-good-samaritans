@@ -4,18 +4,21 @@ import {
   React, useState, useRef,
 } from 'react';
 import '../assets/Login.css';
-import { getLoginTrue, getPasswordTrue } from '../modules/api';
+import { getLoginTrue, getPasswordTrue, changePassword } from '../modules/api';
 import Profile from './Profile';
 import Signup from './Signup';
 import Lockout from './Lockout';
+// import Forgot from './Forgot';
 
 function Login() {
   console.log('render');
   const [started, setStarted] = useState(false);
   const userName = useRef('');
   const userPass = useRef('');
+  const userNewPass = useRef('');
   const clickedSignup = useRef(false);
   const [mistakes, setMistakes] = useState(0);
+  const [forgot, setForgot] = useState(false);
   let loggedIn = false;
   let passwordCheck = true;
 
@@ -25,10 +28,17 @@ function Login() {
   function handleUserPass(e) {
     userPass.current = e.target.value;
   }
-
+  function handleNewUserPass(e) {
+    userNewPass.current = e.target.value;
+  }
   function handleSignUp() {
     setStarted(true);
     clickedSignup.current = true;
+  }
+
+  function handleChangePassword() {
+    changePassword(userName.current, userNewPass.current);
+    setForgot(false);
   }
 
   async function handleFormSubmit() {
@@ -74,6 +84,24 @@ function Login() {
         </div>
       );
     }
+
+    if (forgot) {
+      return (
+        <div className="Login-rectangle">
+          <label htmlFor={domId}>
+            Username:
+            {' '}
+            <input name="user" onChange={handleUser} />
+          </label>
+          <label htmlFor={domId}>
+            New Password:
+            {' '}
+            <input name="password" onChange={handleNewUserPass} />
+          </label>
+          <button type="button" onClick={handleChangePassword}>Reset Password</button>
+        </div>
+      );
+    }
     return (
       <div className="Login-background">
         <h1 className="Login-title">Good Samaritans</h1>
@@ -89,6 +117,7 @@ function Login() {
             <input name="password" onChange={handleUserPass} />
           </label>
           <button type="submit" onClick={handleFormSubmit}>Login</button>
+          <button type="button" onClick={() => setForgot(true)}>Forgot Password?</button>
         </div>
         <div className="Login-signup-box ">
           <h2 className="Login-signup-name">Do not have an Account?</h2>

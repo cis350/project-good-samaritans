@@ -41,6 +41,20 @@ const getPasswordTrue = async (db, user, pwd) => {
   }
 };
 
+// change the password of a user
+const changePassword = async (db, user, newPwd) => {
+  try {
+    await db.collection('Users').updateOne(
+      { name: user },
+      { $set: { password: newPwd } },
+    );
+    const result = await db.collection('Users').findOne({ name: user });
+    return result;
+  } catch (err) {
+    throw new Error('could not reset password');
+  }
+};
+
 // change the privacy of a user
 const changePrivacy = async (db, user, setting) => {
   try {
@@ -178,6 +192,7 @@ module.exports = {
   getProfile,
   addMessage,
   getMessages,
+  changePassword,
 };
 
 // const main = async () => {

@@ -152,6 +152,20 @@ app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (re
   }
 });
 
+app.put('/change-pwd/:name', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0 || !req.body.password) {
+    resp.status(404).json({ error: 'no username or password provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.changePassword(db, req.params.name, req.body.password);
+    resp.status(200).json({ message: `Player with name ${results.name} changed password to ${results.password}` });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
 // accounts page - getProfile
 app.get('/user/:name', async (req, resp) => {
   if (!req.params.name) {

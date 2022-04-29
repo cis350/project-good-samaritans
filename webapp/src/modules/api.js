@@ -82,6 +82,7 @@ export async function getLoginTrue(name, password) {
   }
 }
 
+// login page - if the username is correct but wrong password
 export async function getPasswordTrue(name, password) {
   if (!name || !password) {
     return false;
@@ -90,6 +91,20 @@ export async function getPasswordTrue(name, password) {
   try {
     const result = await axios.get(`${rootURL}/lockout/${name}/${password}`);
     return result.data.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
+// login page - resetting password
+export async function changePassword(name, newPwd) {
+  if (!name || !newPwd) {
+    throw new Error('no password to change');
+  }
+
+  try {
+    await axios.put(`${rootURL}/change-pwd/${name}`, { password: newPwd });
+    return;
   } catch (err) {
     throw err;
   }
