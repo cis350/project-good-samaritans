@@ -17,13 +17,13 @@ export async function changePrivacy(name, setting) {
   }
 }
 
-export async function addUser(name, street, state, country, zip, password, privacy) {
+export async function addUser(name, street, state, country, zip, password, privacy, time) {
   if (!name || !street || !state || !country || !zip || !password) {
     throw new Error('field error');
   }
 
   try {
-    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`);
+    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, { date: time });
     return;
   } catch (err) {
     throw err;
