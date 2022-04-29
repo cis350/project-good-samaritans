@@ -77,6 +77,7 @@ app.put('/user/:name/privacy', async (req, resp) => {
 app.get('/help', async (_req, resp) => {
   try {
     const results = await dbo.getHelpPosts(db);
+    // console.log(results);
     resp.status(200).json({ data: results });
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
@@ -84,18 +85,18 @@ app.get('/help', async (_req, resp) => {
 });
 
 // profile page - getSamaritanTexts endpoint(find who the user is currently helping/texting)
-app.get('/texts/:name', async (req, resp) => {
-  if (!req.params.name || req.params.name.length === 0) {
-    resp.status(404).json({ error: 'username not provided' });
-    return;
-  }
-  try {
-    const results = await dbo.getSamaritanTexts(db, req.params.name);
-    resp.status(200).json({ data: results });
-  } catch (err) {
-    resp.status(400).json({ error: 'try again later' });
-  }
-});
+// app.get('/texts/:name', async (req, resp) => {
+//   if (!req.params.name || req.params.name.length === 0) {
+//     resp.status(404).json({ error: 'username not provided' });
+//     return;
+//   }
+//   try {
+//     const results = await dbo.getSamaritanTexts(db, req.params.name);
+//     resp.status(200).json({ data: results });
+//   } catch (err) {
+//     resp.status(400).json({ error: 'try again later' });
+//   }
+// });
 
 // request page - post request in Help db
 app.post('/request/:name/:post', async (req, resp) => {

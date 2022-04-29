@@ -3,7 +3,7 @@ import {
   React, useState, useEffect, useRef,
 } from 'react';
 import {
-  changePrivacy, getHelpPosts, getSamaritanTexts,
+  changePrivacy, getHelpPosts,
 } from '../modules/api';
 import Training from './Training';
 import Request from './Request';
@@ -13,25 +13,34 @@ import '../assets/Profile.css';
 // import Friends from './Friends';
 
 function Profile({ accountName }) {
-  console.log('in profile', accountName);
   const name = useRef(accountName); // name of the user after logging in
   // const [friends, setFriends] = useState(false); // event if friends button was clicked
   const [training, setTraining] = useState(false); // event if the training button was clicked
-  const [tab, setTab] = useState('board'); // board or samaritan
+  // const [tab, setTab] = useState('board'); // board or samaritan
   const [account, setAccount] = useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
   const [message, setMessage] = useState(false);
-  // const [friendSearch, setFriendSearch] = useState();
-  let helpBoard = [];
-  const samaritanTexts = useRef();
+  const helpBoard = useRef();
+  const currentPostName = useRef();
+  const currentPostDescription = useRef();
+  const [postCount, setPostCount] = useState(0);
+  const clickedHelpBoardButton = useRef(false);
+  const [, setRevealPosts] = useState(false);
+  // const [clickedHelpBoardButton, setHelpButton] = useState(false);
 
   // const friendsList = Storage.getFriends(name.current); -
   // const friendsList = getFriends(name.current);
-
   useEffect(() => {
-    changePrivacy(name.current, privacy);
-  }, [privacy]);
+    async function privacyChange() {
+      await changePrivacy(name.current, privacy);
+    }
+    privacyChange();
+    async function initializeBoardPosts() {
+      helpBoard.current = await getHelpPosts();
+    }
+    initializeBoardPosts();
+  }, []);
 
   const handlePrivacy = () => {
     if (privacy === 'Private') {
@@ -53,27 +62,42 @@ function Profile({ accountName }) {
     setAccount(true);
   };
 
-  // const handleFriends = () => {
-  //   if (friends) {
-  //     setFriends(false);
-  //   } else {
-  //     setFriends(true);
-  //   }
-  // };
+  const handleHelpButton = () => {
+    clickedHelpBoardButton.current = true;
+    const x = helpBoard.current;
+    currentPostName.current = x[postCount].name;
+    currentPostDescription.current = x[postCount].post;
+    setRevealPosts(true);
+  };
 
-  const handleHelpPosts = async () => {
-    setTab('board');
-    helpBoard = getHelpPosts();
+  const handlePrevPost = () => {
+    const currentCount = postCount;
+    if (currentCount > 0) {
+      const x = helpBoard.current;
+      currentPostName.current = x[postCount - 1].name;
+      currentPostDescription.current = x[postCount - 1].post;
+      setPostCount(currentCount - 1);
+    }
+  };
+
+  const handleNextPost = () => {
+    const currentCount = postCount;
+    if (currentCount < helpBoard.current.length) {
+      const x = helpBoard.current;
+      currentPostName.current = x[postCount + 1].name;
+      currentPostDescription.current = x[postCount + 1].post;
+      setPostCount(currentCount + 1);
+    }
   };
 
   const handleMessage = () => {
     setMessage(true);
   };
 
-  const handleSamaritanTexts = () => {
-    setTab('samaritan');
-    samaritanTexts.current = getSamaritanTexts(name.current);
-  };
+  // const handleSamaritanTexts = async () => {
+  //   setTab('samaritan');
+  //   samaritanTexts.current = await getSamaritanTexts(name.current);
+  // };
 
   if (training) { // Goes to training page
     return (
@@ -95,7 +119,6 @@ function Profile({ accountName }) {
       <Message accountName={accountName} />
     );
   }
-  console.log(helpBoard);
 
   return (
     <div className="Profile">
@@ -103,35 +126,29 @@ function Profile({ accountName }) {
         <h1>Good Samaritans</h1>
       </div>
       <div className="leftButtons">
-        {/* <button className="profile-button" id="friends" type="button" onClick={handleFriends}>
-          Friends
-        </button> */}
         <button className="profile-button" id="training" type="button" onClick={handleTraining}>
           Training
         </button>
+        <div className="message">
+          <button className="message-button" type="button" onClick={handleMessage}>
+            Message
+          </button>
+        </div>
       </div>
       <div className="middleButtons">
-        <div className="tabs">
-          <button id="help" type="button" onClick={handleHelpPosts}>
-            Help Board
-          </button>
-          <button id="samaritan" type="button" onClick={handleSamaritanTexts}>
-            Samaritan Help
-          </button>
-          {(tab === 'board') ? (
-            <div className="help-board">
-              <ol className="helpList">
-                {helpBoard.map((post) => (
-                  <li key={post.name}>
-                    {post.name}
-                    {' '}
-                    {post.post}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ) : (<div className="samaritan-help">WHO YOU ARE CURRENTLY HELPING GOES HERE</div>)}
-        </div>
+        <button type="button" onClick={handleHelpButton}>Help Posts</button>
+        {clickedHelpBoardButton.current ? (
+          <div>
+            {' '}
+            { currentPostName.current }
+            <br />
+            { currentPostDescription.current }
+            <br />
+            <button type="button">Respond</button>
+            <button type="button" onClick={handleNextPost}>Next</button>
+            <button type="button" onClick={handlePrevPost}>Prev</button>
+          </div>
+        ) : (<div />)}
       </div>
       <div className="rightButtons">
         <div className="profileName">
@@ -147,11 +164,6 @@ function Profile({ accountName }) {
       <div className="request">
         <button className="request-button" type="button" onClick={handleRequest}>
           Request
-        </button>
-      </div>
-      <div className="message">
-        <button className="message-button" type="button" onClick={handleMessage}>
-          Message
         </button>
       </div>
     </div>

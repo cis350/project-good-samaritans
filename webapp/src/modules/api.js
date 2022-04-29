@@ -97,6 +97,7 @@ export async function postRequest(name, post) {
 export async function getHelpPosts() {
   try {
     const result = await axios.get(`${rootURL}/help`);
+    console.log(result.data.data);
     return result.data.data;
   } catch (err) {
     throw err;
@@ -104,15 +105,15 @@ export async function getHelpPosts() {
 }
 
 // profile page - gets the current list of people you are currently helping
-export async function getSamaritanTexts(name) {
-  if (!name) {
-    throw new Error('no user given');
-  }
+// export async function getSamaritanTexts(name) {
+//   if (!name) {
+//     throw new Error('no user given');
+//   }
 
-  try {
-    const result = await axios.get(`${rootURL}/texts/${name}`);
-    return result.data;
-  } catch (err) {
-    throw err;
-  }
-}
+//   try {
+//     const result = await axios.get(`${rootURL}/texts/${name}`);
+//     return result.data;
+//   } catch (err) {
+//     throw err;
+//   }
+// }

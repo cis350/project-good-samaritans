@@ -55,7 +55,8 @@ const changePrivacy = async (db, user, setting) => {
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
   try {
-    const result = await db.collection('Help').find({}).toArray();
+    const result = await db.collection('Help').find().toArray();
+    // console.log(result);
     return result;
   } catch (err) {
     throw new Error('could not get help board');
@@ -63,14 +64,14 @@ const getHelpPosts = async (db) => {
 };
 
 // get the samaritan texts of a user
-const getSamaritanTexts = async (db, user) => {
-  try {
-    const result = await db.collection('Users').findOne({ name: user });
-    return result.texts;
-  } catch (err) {
-    throw new Error('could not get samaritan texts of user');
-  }
-};
+// const getSamaritanTexts = async (db, user) => {
+//   try {
+//     const result = await db.collection('Users').findOne({ name: user });
+//     return result.texts;
+//   } catch (err) {
+//     throw new Error('could not get samaritan texts of user');
+//   }
+// };
 
 // post a request to the Help DB
 const postRequest = async (db, name, post) => {
@@ -134,7 +135,6 @@ module.exports = {
   getLoginTrue,
   changePrivacy,
   getHelpPosts,
-  getSamaritanTexts,
   postRequest,
   addUser,
   addMessage,
