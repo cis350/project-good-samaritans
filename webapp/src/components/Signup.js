@@ -1,6 +1,7 @@
+/* eslint-disable import/no-cycle */
 import { React, useState, useRef } from 'react';
 import { addUser } from '../modules/api';
-import Profile from './Profile';
+import Login from './Login';
 
 function Signup() {
   const userInput = useRef('');
@@ -10,6 +11,7 @@ function Signup() {
   const userInputCountry = useRef('');
   const userInputZIP = useRef('');
   const userInputCOVID = useRef('');
+  const [login, setLogin] = useState(false);
 
   const [, setStarted] = useState(false);
   const start = useRef(false);
@@ -116,11 +118,21 @@ function Signup() {
     );
   }
 
-  return (
-    <div className="Profile">
-      <Profile accountName={userInput.current} />
-    </div>
-  );
+  if (start.current) {
+    if (!login) {
+      return (
+        <div>
+          <h1>REGISTRATION SUCCESSFUL</h1>
+          <button type="button" onClick={() => { setLogin(true); }}>Login</button>
+        </div>
+      );
+    }
+    return (
+      <div className="Profile">
+        <Login />
+      </div>
+    );
+  }
 }
 
 export default Signup;
