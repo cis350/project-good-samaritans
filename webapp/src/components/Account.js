@@ -1,17 +1,29 @@
+/* eslint-disable import/no-cycle */
 import { React, useEffect, useState } from 'react';
+import Profile from './Profile';
+import { getProfile } from '../modules/api';
 
-import {
-  getProfile,
-} from '../modules/api';
-
-function Account({ user }) {
+function Account({ accountName }) {
   const [profile, setProfile] = useState({ name: '123' });
+  const [goBack, setgoBack] = useState(false);
+  let result = '';
 
   useEffect(async () => {
-    const result = await getProfile(user);
+    result = await getProfile(accountName);
     setProfile(result);
   }, []);
 
+  const handleGoBack = () => {
+    setgoBack(true);
+  };
+
+  if (goBack) {
+    return (
+      <div className="Profile">
+        <Profile accountName={profile.name} />
+      </div>
+    );
+  }
   return (
     <div>
       <b>Account info</b>
@@ -35,6 +47,12 @@ function Account({ user }) {
       Password:
       <br />
       {profile.password}
+      <br />
+      <button type="submit" onClick={handleGoBack}>
+        <div>
+          Go Back to Profile
+        </div>
+      </button>
     </div>
   );
 }

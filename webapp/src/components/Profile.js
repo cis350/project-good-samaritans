@@ -123,17 +123,17 @@ function Profile({ accountName }) {
 
   if (training) { // Goes to training page
     return (
-      <Training />
+      <Training accountName={accountName} />
     );
   }
   if (request) { // Goes to request page
     return (
-      <Request name={name.current} />
+      <Request accountName={accountName} />
     );
   }
   if (account) { // Goes to account page
     return (
-      <Account user={name.current} />
+      <Account accountName={accountName} />
     );
   }
   if (message) {

@@ -3,7 +3,7 @@ import { React, useRef, useState } from 'react';
 import { postRequest } from '../modules/api';
 import Profile from './Profile';
 
-function Request({ name }) {
+function Request({ accountName }) {
   const [requ, setRequ] = useState(false);
   const [goBack, setGoBack] = useState(false);
   const reqPost = useRef('');
@@ -15,7 +15,7 @@ function Request({ name }) {
   // Gonna change this after adding routes
   function sendRequest() {
     // console.log('sent request');
-    postRequest(name, reqPost.current);
+    postRequest(accountName, reqPost.current);
     setRequ(true);
   }
   const domId = 125;
@@ -30,7 +30,7 @@ function Request({ name }) {
     }
     return (
       <div className="Profile">
-        <Profile accountName={name} />
+        <Profile accountName={accountName} />
       </div>
     );
   }
@@ -39,7 +39,7 @@ function Request({ name }) {
       <h1>
         What is your issue
         {' '}
-        {name}
+        {accountName}
       </h1>
       <label htmlFor={domId}>
         <input name="text" onChange={handleReqText} />
