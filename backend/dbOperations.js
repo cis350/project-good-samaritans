@@ -28,6 +28,19 @@ const getLoginTrue = async (db, user, pwd) => {
   }
 };
 
+// login - username was correct but password incorrect
+const getPasswordTrue = async (db, user, pwd) => {
+  try {
+    const result = await db.collection('Users').findOne({ name: user });
+    if (result != null && pwd.normalize() !== (result.password).normalize()) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    throw new Error('wrong password');
+  }
+};
+
 // change the privacy of a user
 const changePrivacy = async (db, user, setting) => {
   try {
@@ -74,16 +87,25 @@ const getHelpPosts = async (db) => {
 // };
 
 // post a request to the Help DB
-const postRequest = async (db, name, post) => {
+const postRequest = async (db, user, request) => {
   try {
-    const result = await db.collection('Help').insertOne({ name, post });
-    return result;
+    const found = await db.collection('Help').findOne({ name: user });
+    // edits the post
+    if (found !== null) {
+      await db.collection('Help').updateOne(
+        { name: user },
+        { $set: { post: request } },
+      );
+    } else {
+      await db.collection('Help').insertOne({ name: user, post: request });
+    }
   } catch (err) {
     console.log(err);
     throw new Error('could not add request');
   }
 };
 
+// adds the user
 const addUser = async (db, name, street, state, country, zip, password, privacy) => {
   try {
     const result = await db.collection('Users').insertOne(
@@ -95,6 +117,21 @@ const addUser = async (db, name, street, state, country, zip, password, privacy)
   } catch (err) {
     console.log(err);
     throw new Error('could not add user');
+  }
+};
+
+// gets the user's profile
+const getProfile = async (db, user) => {
+  try {
+    const result = await db.collection('Users').findOne(
+      {
+        name: user,
+      },
+    );
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not find user');
   }
 };
 
@@ -133,10 +170,12 @@ const getMessages = async (db, name, name2) => {
 module.exports = {
   connect,
   getLoginTrue,
+  getPasswordTrue,
   changePrivacy,
   getHelpPosts,
   postRequest,
   addUser,
+  getProfile,
   addMessage,
   getMessages,
 };

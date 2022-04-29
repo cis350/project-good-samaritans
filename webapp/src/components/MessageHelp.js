@@ -1,5 +1,5 @@
 import {
-  React, useState, useRef,
+  React, useRef,
 } from 'react';
 import {
   getMessages, addMessage,
@@ -10,17 +10,12 @@ import {
 //   import '../assets/Profile.css';
 // import Friends from './Friends';
 
-function Message({ accountName }) {
-  const [target, setTarget] = useState(false);
-  const targetName = useRef('');
+function Message2({ accountName, secondName }) {
+  const targetName = secondName;
   const targetName2 = useRef('');
   let msgHistory = '';
   let arr = [];
   const d = new Date();
-
-  function handleTarget(e) {
-    targetName.current = e.target.value;
-  }
 
   function handleTarget2(e) {
     targetName2.current = e.target.value;
@@ -35,41 +30,28 @@ function Message({ accountName }) {
 
   async function handleDone() {
     arr = [];
-    msgHistory = await getMessages(accountName, targetName.current);
+    msgHistory = await getMessages(accountName, targetName);
     msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
     for (let i = 0; i < msgHistory.data.length; i += 1) {
       const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
       arr.push(temp);
     }
-
-    setTarget(true);
     showMessages();
   }
 
   async function handleDone2() {
-    await addMessage(accountName, targetName.current, targetName2.current, d.getTime());
+    await addMessage(accountName, targetName, targetName2.current, d.getTime());
     const holder = document.getElementById('holder');
     holder.innerHTML = '';
     handleDone();
   }
 
-  if (!target) {
-    return (
-      <div>
-        <h1>
-          Hello
-          {' '}
-          {accountName}
-          !
-        </h1>
-        <h2> Who would you like to message?</h2>
-        <input name="target" onChange={handleTarget} />
-        <button type="submit" onClick={handleDone}>Message</button>
-      </div>
-    );
-  }
   return (
     <div>
+      <div>
+        Messaging :
+        {targetName}
+      </div>
       <div id="holder" />
       <div>new message:</div>
       <input name="messageNow" onChange={handleTarget2} />
@@ -78,4 +60,4 @@ function Message({ accountName }) {
   );
 }
 
-export default Message;
+export default Message2;

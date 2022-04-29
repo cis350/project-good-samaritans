@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-const rootURL = 'http://localhost:5000';
+const rootURL = 'http://localhost:11000';
 
 // profile page - sends request to change the privacy setting
 export async function changePrivacy(name, setting) {
@@ -25,6 +25,19 @@ export async function addUser(name, street, state, country, zip, password, priva
   try {
     await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`);
     return;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function getProfile(name) {
+  if (!name) {
+    throw new Error('no user given');
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/user/${name}`);
+    return result.data.data;
   } catch (err) {
     throw err;
   }
@@ -58,7 +71,7 @@ export async function getMessages(name, name2) {
 
 export async function getLoginTrue(name, password) {
   if (!name || !password) {
-    throw new Error('field error: login');
+    return false;
   }
 
   try {
@@ -69,11 +82,23 @@ export async function getLoginTrue(name, password) {
   }
 }
 
+export async function getPasswordTrue(name, password) {
+  if (!name || !password) {
+    return false;
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/lockout/${name}/${password}`);
+    return result.data.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 // profile page - gets the current list of help posts
 export async function postRequest(name, post) {
   try {
-    const result = await axios.post(`${rootURL}/request/${name}/${post}`);
-    return result;
+    await axios.post(`${rootURL}/request/${name}/${post}`);
   } catch (err) {
     throw err;
   }

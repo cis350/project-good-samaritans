@@ -9,6 +9,7 @@ import Training from './Training';
 import Request from './Request';
 import Account from './Account';
 import Message from './Message';
+import Message2 from './MessageHelp';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
@@ -21,12 +22,15 @@ function Profile({ accountName }) {
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
   const [message, setMessage] = useState(false);
+  const [respond, setRespond] = useState(false);
   const helpBoard = useRef();
   const currentPostName = useRef();
   const currentPostDescription = useRef();
   const [postCount, setPostCount] = useState(0);
   const clickedHelpBoardButton = useRef(false);
   const [, setRevealPosts] = useState(false);
+  // const MINUTE_MS = 5000;
+  // let currLength;
   // const [clickedHelpBoardButton, setHelpButton] = useState(false);
 
   // const friendsList = Storage.getFriends(name.current); -
@@ -40,7 +44,19 @@ function Profile({ accountName }) {
       helpBoard.current = await getHelpPosts();
     }
     initializeBoardPosts();
+    // const interval = setInterval(() => {
+    //   initializeBoardPosts();
+    //   if (currLength < helpBoard.current.length) {
+    //     // eslint-disable-next-line no-alert
+    //     alert('new help needed!');
+    //   }
+    // }, MINUTE_MS);
+    // return () => clearInterval(interval);
+    console.log('in useeffect');
+    console.log(helpBoard.current);
   }, []);
+  console.log('outside useeffect');
+  console.log(helpBoard.current);
 
   const handlePrivacy = () => {
     if (privacy === 'Private') {
@@ -63,6 +79,7 @@ function Profile({ accountName }) {
   };
 
   const handleHelpButton = () => {
+    // currLength = helpBoard.current.length;
     clickedHelpBoardButton.current = true;
     const x = helpBoard.current;
     currentPostName.current = x[postCount].name;
@@ -94,6 +111,10 @@ function Profile({ accountName }) {
     setMessage(true);
   };
 
+  const handleRespond = () => {
+    setRespond(true);
+  };
+
   // const handleSamaritanTexts = async () => {
   //   setTab('samaritan');
   //   samaritanTexts.current = await getSamaritanTexts(name.current);
@@ -109,14 +130,20 @@ function Profile({ accountName }) {
       <Request name={name.current} />
     );
   }
-  if (account) {
+  if (account) { // Goes to account page
     return (
-      <Account />
+      <Account user={name.current} />
     );
   }
   if (message) {
     return (
       <Message accountName={accountName} />
+    );
+  }
+
+  if (respond) {
+    return (
+      <Message2 accountName={accountName} secondName={currentPostName.current} />
     );
   }
 
@@ -144,7 +171,7 @@ function Profile({ accountName }) {
             <br />
             { currentPostDescription.current }
             <br />
-            <button type="button">Respond</button>
+            <button type="button" onClick={handleRespond}>Respond</button>
             <button type="button" onClick={handleNextPost}>Next</button>
             <button type="button" onClick={handlePrevPost}>Prev</button>
           </div>
