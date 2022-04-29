@@ -9,6 +9,7 @@ import Training from './Training';
 import Request from './Request';
 import Account from './Account';
 import Message from './Message';
+import Message2 from './MessageHelp';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
@@ -21,6 +22,7 @@ function Profile({ accountName }) {
   const [privacy, setPrivacy] = useState('Private');
   const [request, setRequest] = useState(false);
   const [message, setMessage] = useState(false);
+  const [respond, setRespond] = useState(false);
   const helpBoard = useRef();
   const currentPostName = useRef();
   const currentPostDescription = useRef();
@@ -94,6 +96,10 @@ function Profile({ accountName }) {
     setMessage(true);
   };
 
+  const handleRespond = () => {
+    setRespond(true);
+  };
+
   // const handleSamaritanTexts = async () => {
   //   setTab('samaritan');
   //   samaritanTexts.current = await getSamaritanTexts(name.current);
@@ -117,6 +123,12 @@ function Profile({ accountName }) {
   if (message) {
     return (
       <Message accountName={accountName} />
+    );
+  }
+
+  if (respond) {
+    return (
+      <Message2 accountName={accountName} secondName={currentPostName.current} />
     );
   }
 
@@ -144,7 +156,7 @@ function Profile({ accountName }) {
             <br />
             { currentPostDescription.current }
             <br />
-            <button type="button">Respond</button>
+            <button type="button" onClick={handleRespond}>Respond</button>
             <button type="button" onClick={handleNextPost}>Next</button>
             <button type="button" onClick={handlePrevPost}>Prev</button>
           </div>
