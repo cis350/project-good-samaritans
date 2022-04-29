@@ -29,8 +29,8 @@ function Profile({ accountName }) {
   const [postCount, setPostCount] = useState(0);
   const clickedHelpBoardButton = useRef(false);
   const [, setRevealPosts] = useState(false);
-  const MINUTE_MS = 5000;
-  let currLength;
+  // const MINUTE_MS = 5000;
+  // let currLength;
   // const [clickedHelpBoardButton, setHelpButton] = useState(false);
 
   // const friendsList = Storage.getFriends(name.current); -
@@ -44,15 +44,19 @@ function Profile({ accountName }) {
       helpBoard.current = await getHelpPosts();
     }
     initializeBoardPosts();
-    const interval = setInterval(() => {
-      initializeBoardPosts();
-      if (currLength < helpBoard.current.length) {
-        // eslint-disable-next-line no-alert
-        alert('new help needed!');
-      }
-    }, MINUTE_MS);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   initializeBoardPosts();
+    //   if (currLength < helpBoard.current.length) {
+    //     // eslint-disable-next-line no-alert
+    //     alert('new help needed!');
+    //   }
+    // }, MINUTE_MS);
+    // return () => clearInterval(interval);
+    console.log('in useeffect');
+    console.log(helpBoard.current);
   }, []);
+  console.log('outside useeffect');
+  console.log(helpBoard.current);
 
   const handlePrivacy = () => {
     if (privacy === 'Private') {
@@ -75,7 +79,7 @@ function Profile({ accountName }) {
   };
 
   const handleHelpButton = () => {
-    currLength = helpBoard.current.length;
+    // currLength = helpBoard.current.length;
     clickedHelpBoardButton.current = true;
     const x = helpBoard.current;
     currentPostName.current = x[postCount].name;

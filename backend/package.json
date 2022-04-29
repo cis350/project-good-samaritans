@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage --forceExit",
     "lint": "eslint *.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "npm install && cd ../webapp && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

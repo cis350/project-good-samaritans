@@ -28,6 +28,19 @@ const getLoginTrue = async (db, user, pwd) => {
   }
 };
 
+// login - username was correct but password incorrect
+const getPasswordTrue = async (db, user, pwd) => {
+  try {
+    const result = await db.collection('Users').findOne({ name: user });
+    if (result != null && pwd.normalize() !== (result.password).normalize()) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    throw new Error('wrong password');
+  }
+};
+
 // change the privacy of a user
 const changePrivacy = async (db, user, setting) => {
   try {
@@ -55,7 +68,8 @@ const changePrivacy = async (db, user, setting) => {
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
   try {
-    const result = await db.collection('Help').find({}).toArray();
+    const result = await db.collection('Help').find().toArray();
+    // console.log(result);
     return result;
   } catch (err) {
     throw new Error('could not get help board');
@@ -63,14 +77,14 @@ const getHelpPosts = async (db) => {
 };
 
 // get the samaritan texts of a user
-const getSamaritanTexts = async (db, user) => {
-  try {
-    const result = await db.collection('Users').findOne({ name: user });
-    return result.texts;
-  } catch (err) {
-    throw new Error('could not get samaritan texts of user');
-  }
-};
+// const getSamaritanTexts = async (db, user) => {
+//   try {
+//     const result = await db.collection('Users').findOne({ name: user });
+//     return result.texts;
+//   } catch (err) {
+//     throw new Error('could not get samaritan texts of user');
+//   }
+// };
 
 // post a request to the Help DB
 const postRequest = async (db, user, request) => {
@@ -156,9 +170,9 @@ const getMessages = async (db, name, name2) => {
 module.exports = {
   connect,
   getLoginTrue,
+  getPasswordTrue,
   changePrivacy,
   getHelpPosts,
-  getSamaritanTexts,
   postRequest,
   addUser,
   getProfile,
