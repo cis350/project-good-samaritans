@@ -12,6 +12,7 @@ function Signup() {
   const userInputZIP = useRef('');
   const userInputCOVID = useRef('');
   const [login, setLogin] = useState(false);
+  const d = new Date();
 
   const [, setStarted] = useState(false);
   const start = useRef(false);
@@ -62,6 +63,11 @@ function Signup() {
         userInputZIP.current,
         userPwd.current,
         'Private',
+        {
+          year: d.getFullYear,
+          month: d.getMonth,
+          day: d.getDay,
+        },
       );
       setStarted(true);
       start.current = true;

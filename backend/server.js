@@ -145,6 +145,7 @@ app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (re
       req.params.zip,
       req.params.password,
       req.params.privacy,
+      req.body.date,
     );
     resp.status(200).json({ data: results });
   } catch (err) {

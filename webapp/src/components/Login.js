@@ -51,9 +51,7 @@ function Login() {
         setStarted(true);
       } else if (!passwordCheck) {
         const count = mistakes + 1;
-        console.log(count);
         setMistakes(count);
-        console.log(count);
         alert('incorrect password');
       } else {
         // eslint this later

@@ -120,11 +120,11 @@ const postRequest = async (db, user, request) => {
 };
 
 // adds the user
-const addUser = async (db, name, street, state, country, zip, password, privacy) => {
+const addUser = async (db, name, street, state, country, zip, password, privacy, date) => {
   try {
     const result = await db.collection('Users').insertOne(
       {
-        name, street, state, country, zip, password, privacy,
+        name, street, state, country, zip, password, privacy, date,
       },
     );
     return result;
