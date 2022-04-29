@@ -30,6 +30,19 @@ export async function addUser(name, street, state, country, zip, password, priva
   }
 }
 
+export async function getProfile(name) {
+  if (!name) {
+    throw new Error('no user given');
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/user/${name}`);
+    return result.data.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function addMessage(name, name2, message, time) {
   if (!name || !name2 || !message || !time) {
     throw new Error('field error');

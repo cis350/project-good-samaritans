@@ -57,6 +57,7 @@ function Message({ accountName }) {
       <div>
         <h1>
           Hello
+          {' '}
           {accountName}
           !
         </h1>

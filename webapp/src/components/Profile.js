@@ -109,9 +109,9 @@ function Profile({ accountName }) {
       <Request name={name.current} />
     );
   }
-  if (account) {
+  if (account) { // Goes to account page
     return (
-      <Account />
+      <Account user={name.current} />
     );
   }
   if (message) {

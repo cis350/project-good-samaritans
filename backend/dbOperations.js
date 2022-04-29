@@ -106,6 +106,21 @@ const addUser = async (db, name, street, state, country, zip, password, privacy)
   }
 };
 
+// gets the user's profile
+const getProfile = async (db, user) => {
+  try {
+    const result = await db.collection('Users').findOne(
+      {
+        name: user,
+      },
+    );
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not find user');
+  }
+};
+
 const addMessage = async (db, name, name2, message, time) => {
   try {
     const result = await db.collection('Messages').insert(
@@ -146,6 +161,7 @@ module.exports = {
   getSamaritanTexts,
   postRequest,
   addUser,
+  getProfile,
   addMessage,
   getMessages,
 };

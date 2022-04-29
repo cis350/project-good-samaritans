@@ -112,6 +112,7 @@ app.post('/request/:name/:post', async (req, resp) => {
   }
 });
 
+// signin page - addUser
 app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (req, resp) => {
   if (!req.params.name) {
     resp.status(404).json({ error: 'username not provided' });
@@ -129,6 +130,21 @@ app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (re
       req.params.password,
       req.params.privacy,
     );
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
+// accounts page - getProfile
+app.get('/user/:name', async (req, resp) => {
+  if (!req.params.name) {
+    resp.status(404).json({ error: 'username not provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.getProfile(db, req.params.name);
     resp.status(200).json({ data: results });
   } catch (err) {
     resp.status(400).json({ error: 'try again later' });
