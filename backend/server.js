@@ -206,7 +206,7 @@ app.get('/message/:name1/:name2', async (req, resp) => {
 });
 
 // Start server
-const port = process.env.PORT || 11000;
+const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   // perform a database connection when server starts
   db = await dbo.connect(url);
