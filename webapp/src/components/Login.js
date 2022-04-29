@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-alert */
 import {
   React, useState, useRef,
@@ -6,6 +7,7 @@ import '../assets/Login.css';
 import { getLoginTrue, getPasswordTrue } from '../modules/api';
 import Profile from './Profile';
 import Signup from './Signup';
+import Lockout from './Lockout';
 
 function Login() {
   console.log('render');
@@ -61,13 +63,14 @@ function Login() {
       </div>
     );
   }
+
   // needed for eslint. Figure it out later
   const domId = 124;
   if (!started && !clickedSignup.current) {
     if (mistakes >= 3) {
       return (
         <div>
-          ACCOUNT LOCKED OUT
+          <Lockout />
         </div>
       );
     }
