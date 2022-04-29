@@ -27,7 +27,7 @@ const url = process.env.ATLAS_URI;
 
 // Root endpoint
 app.get('/', (_req, resp) => {
-  resp.json({ message: 'project good samaritans' });
+  resp.json({ message: 'project good samaritans backend' });
 });
 
 // login page - logged in successfully
@@ -43,6 +43,7 @@ app.get('/login/:name/:password', async (req, resp) => {
     resp.status(400).json({ error: 'try again later' });
   }
 });
+
 // profile page - changePrivacy endpoint(change the user's privacy in db)
 app.put('/user/:name/privacy', async (req, resp) => {
   if (!req.params.name || req.params.name.length === 0 || !req.body.privacy) {

@@ -23,12 +23,13 @@ function Profile({ accountName }) {
   const [request, setRequest] = useState(false);
   const [message, setMessage] = useState(false);
   // const [friendSearch, setFriendSearch] = useState();
-  let helpBoard = [];
+  const helpBoard = useRef([]);
   const samaritanTexts = useRef();
 
   // const friendsList = Storage.getFriends(name.current); -
   // const friendsList = getFriends(name.current);
 
+  // DOESN'T WORK YETs
   useEffect(() => {
     changePrivacy(name.current, privacy);
   }, [privacy]);
@@ -61,9 +62,17 @@ function Profile({ accountName }) {
   //   }
   // };
 
-  const handleHelpPosts = async () => {
+  // For some reason doesn't render when first opened
+  useEffect(() => {
+    async function fetchHelpPosts() {
+      helpBoard.current = await getHelpPosts();
+    }
+    console.log('posts:', helpBoard.current);
+    fetchHelpPosts();
+  });
+
+  const handleHelpPosts = () => {
     setTab('board');
-    helpBoard = getHelpPosts();
   };
 
   const handleMessage = () => {
@@ -95,7 +104,6 @@ function Profile({ accountName }) {
       <Message accountName={accountName} />
     );
   }
-  console.log(helpBoard);
 
   return (
     <div className="Profile">
@@ -121,10 +129,10 @@ function Profile({ accountName }) {
           {(tab === 'board') ? (
             <div className="help-board">
               <ol className="helpList">
-                {helpBoard.map((post) => (
+                {helpBoard.current.map((post) => (
                   <li key={post.name}>
                     {post.name}
-                    {' '}
+                    {': '}
                     {post.post}
                   </li>
                 ))}
