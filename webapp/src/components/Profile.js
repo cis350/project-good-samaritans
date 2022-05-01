@@ -14,13 +14,14 @@ import Message2 from './MessageHelp';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
-function Profile({ accountName }) {
+function Profile({ accountName, initialPrivacy }) {
+  console.log('rerender');
   const name = useRef(accountName); // name of the user after logging in
   // const [friends, setFriends] = useState(false); // event if friends button was clicked
   const [training, setTraining] = useState(false); // event if the training button was clicked
   // const [tab, setTab] = useState('board'); // board or samaritan
   const [account, setAccount] = useState(false); // event if the account button was clicked
-  const [privacy, setPrivacy] = useState('Private');
+  const [privacy, setPrivacy] = useState(initialPrivacy);
   const [request, setRequest] = useState(false);
   const [message, setMessage] = useState(false);
   const [respond, setRespond] = useState(false);
@@ -30,6 +31,8 @@ function Profile({ accountName }) {
   const [postCount, setPostCount] = useState(0);
   const clickedHelpBoardButton = useRef(false);
   const [, setRevealPosts] = useState(false);
+  // console.log(initialPrivacy);
+  // console.log(`initial: ${privacy}`);
   // const MINUTE_MS = 5000;
   // let currLength;
   // const [clickedHelpBoardButton, setHelpButton] = useState(false);
@@ -45,24 +48,19 @@ function Profile({ accountName }) {
       helpBoard.current = await getHelpPosts();
     }
     initializeBoardPosts();
-    // const interval = setInterval(() => {
-    //   initializeBoardPosts();
-    //   if (currLength < helpBoard.current.length) {
-    //     // eslint-disable-next-line no-alert
-    //     alert('new help needed!');
-    //   }
-    // }, MINUTE_MS);
-    // return () => clearInterval(interval);
     console.log('in useeffect');
     console.log(helpBoard.current);
-  }, []);
-  console.log('outside useeffect');
-  console.log(helpBoard.current);
+    console.log(privacy);
+  }, [privacy, postCount]);
+  // console.log('outside useeffect');
+  // console.log(helpBoard.current);
 
   const handlePrivacy = () => {
     if (privacy === 'Private') {
+      console.log('chaging privacy');
       setPrivacy('Public');
     } else {
+      console.log('else privacy');
       setPrivacy('Private');
     }
   };
