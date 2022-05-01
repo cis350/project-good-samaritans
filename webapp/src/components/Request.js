@@ -3,7 +3,7 @@ import { React, useRef, useState } from 'react';
 import { postRequest } from '../modules/api';
 import Profile from './Profile';
 
-function Request({ accountName }) {
+function Request({ accountName, currentPrivacy }) {
   const [requ, setRequ] = useState(false);
   const [goBack, setGoBack] = useState(false);
   const reqPost = useRef('');
@@ -30,7 +30,7 @@ function Request({ accountName }) {
     }
     return (
       <div className="Profile">
-        <Profile accountName={accountName} />
+        <Profile accountName={accountName} initialPrivacy={currentPrivacy} />
       </div>
     );
   }

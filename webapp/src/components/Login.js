@@ -4,7 +4,9 @@ import {
   React, useState, useRef,
 } from 'react';
 import '../assets/Login.css';
-import { getLoginTrue, getPasswordTrue, changePassword } from '../modules/api';
+import {
+  getLoginTrue, getPasswordTrue, changePassword, getProfile,
+} from '../modules/api';
 import Profile from './Profile';
 import Signup from './Signup';
 import Lockout from './Lockout';
@@ -21,6 +23,7 @@ function Login() {
   const [forgot, setForgot] = useState(false);
   let loggedIn = false;
   let passwordCheck = true;
+  const [privacy, setPrivacy] = useState('');
 
   function handleUser(e) {
     userName.current = e.target.value;
@@ -46,8 +49,10 @@ function Login() {
       loggedIn = await getLoginTrue(userName.current, userPass.current);
       passwordCheck = await getPasswordTrue(userName.current, userPass.current);
 
-      console.log(loggedIn);
+      console.log(`handleFormSubmit loggedin: ${loggedIn}`);
       if (loggedIn) {
+        const result = await getProfile(userName.current);
+        setPrivacy(result.privacy);
         setStarted(true);
       } else if (!passwordCheck) {
         const count = mistakes + 1;
@@ -127,7 +132,7 @@ function Login() {
 
   return (
     <div className="Profile">
-      <Profile accountName={userName.current} />
+      <Profile accountName={userName.current} initialPrivacy={privacy} />
     </div>
   );
 }
