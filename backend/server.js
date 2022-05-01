@@ -146,6 +146,8 @@ app.post('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (r
       req.params.password,
       req.params.privacy,
       req.body.date,
+      req.body.helpedNo,
+      req.body.requestsNo,
     );
     resp.status(200).json({ data: results });
   } catch (err) {
@@ -162,6 +164,21 @@ app.put('/change-pwd/:name', async (req, resp) => {
   try {
     const results = await dbo.changePassword(db, req.params.name, req.body.password);
     resp.status(200).json({ message: `Player with name ${results.name} changed password to ${results.password}` });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
+// increment number of requests made
+app.put('/requests/:name', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0) {
+    resp.status(404).json({ error: 'no username provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.incrementRequest(db, req.params.name);
+    resp.status(200).json({ message: `Player with name ${results.name} incremented number of requests to ${results.requestsNo}` });
   } catch (err) {
     resp.status(400).json({ error: 'try again later' });
   }

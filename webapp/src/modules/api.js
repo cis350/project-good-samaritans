@@ -17,13 +17,40 @@ export async function changePrivacy(name, setting) {
   }
 }
 
-export async function addUser(name, street, state, country, zip, password, privacy, time) {
+export async function addUser(
+  name,
+  street,
+  state,
+  country,
+  zip,
+  password,
+  privacy,
+  time,
+  noHelped,
+  noRequests,
+) {
   if (!name || !street || !state || !country || !zip || !password) {
     throw new Error('field error');
   }
 
   try {
-    await axios.post(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, { date: time });
+    await axios.post(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, { date: time, helpedNo: noHelped, requestsNo: noRequests });
+    return;
+  } catch (err) {
+    throw err;
+  }
+}
+
+// increment number of people helped
+
+// increment number of requests made
+export async function incrementRequest(name) {
+  if (!name) {
+    throw new Error('no user given');
+  }
+
+  try {
+    await axios.put(`${rootURL}/requests/${name}`);
     return;
   } catch (err) {
     throw err;

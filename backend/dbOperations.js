@@ -69,6 +69,20 @@ const changePrivacy = async (db, user, setting) => {
   }
 };
 
+// increment the number of requests made by user
+const incrementRequest = async (db, user) => {
+  try {
+    await db.collection('Users').updateOne(
+      { name: user },
+      { $inc: { requestsNo: 1 } },
+    );
+    const result = await db.collection('Users').findOne({ name: user });
+    return result;
+  } catch (err) {
+    throw new Error('could not increment request number');
+  }
+};
+
 // get the friends of a user
 // const getFriends = async (db, user) => {
 //   try {
@@ -120,11 +134,23 @@ const postRequest = async (db, user, request) => {
 };
 
 // adds the user
-const addUser = async (db, name, street, state, country, zip, password, privacy, date) => {
+const addUser = async (
+  db,
+  name,
+  street,
+  state,
+  country,
+  zip,
+  password,
+  privacy,
+  date,
+  helpedNo,
+  requestsNo,
+) => {
   try {
     const result = await db.collection('Users').insertOne(
       {
-        name, street, state, country, zip, password, privacy, date,
+        name, street, state, country, zip, password, privacy, date, helpedNo, requestsNo,
       },
     );
     return result;
@@ -193,6 +219,7 @@ module.exports = {
   addMessage,
   getMessages,
   changePassword,
+  incrementRequest,
 };
 
 // const main = async () => {

@@ -14,7 +14,7 @@ import Message2 from './MessageHelp';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
-function Profile({ accountName, initialPrivacy }) {
+function Profile({ accountName, initialPrivacy, requests }) {
   console.log('rerender');
   const name = useRef(accountName); // name of the user after logging in
   // const [friends, setFriends] = useState(false); // event if friends button was clicked
@@ -31,6 +31,8 @@ function Profile({ accountName, initialPrivacy }) {
   const [postCount, setPostCount] = useState(0);
   const clickedHelpBoardButton = useRef(false);
   const [, setRevealPosts] = useState(false);
+  const requestsNo = useRef(requests);
+  console.log(`number of requests: ${requestsNo.current}`);
   // console.log(initialPrivacy);
   // console.log(`initial: ${privacy}`);
   // const MINUTE_MS = 5000;
@@ -121,17 +123,29 @@ function Profile({ accountName, initialPrivacy }) {
 
   if (training) { // Goes to training page
     return (
-      <Training accountName={accountName} currentPrivacy={privacy} />
+      <Training
+        accountName={accountName}
+        currentPrivacy={privacy}
+        currentRequests={requestsNo.current}
+      />
     );
   }
   if (request) { // Goes to request page
     return (
-      <Request accountName={accountName} currentPrivacy={privacy} />
+      <Request
+        accountName={accountName}
+        currentPrivacy={privacy}
+        currentRequests={requestsNo.current}
+      />
     );
   }
   if (account) { // Goes to account page
     return (
-      <Account accountName={accountName} currentPrivacy={privacy} />
+      <Account
+        accountName={accountName}
+        currentPrivacy={privacy}
+        currentRequests={requestsNo.current}
+      />
     );
   }
   if (message) {
@@ -159,6 +173,12 @@ function Profile({ accountName, initialPrivacy }) {
           <button className="message-button" type="button" onClick={handleMessage}>
             Message
           </button>
+        </div>
+        <div className="analytics">
+          <h3>User Analytics</h3>
+          <p>Number of Requests Made: </p>
+          {' '}
+          { requestsNo.current }
         </div>
       </div>
       <div className="middleButtons">
