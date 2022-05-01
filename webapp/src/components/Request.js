@@ -1,9 +1,9 @@
 /* eslint-disable import/no-cycle */
 import { React, useRef, useState } from 'react';
-import { postRequest } from '../modules/api';
+import { incrementRequest, postRequest } from '../modules/api';
 import Profile from './Profile';
 
-function Request({ accountName, currentPrivacy }) {
+function Request({ accountName, currentPrivacy, currentRequests }) {
   const [requ, setRequ] = useState(false);
   const [goBack, setGoBack] = useState(false);
   const reqPost = useRef('');
@@ -16,6 +16,7 @@ function Request({ accountName, currentPrivacy }) {
   function sendRequest() {
     // console.log('sent request');
     postRequest(accountName, reqPost.current);
+    incrementRequest(accountName);
     setRequ(true);
   }
   const domId = 125;
@@ -30,7 +31,11 @@ function Request({ accountName, currentPrivacy }) {
     }
     return (
       <div className="Profile">
-        <Profile accountName={accountName} initialPrivacy={currentPrivacy} />
+        <Profile
+          accountName={accountName}
+          initialPrivacy={currentPrivacy}
+          requests={currentRequests + 1}
+        />
       </div>
     );
   }

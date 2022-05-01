@@ -70,6 +70,8 @@ function Signup() {
         userPwd.current,
         'Private',
         date,
+        0,
+        0,
       );
       setStarted(true);
       start.current = true;
