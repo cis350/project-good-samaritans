@@ -3,7 +3,7 @@ import { React, useEffect, useState } from 'react';
 import Profile from './Profile';
 import { getProfile } from '../modules/api';
 
-function Training({ accountName }) {
+function Training({ accountName, currentPrivacy }) {
   const [profile, setProfile] = useState({ name: '123' });
   const [goBack, setgoBack] = useState(false);
   let result = '';
@@ -20,7 +20,7 @@ function Training({ accountName }) {
   if (goBack) {
     return (
       <div className="Profile">
-        <Profile accountName={profile.name} />
+        <Profile accountName={profile.name} initialPrivacy={currentPrivacy} />
       </div>
     );
   }

@@ -121,17 +121,17 @@ function Profile({ accountName, initialPrivacy }) {
 
   if (training) { // Goes to training page
     return (
-      <Training accountName={accountName} />
+      <Training accountName={accountName} currentPrivacy={privacy} />
     );
   }
   if (request) { // Goes to request page
     return (
-      <Request accountName={accountName} />
+      <Request accountName={accountName} currentPrivacy={privacy} />
     );
   }
   if (account) { // Goes to account page
     return (
-      <Account accountName={accountName} />
+      <Account accountName={accountName} currentPrivacy={privacy} />
     );
   }
   if (message) {
