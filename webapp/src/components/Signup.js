@@ -55,6 +55,12 @@ function Signup() {
       console.log(userInputZIP);
       console.log(userInputCOVID);
 
+      const date = {
+        year: d.getFullYear(),
+        month: d.getMonth(),
+        day: d.getDay(),
+      };
+
       addUser(
         userInput.current,
         userInputStreet.current,
@@ -63,11 +69,7 @@ function Signup() {
         userInputZIP.current,
         userPwd.current,
         'Private',
-        {
-          year: d.getFullYear,
-          month: d.getMonth,
-          day: d.getDay,
-        },
+        date,
       );
       setStarted(true);
       start.current = true;

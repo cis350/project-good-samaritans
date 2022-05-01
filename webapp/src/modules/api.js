@@ -23,7 +23,7 @@ export async function addUser(name, street, state, country, zip, password, priva
   }
 
   try {
-    await axios.put(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, { date: time });
+    await axios.post(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, { date: time });
     return;
   } catch (err) {
     throw err;

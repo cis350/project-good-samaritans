@@ -129,7 +129,7 @@ app.post('/request/:name/:post', async (req, resp) => {
 });
 
 // signin page - addUser
-app.put('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (req, resp) => {
+app.post('/user/:name/:street/:state/:country/:zip/:password/:privacy', async (req, resp) => {
   if (!req.params.name) {
     resp.status(404).json({ error: 'username not provided' });
     return;
