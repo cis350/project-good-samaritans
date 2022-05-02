@@ -13,9 +13,9 @@ function Signup() {
   const userInputCOVID = useRef('');
   const [login, setLogin] = useState(false);
   const d = new Date();
+  let exists = null;
 
-  const [, setStarted] = useState(false);
-  const start = useRef(false);
+  const [started, setStarted] = useState(false);
 
   function handleUser(e) {
     userInput.current = e.target.value;
@@ -45,55 +45,49 @@ function Signup() {
     userInputCOVID.current = e.target.value;
   }
 
-  async function nameExists(name) {
-    const result = await getProfile(name);
-    return (result != null);
-  }
-
   // remove console.log for eslint later
   async function handleFormSubmit() {
-    if (await nameExists(userInput.current)) {
-      // eslint-disable-next-line no-alert
-      alert('username already exists');
-      return;
-    }
-    if (/^[a-z0-9A-Z ]+$/.test(userInput.current)) {
-      console.log(userInput);
-      console.log(userInputStreet);
-      console.log(userInputState);
-      console.log(userInputCountry);
-      console.log(userInputZIP);
-      console.log(userInputCOVID);
+    try {
+      exists = await getProfile(userInput.current);
 
-      const date = {
-        year: d.getFullYear(),
-        month: d.getMonth(),
-        day: d.getDay(),
-      };
-      addUser(
-        userInput.current,
-        userInputStreet.current,
-        userInputState.current,
-        userInputCountry.current,
-        userInputZIP.current,
-        userPwd.current,
-        'Private',
-        date,
-        0,
-        0,
-      );
-      setStarted(true);
-      start.current = true;
-    } else {
-      //  eslint this later
+      if (exists != null) {
+        // eslint-disable-next-line no-alert
+        alert('username already exists');
+        return;
+      }
+      if (/^[a-z0-9A-Z ]+$/.test(userInput.current)) {
+        const date = {
+          year: d.getFullYear(),
+          month: d.getMonth(),
+          day: d.getDay(),
+        };
+        addUser(
+          userInput.current,
+          userInputStreet.current,
+          userInputState.current,
+          userInputCountry.current,
+          userInputZIP.current,
+          userPwd.current,
+          'Private',
+          date,
+          0,
+          0,
+        );
+        setStarted(true);
+      } else {
+        //  eslint this later
+        // eslint-disable-next-line no-alert
+        alert('must fill all values properly and alphanumerically');
+      }
+    } catch {
       // eslint-disable-next-line no-alert
-      alert('must fill all values properly and alphanumerically');
+      alert('error submitting');
     }
   }
 
   // placeholder variable for eslint
   const domId = 123;
-  if (!start.current) {
+  if (!started) {
     return (
       <div>
         <h1>Enter Account Information</h1>
@@ -137,7 +131,7 @@ function Signup() {
     );
   }
 
-  if (start.current) {
+  if (started) {
     if (!login) {
       return (
         <div>

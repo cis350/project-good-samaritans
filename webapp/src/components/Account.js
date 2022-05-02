@@ -48,6 +48,10 @@ function Account({ accountName, currentPrivacy, currentRequests }) {
       <br />
       {profile.street}
       <br />
+      ZIP:
+      <br />
+      {profile.zip}
+      <br />
       Password:
       <br />
       {profile.password}
