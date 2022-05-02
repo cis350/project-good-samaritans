@@ -17,6 +17,7 @@ export async function changePrivacy(name, setting) {
   }
 }
 
+// signup page - sends request to add user
 export async function addUser(
   name,
   street,

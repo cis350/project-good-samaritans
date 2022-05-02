@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { React, useState, useRef } from 'react';
-import { addUser } from '../modules/api';
+import { addUser, getProfile } from '../modules/api';
 import Login from './Login';
 
 function Signup() {
@@ -45,8 +45,18 @@ function Signup() {
     userInputCOVID.current = e.target.value;
   }
 
+  async function nameExists(name) {
+    const result = await getProfile(name);
+    return (result != null);
+  }
+
   // remove console.log for eslint later
-  function handleFormSubmit() {
+  async function handleFormSubmit() {
+    if (await nameExists(userInput.current)) {
+      // eslint-disable-next-line no-alert
+      alert('username already exists');
+      return;
+    }
     if (/^[a-z0-9A-Z ]+$/.test(userInput.current)) {
       console.log(userInput);
       console.log(userInputStreet);
@@ -60,7 +70,6 @@ function Signup() {
         month: d.getMonth(),
         day: d.getDay(),
       };
-
       addUser(
         userInput.current,
         userInputStreet.current,
