@@ -1,5 +1,5 @@
 import {
-  React, useState, useRef,
+  React, useState, useEffect, useRef,
 } from 'react';
 import {
   getMessages, addMessage,
@@ -17,6 +17,7 @@ function Message({ accountName }) {
   let msgHistory = '';
   let arr = [];
   const d = new Date();
+  const MINUTE_MS = 5000;
 
   function handleTarget(e) {
     targetName.current = e.target.value;
@@ -28,6 +29,7 @@ function Message({ accountName }) {
 
   function showMessages() {
     const holder = document.getElementById('holder');
+    holder.innerHTML = '';
     for (let i = 0; i < arr.length; i += 1) {
       holder.innerHTML += `<p>${arr[i]}</p><br>`;
     }
@@ -45,6 +47,13 @@ function Message({ accountName }) {
     setTarget(true);
     showMessages();
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleDone();
+    }, MINUTE_MS);
+    return () => clearInterval(interval);
+  }, []);
 
   async function handleDone2() {
     await addMessage(accountName, targetName.current, targetName2.current, d.getTime());
