@@ -35,6 +35,7 @@ function Message({ accountName }) {
     }
   }
 
+  // gets all messages from person to message to
   async function handleDone() {
     arr = [];
     msgHistory = await getMessages(accountName, targetName.current);
@@ -55,6 +56,7 @@ function Message({ accountName }) {
     return () => clearInterval(interval);
   }, []);
 
+  // adds messages
   async function handleDone2() {
     await addMessage(accountName, targetName.current, targetName2.current, d.getTime());
     const holder = document.getElementById('holder');
