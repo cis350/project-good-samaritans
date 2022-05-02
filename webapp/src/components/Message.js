@@ -2,7 +2,7 @@ import {
   React, useState, useEffect, useRef,
 } from 'react';
 import {
-  getMessages, addMessage,
+  getMessages, addMessage, getProfile,
 } from '../modules/api';
 //   import Training from './Training';
 //   import Request from './Request';
@@ -37,6 +37,12 @@ function Message({ accountName }) {
 
   // gets all messages from person to message to
   async function handleDone() {
+    const recipient = await getProfile(targetName.current);
+    if (recipient == null) {
+      // eslint-disable-next-line no-alert
+      alert('recipient does not exist');
+      return;
+    }
     arr = [];
     msgHistory = await getMessages(accountName, targetName.current);
     msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
