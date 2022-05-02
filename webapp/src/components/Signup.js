@@ -56,13 +56,6 @@ function Signup() {
         return;
       }
       if (/^[a-z0-9A-Z ]+$/.test(userInput.current)) {
-        console.log(userInput);
-        console.log(userInputStreet);
-        console.log(userInputState);
-        console.log(userInputCountry);
-        console.log(userInputZIP);
-        console.log(userInputCOVID);
-
         const date = {
           year: d.getFullYear(),
           month: d.getMonth(),

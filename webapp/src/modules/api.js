@@ -35,7 +35,7 @@ export async function addUser(
   }
 
   try {
-    await axios.post(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}}/${password}/${privacy}`, { date: time, helpedNo: noHelped, requestsNo: noRequests });
+    await axios.post(`${rootURL}/user/${name}/${street}/${state}/${country}/${zip}/${password}/${privacy}`, { date: time, helpedNo: noHelped, requestsNo: noRequests });
     return;
   } catch (err) {
     throw err;
