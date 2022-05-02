@@ -104,6 +104,44 @@ const getHelpPosts = async (db) => {
   }
 };
 
+// gets specific help post
+const getSpecificHelp = async (db, user) => {
+  try {
+    const result = await db.collection('Help').find(
+      {
+        name: user,
+      },
+    ).toArray();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not find user');
+  }
+};
+
+const deleteHelp = async (db, user, message, helper) => {
+  try {
+    await db.collection('Help').remove(
+      {
+        name: user,
+        post: message,
+      },
+    );
+
+    const result2 = await db.collection('Users').updateOne(
+      { name: helper },
+      { $inc: { helpedNo: 1 } },
+
+    );
+
+    return result2;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not find user');
+  }
+};
+
 // get the samaritan texts of a user
 // const getSamaritanTexts = async (db, user) => {
 //   try {
@@ -220,6 +258,8 @@ module.exports = {
   getMessages,
   changePassword,
   incrementRequest,
+  getSpecificHelp,
+  deleteHelp,
 };
 
 // const main = async () => {

@@ -184,6 +184,36 @@ app.put('/requests/:name', async (req, resp) => {
   }
 });
 
+// find help posts of user
+app.get('/help/:name', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0) {
+    resp.status(404).json({ error: 'no username provided' });
+    return;
+  }
+
+  try {
+    const results = await dbo.getSpecificHelp(db, req.params.name);
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
+app.put('/help/:name/:message/:helper', async (req, resp) => {
+  if (!req.params.name || req.params.name.length === 0) {
+    resp.status(404).json({ error: 'no username provided' });
+    return;
+  }
+
+  try {
+    // eslint-disable-next-line max-len
+    const results = await dbo.deleteHelp(db, req.params.name, req.params.message, req.params.helper);
+    resp.status(200).json({ data: results });
+  } catch (err) {
+    resp.status(400).json({ error: 'try again later' });
+  }
+});
+
 // accounts page - getProfile
 app.get('/user/:name', async (req, resp) => {
   if (!req.params.name) {

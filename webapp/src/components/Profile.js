@@ -11,6 +11,7 @@ import Request from './Request';
 import Account from './Account';
 import Message from './Message';
 import Message2 from './MessageHelp';
+import MyHelpPosts from './MyHelpPosts';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
@@ -24,6 +25,7 @@ function Profile({ accountName, initialPrivacy, requests }) {
   const [privacy, setPrivacy] = useState(initialPrivacy);
   const [request, setRequest] = useState(false);
   const [message, setMessage] = useState(false);
+  const [myHelp, setMyHelp] = useState(false);
   const [respond, setRespond] = useState(false);
   const helpBoard = useRef();
   const currentPostName = useRef();
@@ -69,6 +71,10 @@ function Profile({ accountName, initialPrivacy, requests }) {
 
   const handleTraining = () => {
     setTraining(true);
+  };
+
+  const handleMyHelp = () => {
+    setMyHelp(true);
   };
 
   const handleRequest = () => {
@@ -154,6 +160,12 @@ function Profile({ accountName, initialPrivacy, requests }) {
     );
   }
 
+  if (myHelp) {
+    return (
+      <MyHelpPosts accountName={accountName} />
+    );
+  }
+
   if (respond) {
     return (
       <Message2 accountName={accountName} secondName={currentPostName.current} />
@@ -172,6 +184,11 @@ function Profile({ accountName, initialPrivacy, requests }) {
         <div className="message">
           <button className="message-button" type="button" onClick={handleMessage}>
             Message
+          </button>
+        </div>
+        <div className="myHelp">
+          <button className="message-button" type="button" onClick={handleMyHelp}>
+            My Help Posts
           </button>
         </div>
         <div className="analytics">

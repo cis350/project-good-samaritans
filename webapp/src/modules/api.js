@@ -172,6 +172,32 @@ export async function getHelpPosts() {
   }
 }
 
+export async function getSpecificHelp(name) {
+  if (!name) {
+    return false;
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/help/${name}`);
+    return result.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function deleteHelp(name, message, helper) {
+  if (!name) {
+    return false;
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/help/${name}/${message}/${helper}`);
+    return result.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 // profile page - gets the current list of people you are currently helping
 // export async function getSamaritanTexts(name) {
 //   if (!name) {
