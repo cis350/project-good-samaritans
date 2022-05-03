@@ -1,5 +1,5 @@
 import {
-  React, useEffect, useRef,
+  React, useEffect, useRef, useState,
 } from 'react';
 import { deleteHelp, getSpecificHelp } from '../modules/api';
 
@@ -8,16 +8,23 @@ function MyHelpPosts({ accountName }) {
   // eslint-disable-next-line no-unused-vars
   let arr = [];
   const targetName = useRef('');
+  const [curr, setCurr] = useState(0);
+  const MINUTE_MS = 5000;
 
   function handleTarget(e) {
     targetName.current = e.target.value;
     console.log(targetName.current);
   }
 
+  function handleCurr() {
+    setCurr(curr + 1);
+  }
+
   async function handleGet() {
     posts = await getSpecificHelp(accountName);
     arr = posts.data;
     const holder = document.getElementById('holder');
+    holder.innerHTML = '';
     for (let i = 0; i < posts.data.length; i += 1) {
       const text = document.createElement('div', null, posts.data[i].post);
       text.textContent = posts.data[i].post;
@@ -35,7 +42,7 @@ function MyHelpPosts({ accountName }) {
       const btn = document.createElement('button');
       btn.innerHTML = 'Mark Resolved';
       // eslint-disable-next-line no-loop-func
-      btn.addEventListener('click', async (e) => { await deleteHelp(accountName, arr[e.target.id].post, targetName.current); });
+      btn.addEventListener('click', async (e) => { await deleteHelp(accountName, arr[e.target.id].post, targetName.current); handleCurr(); });
       btn.setAttribute('id', i);
       holder.appendChild(btn);
 
@@ -47,6 +54,10 @@ function MyHelpPosts({ accountName }) {
 
   useEffect(() => {
     handleGet();
+    const interval = setInterval(() => {
+      handleGet();
+    }, MINUTE_MS);
+    return () => clearInterval(interval);
   }, []);
 
   return (
