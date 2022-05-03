@@ -25,6 +25,7 @@ function Login() {
   let passwordCheck = true;
   const [privacy, setPrivacy] = useState('');
   const [noRequests, setNoRequests] = useState();
+  const [helpedNoRequests, sethelpedNoRequests] = useState();
 
   function handleUser(e) {
     userName.current = e.target.value;
@@ -55,6 +56,7 @@ function Login() {
         const result = await getProfile(userName.current);
         setPrivacy(result.privacy);
         setNoRequests(result.requestsNo);
+        sethelpedNoRequests(result.helpedNo);
         setStarted(true);
       } else if (!passwordCheck) {
         const count = mistakes + 1;
@@ -134,7 +136,12 @@ function Login() {
 
   return (
     <div className="Profile">
-      <Profile accountName={userName.current} initialPrivacy={privacy} requests={noRequests} />
+      <Profile
+        accountName={userName.current}
+        initialPrivacy={privacy}
+        requests={noRequests}
+        helped={helpedNoRequests}
+      />
     </div>
   );
 }

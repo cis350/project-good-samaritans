@@ -15,7 +15,9 @@ import MyHelpPosts from './MyHelpPosts';
 import '../assets/Profile.css';
 // import Friends from './Friends';
 
-function Profile({ accountName, initialPrivacy, requests }) {
+function Profile({
+  accountName, initialPrivacy, requests, helped,
+}) {
   console.log('rerender');
   const name = useRef(accountName); // name of the user after logging in
   // const [friends, setFriends] = useState(false); // event if friends button was clicked
@@ -34,6 +36,7 @@ function Profile({ accountName, initialPrivacy, requests }) {
   const clickedHelpBoardButton = useRef(false);
   const [, setRevealPosts] = useState(false);
   const requestsNo = useRef(requests);
+  const helpedNo = useRef(helped);
   console.log(`number of requests: ${requestsNo.current}`);
   // console.log(initialPrivacy);
   // console.log(`initial: ${privacy}`);
@@ -52,6 +55,7 @@ function Profile({ accountName, initialPrivacy, requests }) {
       helpBoard.current = await getHelpPosts();
     }
     initializeBoardPosts();
+
     console.log('in useeffect');
     console.log(helpBoard.current);
     console.log(privacy);
@@ -196,6 +200,9 @@ function Profile({ accountName, initialPrivacy, requests }) {
           <p>Number of Requests Made: </p>
           {' '}
           { requestsNo.current }
+          <p>Number Helped: </p>
+          { helpedNo.current }
+          { }
         </div>
       </div>
       <div className="middleButtons">

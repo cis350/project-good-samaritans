@@ -191,7 +191,7 @@ export async function deleteHelp(name, message, helper) {
   }
 
   try {
-    const result = await axios.get(`${rootURL}/help/${name}/${message}/${helper}`);
+    const result = await axios.put(`${rootURL}/help/${name}/${message}/${helper}`);
     return result.data;
   } catch (err) {
     throw err;
