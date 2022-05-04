@@ -215,7 +215,7 @@ const getProfile = async (db, user) => {
 
 const addMessage = async (db, name, name2, message, time) => {
   try {
-    const result = await db.collection('Messages').insert(
+    const result = await db.collection('Messages').insertOne(
       {
         from: name,
         to: name2,
