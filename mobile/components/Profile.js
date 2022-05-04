@@ -22,14 +22,16 @@ function Profile({ route, navigation }) {
   const helpBoard = useRef();
   const currentPostName = useRef();
   const currentPostDescription = useRef();
+
+  // These two variables are not refreshing
   const [postCount, setPostCount] = useState(0);
-  const [clickHB, setClickedHelpBoardButton] = useState(false); // no useRef, could change back
-  const [, setRevealPosts] = useState(false);
+  const [clickHB, setClickedHelpBoardButton] = useState(false);
+
   const requestsNo = requests; // no useRef, could change back
   const helpedNo = helped; // no useRef, could change back
   // console.log(`number of requests: ${requestsNo}`);
   // console.log(`clicked help board: ${clickHB}`);
-  // console.log(postCount);
+  console.log(postCount);
 
   useEffect(() => {
     async function privacyChange() {
@@ -81,7 +83,6 @@ function Profile({ route, navigation }) {
     const x = helpBoard.current;
     currentPostName.current = x[postCount].name;
     currentPostDescription.current = x[postCount].post;
-    setRevealPosts(true);
   };
 
   const handlePrevPost = () => {
@@ -96,7 +97,7 @@ function Profile({ route, navigation }) {
 
   const handleNextPost = () => {
     const currentCount = postCount;
-    if (currentCount < helpBoard.current.length) {
+    if (currentCount < helpBoard.current.length - 1) {
       const x = helpBoard.current;
       currentPostName.current = x[postCount + 1].name;
       currentPostDescription.current = x[postCount + 1].post;

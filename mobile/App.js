@@ -19,20 +19,29 @@ import Training from './components/Training';
 
 // create a navigation stack
 const Stack = createNativeStackNavigator();
+Stack.headerLeft = null;
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Account" component={Account} />
-        <Stack.Screen name="Lockout" component={Lockout} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Message" component={Message} />
-        <Stack.Screen name="MessageHelp" component={MessageHelp} />
-        <Stack.Screen name="MyHelpPosts" component={MyHelpPosts} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Request" component={Request} />
-        <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Training" component={Training} />
+        <Stack.Group
+          screenOptions={() => ({
+            presentation: 'modal',
+            headerLeft: () => null,
+            // headerTitle: () => null,
+          })}
+        >
+          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="Lockout" component={Lockout} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Message" component={Message} />
+          <Stack.Screen name="MessageHelp" component={MessageHelp} />
+          <Stack.Screen name="MyHelpPosts" component={MyHelpPosts} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Request" component={Request} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Training" component={Training} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

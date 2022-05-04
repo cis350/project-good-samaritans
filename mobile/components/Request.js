@@ -10,7 +10,7 @@ function Request({ route, navigation }) {
   } = route.params;
 
   const [requ, setRequ] = useState(false);
-  const [reqPost, setreqPost] = useState(false);
+  const [reqPost, setreqPost] = useState('');
 
   function sendRequest() {
     postRequest(accountName, reqPost);
