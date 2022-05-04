@@ -160,7 +160,11 @@ function Profile({
   }
   if (message) {
     return (
-      <Message accountName={accountName} />
+      <Message
+        accountName={accountName}
+        currentPrivacy={privacy}
+        currentRequests={requestsNo.current}
+      />
     );
   }
 
