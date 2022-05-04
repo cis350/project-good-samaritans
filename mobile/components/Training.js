@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 
 function Training({ navigation }) {
-  const handleFormGoBack = () => {
+  const handleGoBack = () => {
     navigation.goBack();
   };
 
@@ -17,7 +17,7 @@ function Training({ navigation }) {
       </Text>
       <Button
         title="Go back to Profile"
-        onPress={(e) => handleFormGoBack(e)}
+        onPress={(e) => handleGoBack(e)}
       />
     </View>
   );

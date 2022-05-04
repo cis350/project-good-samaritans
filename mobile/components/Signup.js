@@ -1,8 +1,9 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, View, Text, TextInput, Button, Alert,
 } from 'react-native';
+import { addUser, getProfile } from '../modules/api';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,30 +15,51 @@ const styles = StyleSheet.create({
 });
 
 function Signup({ navigation }) {
-  const [userInput, setUserInput] = React.useState('');
-  const [userInputPwd, setUserInputPwd] = React.useState('');
-  const [userInputStreet, setUserInputStreet] = React.useState('');
-  const [userInputState, setUserInputState] = React.useState('');
-  const [userInputCountry, setUserInputCountry] = React.useState('');
-  const [userInputZIP, setUserInputZIP] = React.useState('');
-  const [userInputCOVID, setUserInputCOVID] = React.useState('');
+  const [userInput, setUserInput] = useState('');
+  const [userPwd, setPwd] = useState('');
+  const [userInputStreet, setUserInputStreet] = useState('');
+  const [userInputState, setUserInputState] = useState('');
+  const [userInputCountry, setUserInputCountry] = useState('');
+  const [userInputZIP, setUserInputZIP] = useState('');
+  const [userInputCOVID, setUserInputCOVID] = useState('');
+  const d = new Date();
+  let exists = null;
 
   // remove console.log after, also remove from .eslint.js
-  function handleFormSubmit() {
-    const regEx = /^[a-z0-9A-Z ]+$/;
-    if (userInput.match(regEx)) {
-      // console.log(userInput);
-      // console.log(userInputStreet);
-      // console.log(userInputState);
-      // console.log(userInputCountry);
-      // console.log(userInputZIP);
-      // console.log(userInputCOVID);
+  async function handleFormSubmit() {
+    try {
+      exists = await getProfile(userInput);
+      if (exists != null) {
+        console.log('username already exists');
+        Alert.alert('username already exists');
+        return;
+      }
 
-      navigation.navigate('Profile', {
-        accountName: userInput,
-      });
-    } else {
-      Alert.alert('must fill all values properly and alphanumerically');
+      if (/^[a-z0-9A-Z ]+$/.test(userInput)) {
+        const date = {
+          year: d.getFullYear(),
+          month: d.getMonth(),
+          day: d.getDay(),
+        };
+        addUser(
+          userInput,
+          userInputStreet,
+          userInputState,
+          userInputCountry,
+          userInputZIP,
+          userPwd,
+          'Private',
+          date,
+          0,
+          0,
+        );
+        // navigate back to Login Page
+        navigation.goBack();
+      } else {
+        Alert.alert('must fill all values properly and alphanumerically');
+      }
+    } catch {
+      Alert.alert('error submitting');
     }
   }
 
@@ -59,8 +81,8 @@ function Signup({ navigation }) {
         Password:
       </Text>
       <TextInput
-        onChangeText={setUserInputPwd}
-        value={userInputPwd}
+        onChangeText={setPwd}
+        value={userPwd}
       />
 
       <Text>
