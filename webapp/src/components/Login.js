@@ -5,7 +5,7 @@ import {
 } from 'react';
 import '../assets/Login.css';
 import {
-  getLoginTrue, getPasswordTrue, changePassword, getProfile,
+  getLoginTrue, getPasswordTrue, changePassword, getProfile, soloGetMessages,
 } from '../modules/api';
 import Profile from './Profile';
 import Signup from './Signup';
@@ -26,6 +26,7 @@ function Login() {
   const [privacy, setPrivacy] = useState('');
   const [noRequests, setNoRequests] = useState();
   const [helpedNoRequests, sethelpedNoRequests] = useState();
+  let msgLength = 0;
 
   function handleUser(e) {
     userName.current = e.target.value;
@@ -48,6 +49,9 @@ function Login() {
 
   async function handleFormSubmit() {
     try {
+      const se = await soloGetMessages(userName.current);
+      msgLength = se.data.length;
+      console.log(msgLength);
       loggedIn = await getLoginTrue(userName.current, userPass.current);
       passwordCheck = await getPasswordTrue(userName.current, userPass.current);
 
@@ -141,6 +145,7 @@ function Login() {
         initialPrivacy={privacy}
         requests={noRequests}
         helped={helpedNoRequests}
+        msgs={msgLength}
       />
     </div>
   );

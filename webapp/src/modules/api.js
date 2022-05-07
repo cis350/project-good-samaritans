@@ -97,6 +97,19 @@ export async function getMessages(name, name2) {
   }
 }
 
+export async function soloGetMessages(name) {
+  if (!name) {
+    throw new Error('field error');
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/message/${name}`);
+    return result.data;
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function getLoginTrue(name, password) {
   if (!name || !password) {
     return false;
@@ -165,7 +178,6 @@ export async function postRequest(name, post) {
 export async function getHelpPosts() {
   try {
     const result = await axios.get(`${rootURL}/help`);
-    console.log(result.data.data);
     return result.data.data;
   } catch (err) {
     throw err;

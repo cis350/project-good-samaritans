@@ -245,6 +245,21 @@ const getMessages = async (db, name, name2) => {
   }
 };
 
+const soloGetMessages = async (db, name) => {
+  try {
+    const result = await db.collection('Messages').find(
+      {
+        $or: [{ to: name },
+        ],
+      },
+    ).toArray();
+    return result;
+  } catch (err) {
+    console.log(err);
+    throw new Error('could not find history of messages');
+  }
+};
+
 module.exports = {
   connect,
   getLoginTrue,
@@ -260,6 +275,7 @@ module.exports = {
   incrementRequest,
   getSpecificHelp,
   deleteHelp,
+  soloGetMessages,
 };
 
 // const main = async () => {
