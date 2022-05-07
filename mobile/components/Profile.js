@@ -31,7 +31,7 @@ function Profile({ route, navigation }) {
   const helpedNo = helped; // no useRef, could change back
   // console.log(`number of requests: ${requestsNo}`);
   // console.log(`clicked help board: ${clickHB}`);
-  console.log(postCount);
+  // console.log(postCount);
 
   useEffect(() => {
     async function privacyChange() {
@@ -61,10 +61,14 @@ function Profile({ route, navigation }) {
   };
 
   const handleTraining = () => {
+    setClickedHelpBoardButton(false);
+    setPostCount(0);
     navigation.navigate('Training');
   };
 
   const handleRequest = () => {
+    setClickedHelpBoardButton(false);
+    setPostCount(0);
     navigation.navigate('Request', {
       accountName,
       currentPrivacy: privacy,
@@ -73,8 +77,39 @@ function Profile({ route, navigation }) {
   };
 
   const handleAccount = () => {
+    setClickedHelpBoardButton(false);
+    setPostCount(0);
     navigation.navigate('Account', {
       accountName,
+    });
+  };
+
+  const handleMyHelp = () => {
+    setClickedHelpBoardButton(false);
+    setPostCount(0);
+    navigation.navigate('MyHelpPosts', {
+      accountName,
+    });
+  };
+
+  // Message {accountName, currentPrivacy, currentRequests}
+  const handleMessage = () => {
+    setClickedHelpBoardButton(false);
+    setPostCount(0);
+    navigation.navigate('Message', {
+      accountName,
+      currentPrivacy: privacy,
+      currentRequests: requestsNo,
+    });
+  };
+
+  // Message 2, {accountName, secondName}
+  const handleRespond = () => {
+    setClickedHelpBoardButton(false);
+    setPostCount(0);
+    navigation.navigate('MessageHelp', {
+      accountName,
+      secondName: currentPostName.current,
     });
   };
 
@@ -103,29 +138,6 @@ function Profile({ route, navigation }) {
       currentPostDescription.current = x[postCount + 1].post;
       setPostCount(currentCount + 1);
     }
-  };
-
-  const handleMyHelp = () => {
-    navigation.navigate('MyHelpPosts', {
-      accountName,
-    });
-  };
-
-  // Message {accountName, currentPrivacy, currentRequests}
-  const handleMessage = () => {
-    navigation.navigate('Message', {
-      accountName,
-      currentPrivacy: privacy,
-      currentRequests: requestsNo,
-    });
-  };
-
-  // Message 2, {accountName, secondName}
-  const handleRespond = () => {
-    navigation.navigate('MessageHelp', {
-      accountName,
-      secondName: currentPostName.current,
-    });
   };
 
   /* //////////////////////
