@@ -40,6 +40,7 @@ function Profile({
   const MINUTE_MS = 5000;
   let currMsgLength = msgs;
   let curr2 = 0;
+  let counter = 0;
 
   console.log(`number of requests: ${requestsNo.current}`);
   // console.log(initialPrivacy);
@@ -73,8 +74,11 @@ function Profile({
       console.log(curr2);
       if (curr2 > currMsgLength) {
         currMsgLength = curr2;
-        // eslint-disable-next-line no-alert
-        alert('new message!');
+        if (counter !== 0) {
+          // eslint-disable-next-line no-alert
+          alert('new message!');
+        }
+        counter += 1;
       }
     }, MINUTE_MS);
     console.log(currMsgLength);
