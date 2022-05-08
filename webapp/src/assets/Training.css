@@ -1,0 +1,63 @@
+.training-page {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #E9E9E9;
+    min-height: 100vh;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.training-title-container {
+    text-align: center;
+}
+.training-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 60px;
+    
+    color: #000000;
+}
+
+.training-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 55%;
+    
+    padding-bottom: 4%;
+    font-family: 'Roboto';
+}
+
+.training-description {
+    border: 0.5px solid;
+    background-color: #FFFFFF;
+    padding: 5% 10% 5% 10%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.training-lessons {
+    border: 0.5px solid;
+    background-color: #FFFFFF;
+    font-size: 50px;
+    padding: 5%;
+}
+
+.submit-button {
+    font-family: 'Roboto';
+    font-style: normal;
+    border: none;
+    border-radius: 8px;
+    margin: 3%;
+    padding: 1% 7% 1% 7%;
+    background-color: #FF8282;
+
+    color: #FFFFFF;
+    font-size: 15px;
+}

@@ -1,0 +1,97 @@
+.account-page {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #E9E9E9;
+    min-height: 100vh;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.account-title-container {
+    text-align: center;
+}
+.account-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 60px;
+    
+    color: #000000;
+}
+
+.account-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0.5px solid;
+    width: 55%;
+
+    background-color: #FFFFFF;
+    padding-top: 2%;
+    padding-bottom: 4%;
+    font-family: 'Roboto';
+    font-size: 20px;
+}
+
+.info-title {
+    margin: 2% 10% 0% 10%;
+    font-weight: bold;
+}
+
+.info-box {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.info-state-country {
+    margin: 0% 10% 0% 10%;
+    display: flex;
+}
+
+.state-account {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-right: 5%;
+}
+
+.country-account {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.state-info {
+    font-weight: bold;
+    margin-top: 4%;
+}
+
+.country-info {
+    font-weight: bold;
+    margin-top: 4%;
+}
+
+.state-box {
+    margin-top: -15%;
+}
+
+.country-box {
+    margin-top: -10%;
+}
+
+.submit-button {
+    font-family: 'Roboto';
+    font-style: normal;
+    border: none;
+    border-radius: 8px;
+    margin: 3%;
+    padding: 1% 7% 1% 7%;
+    background-color: #FF8282;
+
+    color: #FFFFFF;
+    font-size: 15px;
+}
