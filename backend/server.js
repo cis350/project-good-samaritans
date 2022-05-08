@@ -291,3 +291,5 @@ app.listen(port, async () => {
   db = await dbo.connect(url);
   console.log(`Server is running on port: ${port}`);
 });
+
+module.exports = app;
