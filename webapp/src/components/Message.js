@@ -92,8 +92,8 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
           !
         </h1>
         <h2> Who would you like to message?</h2>
-        <input name="target" onChange={handleTarget} />
-        <button type="submit" onClick={handleDone}>Message</button>
+        <input id="1" name="target" onChange={handleTarget} />
+        <button id="2" type="submit" onClick={handleDone}>Message</button>
         <button type="submit" onClick={handleGoBack}>
           <div>
             Go Back to Profile
@@ -106,8 +106,8 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
     <div>
       <div id="holder" />
       <div>new message:</div>
-      <input name="messageNow" onChange={handleTarget2} />
-      <button type="submit" onClick={handleDone2}>Message</button>
+      <input name="messageNow" id="4" onChange={handleTarget2} />
+      <button type="submit" id="5" onClick={handleDone2}>Message</button>
       <button type="submit" onClick={handleGoBack}>
         <div>
           Go Back to Profile

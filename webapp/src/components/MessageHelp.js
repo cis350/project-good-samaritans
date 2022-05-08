@@ -54,8 +54,8 @@ function Message2({ accountName, secondName }) {
       </div>
       <div id="holder" />
       <div>new message:</div>
-      <input name="messageNow" onChange={handleTarget2} />
-      <button type="submit" onClick={handleDone2}>Message</button>
+      <input name="messageNow" id="2" onChange={handleTarget2} />
+      <button type="submit" id="3" onClick={handleDone2}>Message</button>
     </div>
   );
 }

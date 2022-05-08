@@ -3,11 +3,11 @@
 */
 
 import { React, render, screen } from '@testing-library/react';
-import App from './App';
+import Lockout from './Lockout';
 import '@testing-library/jest-dom';
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Signup/i);
+  render(<Lockout />);
+  const linkElement = screen.getByText(/ACCOUNT LOCKED OUT/i);
   expect(linkElement).toBeInTheDocument();
 });

@@ -94,39 +94,39 @@ function Signup() {
         <label htmlFor={domId}>
           Full Name:
           {' '}
-          <input name="user" onChange={handleUser} />
+          <input name="user" id="1" onChange={handleUser} />
         </label>
         <label htmlFor={domId}>
           Password:
           {' '}
-          <input name="password" onChange={handleUserPwd} />
+          <input name="password" id="2" onChange={handleUserPwd} />
         </label>
         <label htmlFor={domId}>
           Street:
           {' '}
-          <input name="street" onChange={handleUserStreet} />
+          <input name="street" id="3" onChange={handleUserStreet} />
         </label>
         <label htmlFor={domId}>
           State:
           {' '}
-          <input name="state" onChange={handleUserState} />
+          <input name="state" id="4" onChange={handleUserState} />
         </label>
         <label htmlFor={domId}>
           Country:
           {' '}
-          <input name="country" onChange={handleUserCountry} />
+          <input name="country" id="5" onChange={handleUserCountry} />
         </label>
         <label htmlFor={domId}>
           Zipcode:
           {' '}
-          <input name="zip" onChange={handleUserZIP} />
+          <input name="zip" id="6" onChange={handleUserZIP} />
         </label>
         <label htmlFor={domId}>
           COVID vaccination record:
           {' '}
-          <input name="user" onChange={handleUserCOVID} />
+          <input name="user" id="7" onChange={handleUserCOVID} />
         </label>
-        <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
+        <button type="submit" id="8" onClick={handleFormSubmit}>Sign Up</button>
       </div>
     );
   }

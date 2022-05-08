@@ -13,7 +13,6 @@ import Lockout from './Lockout';
 // import Forgot from './Forgot';
 
 function Login() {
-  console.log('render');
   const [started, setStarted] = useState(false);
   const userName = useRef('');
   const userPass = useRef('');
@@ -102,12 +101,12 @@ function Login() {
           <label htmlFor={domId}>
             Username:
             {' '}
-            <input name="user" onChange={handleUser} />
+            <input name="user" id="1" onChange={handleUser} />
           </label>
           <label htmlFor={domId}>
             New Password:
             {' '}
-            <input name="password" onChange={handleNewUserPass} />
+            <input name="password" id="2" onChange={handleNewUserPass} />
           </label>
           <button type="button" onClick={handleChangePassword}>Reset Password</button>
         </div>
@@ -120,19 +119,19 @@ function Login() {
           <label htmlFor={domId}>
             Username:
             {' '}
-            <input name="user" onChange={handleUser} />
+            <input name="user" id="3" onChange={handleUser} />
           </label>
           <label htmlFor={domId}>
             Password:
             {' '}
-            <input name="password" onChange={handleUserPass} />
+            <input name="password" id="4" onChange={handleUserPass} />
           </label>
           <button type="submit" onClick={handleFormSubmit}>Login</button>
           <button type="button" onClick={() => setForgot(true)}>Forgot Password?</button>
         </div>
         <div className="Login-signup-box ">
           <h2 className="Login-signup-name">Do not have an Account?</h2>
-          <button type="submit" onClick={handleSignUp}>Signup</button>
+          <button type="submit" id="5" onClick={handleSignUp}>Signup</button>
         </div>
       </div>
     );
