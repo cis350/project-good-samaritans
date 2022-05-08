@@ -6,10 +6,7 @@
     "resetMocks": false,
     "moduleNameMapper": {
       "\\.(css)$": "<rootDir>/cssStub.js"
-    },
-    "setupFiles": [
-      "jest-localstorage-mock"
-    ]
+    }
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
