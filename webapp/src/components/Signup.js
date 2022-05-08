@@ -2,6 +2,7 @@
 import { React, useState, useRef } from 'react';
 import { addUser, getProfile } from '../modules/api';
 import Login from './Login';
+import '../assets/Signup.css';
 
 function Signup() {
   const userInput = useRef('');
@@ -89,44 +90,54 @@ function Signup() {
   const domId = 123;
   if (!started) {
     return (
-      <div>
-        <h1>Enter Account Information</h1>
-        <label htmlFor={domId}>
-          Full Name:
-          {' '}
-          <input name="user" onChange={handleUser} />
-        </label>
-        <label htmlFor={domId}>
-          Password:
-          {' '}
-          <input name="password" onChange={handleUserPwd} />
-        </label>
-        <label htmlFor={domId}>
-          Street:
-          {' '}
-          <input name="street" onChange={handleUserStreet} />
-        </label>
-        <label htmlFor={domId}>
-          State:
-          {' '}
-          <input name="state" onChange={handleUserState} />
-        </label>
-        <label htmlFor={domId}>
-          Country:
-          {' '}
-          <input name="country" onChange={handleUserCountry} />
-        </label>
-        <label htmlFor={domId}>
-          Zipcode:
-          {' '}
-          <input name="zip" onChange={handleUserZIP} />
-        </label>
-        <label htmlFor={domId}>
-          COVID vaccination record:
-          {' '}
-          <input name="user" onChange={handleUserCOVID} />
-        </label>
-        <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
+      <div className="signup-page">
+        <div className="signup-title-container">
+          <h1 className="signup-title">Good Samaritans</h1>
+        </div>
+        <div className="input-container">
+          <label className="input-title" htmlFor={domId}>
+            Full Name:
+            {' '}
+          </label>
+          <input className="input-box" name="user" onChange={handleUser} />
+          <label className="input-title" htmlFor={domId}>
+            Password:
+            {' '}
+          </label>
+          <input className="input-box" name="password" onChange={handleUserPwd} />
+          <label className="input-title" htmlFor={domId}>
+            Street:
+            {' '}
+          </label>
+          <input className="input-box" name="street" onChange={handleUserStreet} />
+          <div className="state-country">
+            <div className="state">
+              <label id="state-title" htmlFor={domId}>
+                State:
+                {' '}
+              </label>
+              <input id="state-input" name="state" onChange={handleUserState} />
+            </div>
+            <div className="country">
+              <label id="country-title" htmlFor={domId}>
+                Country:
+                {' '}
+              </label>
+              <input id="country-input" name="country" onChange={handleUserCountry} />
+            </div>
+          </div>
+          <label className="input-title" htmlFor={domId}>
+            Zipcode:
+            {' '}
+          </label>
+          <input id="zip" name="zip" onChange={handleUserZIP} />
+          <label className="input-title" htmlFor={domId}>
+            Please describe your COVID19 vaccination Status:
+            {' '}
+          </label>
+          <input className="input-box" name="user" onChange={handleUserCOVID} />
+        </div>
+        <button className="submit-button" type="submit" onClick={handleFormSubmit}>Sign Up</button>
       </div>
     );
   }
@@ -134,9 +145,12 @@ function Signup() {
   if (started) {
     if (!login) {
       return (
-        <div>
-          <h1>REGISTRATION SUCCESSFUL</h1>
-          <button type="button" onClick={() => { setLogin(true); }}>Login</button>
+        <div className="signup-page">
+          <div className="signup-title-container">
+            <h1 className="signup-title">Good Samaritans</h1>
+          </div>
+          <p id="success">Registration successful</p>
+          <button className="login-button" type="button" onClick={() => { setLogin(true); }}>Login</button>
         </div>
       );
     }

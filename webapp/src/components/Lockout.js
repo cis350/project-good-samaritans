@@ -27,7 +27,7 @@ function Lockout() {
         </div>
       ) : (
         <div className="lockout-page">
-          <div className="title-container">
+          <div className="lockout-title-container">
             <h1 className="Lockout-title">Good Samaritans</h1>
           </div>
           <p id="description">Your account has been temporarily locked due to multiple invalid logins. Please try again later.</p>

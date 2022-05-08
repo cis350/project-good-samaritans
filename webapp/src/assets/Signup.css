@@ -1,0 +1,108 @@
+.signup-page {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #E9E9E9;
+    min-height: 100vh;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.signup-title-container {
+    text-align: center;
+}
+.signup-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 60px;
+    
+    color: #000000;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0.5px solid;
+    width: 55%;
+
+    background-color: #FFFFFF;
+    padding-top: 2%;
+    padding-bottom: 4%;
+    font-family: 'Roboto';
+}
+
+.input-title {
+    margin: 2% 10% 0% 10%;
+}
+
+.input-box {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.state-country {
+    margin: 2% 10% 0% 10%;
+    display: flex;
+}
+
+.state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    margin-right: 5%;
+}
+
+.country {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+}
+
+#zip {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.submit-button {
+    font-family: 'Roboto';
+    font-style: normal;
+    border: none;
+    border-radius: 8px;
+    margin: 3%;
+    padding: 1% 7% 1% 7%;
+    background-color: #FF0000;
+
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+#success {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 25px;
+    border: 0.5px solid;
+    margin: 5% 20% 5% 20%;
+    padding: 3%;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.login-button {
+    font-family: 'Roboto';
+    font-style: normal;
+    border: none;
+    border-radius: 8px;
+    margin: 3%;
+    padding: 1% 7% 1% 7%;
+    background-color: #FF8282;
+
+    color: #FFFFFF;
+    font-size: 15px;
+}
