@@ -15,7 +15,18 @@ app.use(
 );
 
 // tell express to use cors
-app.use(cors({ credentials: true, origin: true }));
+app.use(cors({
+  credentials: true,
+  // origin: 'http://localhost:19006',
+  origin: true,
+}));
+
+// NOT WORKING
+app.use((_req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 // get driver connection
 const dbo = require('./dbOperations');

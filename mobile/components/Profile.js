@@ -101,8 +101,8 @@ function Profile({ route, navigation }) {
     setPostCount(0);
     navigation.navigate('Message', {
       accountName,
-      currentPrivacy: privacy,
-      currentRequests: requestsNo,
+      // currentPrivacy: privacy,
+      // currentRequests: requestsNo,
     });
   };
 
@@ -156,48 +156,44 @@ function Profile({ route, navigation }) {
         <Text style={styles.h2}>{ name.current }</Text>
       </View>
 
-      <View>
-        <View>
-          <TouchableOpacity onPress={(e) => handleTraining(e)} style={styles.button}>
-            <Text style={styles.buttontext}>
-              Training
+      <View style={styles.buttonscontainer}>
+        <TouchableOpacity onPress={(e) => handleTraining(e)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            Training
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={(e) => handleMessage(e)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            Message
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={(e) => handleMyHelp(e)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            My Help Post
+          </Text>
+        </TouchableOpacity>
+
+        <View style={styles.analytics}>
+          <Text style={styles.h2}>User Analytics</Text>
+          <View>
+            <Text>
+              Number of Requests Made:
+              {' '}
+              { requestsNo }
             </Text>
-          </TouchableOpacity>
-          <View>
-            <TouchableOpacity onPress={(e) => handleMessage(e)} style={styles.button}>
-              <Text style={styles.buttontext}>
-                Message
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <TouchableOpacity onPress={(e) => handleMyHelp(e)} style={styles.button}>
-              <Text style={styles.buttontext}>
-                My Help Posts
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.analytics}>
-            <Text style={styles.h2}>User Analytics</Text>
-            <View>
-              <Text>
-                Number of Requests Made:
-                {' '}
-                { requestsNo }
-              </Text>
-              <Text>
-                Number Helped:
-                {' '}
-                { helpedNo }
-                {' '}
-              </Text>
-              { }
-            </View>
+            <Text>
+              Number Helped:
+              {' '}
+              { helpedNo }
+              {' '}
+            </Text>
+            { }
           </View>
         </View>
+
         <TouchableOpacity onPress={(e) => handleHelpButton(e)} style={styles.button}>
           <Text style={styles.buttontext}>
-            Help Posts
+            Live Help Posts
           </Text>
         </TouchableOpacity>
         <View>
@@ -208,21 +204,23 @@ function Profile({ route, navigation }) {
                 {'\n'}
                 { currentPostDescription.current }
               </Text>
-              <TouchableOpacity onPress={(e) => handleRespond(e)} style={styles.button}>
-                <Text style={styles.buttontext}>
-                  Respond
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={(e) => handleNextPost(e)} style={styles.button}>
-                <Text style={styles.buttontext}>
-                  Next
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={(e) => handlePrevPost(e)} style={styles.button}>
-                <Text style={styles.buttontext}>
-                  Prev
-                </Text>
-              </TouchableOpacity>
+              <View style={styles.parentbutton}>
+                <TouchableOpacity onPress={(e) => handleRespond(e)} style={styles.helpbutton}>
+                  <Text style={styles.buttontext}>
+                    Respond
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={(e) => handleNextPost(e)} style={styles.helpbutton}>
+                  <Text style={styles.buttontext}>
+                    Next
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={(e) => handlePrevPost(e)} style={styles.helpbutton}>
+                  <Text style={styles.buttontext}>
+                    Prev
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ) : (<View />)}
         </View>
@@ -260,6 +258,10 @@ const styles = StyleSheet.create({
     padding: 24,
     // backgroundColor: '#DADADA',
   },
+  buttonscontainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   h1: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -274,6 +276,7 @@ const styles = StyleSheet.create({
     padding: 2,
     marginTop: 10,
     textAlign: 'center',
+    width: 250,
     borderWidth: 1,
     borderColor: '#000000',
     borderRadius: 10,
@@ -284,6 +287,19 @@ const styles = StyleSheet.create({
     width: 200,
     alignItems: 'center',
     backgroundColor: '#FF0000',
+    borderRadius: 10,
+    paddingVertical: 10,
+  },
+  parentbutton: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  helpbutton: {
+    marginTop: 10,
+    marginRight: 5,
+    width: 100,
+    alignItems: 'center',
+    backgroundColor: '#800020',
     borderRadius: 10,
     paddingVertical: 10,
   },

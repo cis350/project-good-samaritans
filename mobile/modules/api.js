@@ -1,7 +1,8 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-// const rootURL = 'http://0f4d-2603-8001-7b00-5d42-8bd-2714-99a7-9534.ngrok.io';
+// const rootURL = 'http://de62-2603-8001-7b00-5d42-8bd-2714-99a7-9534.ngrok.io';
+
 const rootURL = 'http://localhost:5000';
 
 // profile page - sends request to change the privacy setting
@@ -166,7 +167,7 @@ export async function postRequest(name, post) {
 export async function getHelpPosts() {
   try {
     const result = await axios.get(`${rootURL}/help`);
-    console.log(result.data.data);
+    // console.log(result.data.data);
     return result.data.data;
   } catch (err) {
     throw err;

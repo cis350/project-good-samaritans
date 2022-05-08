@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import {
-  React, useEffect, useState, useRef,
+  React, useEffect, useState,
 } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity,
@@ -11,18 +11,24 @@ function Account({ route, navigation }) {
   const {
     accountName,
   } = route.params;
-
-  // // remove later
-  // console.log(currentPrivacy);
-  // console.log(currentRequests);
-
   const [profile, setProfile] = useState('');
+  const [loading, setLoading] = useState(true);
   // let result = '';
-  const result = useRef();
+  // const result = useRef();
 
-  useEffect(async () => {
-    result.current = await getProfile(accountName);
-    setProfile(result.current);
+  useEffect(() => {
+    async function handleGet() {
+      try {
+        const result = await getProfile(accountName);
+        if (result !== undefined) {
+          setProfile(result);
+          setLoading(false);
+        }
+      } catch {
+        setLoading(true);
+      }
+    }
+    handleGet();
   }, []);
 
   const handleGoBack = () => {
@@ -30,40 +36,48 @@ function Account({ route, navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>
-        <Text style={styles.h1}>Account info</Text>
-        {'\n'}
-        <Text style={styles.h2}>Name:</Text>
-        {' '}
-        {profile.name}
-        {'\n'}
-        <Text style={styles.h2}>Country:</Text>
-        {' '}
-        {profile.country}
-        {'\n'}
-        <Text style={styles.h2}>State:</Text>
-        {' '}
-        {profile.state}
-        {'\n'}
-        <Text style={styles.h2}>Street:</Text>
-        {' '}
-        {profile.street}
-        {'\n'}
-        <Text style={styles.h2}>ZIP:</Text>
-        {' '}
-        {profile.zip}
-        {'\n'}
-        <Text style={styles.h2}>Password:</Text>
-        {' '}
-        {profile.password}
-        {'\n'}
-      </Text>
-      <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
-        <Text style={styles.buttontext}>
-          Go Back to Profile
-        </Text>
-      </TouchableOpacity>
+    <View>
+      {!loading ? (
+        <View style={styles.container}>
+          <Text>
+            <Text style={styles.h1}>Account info</Text>
+            {'\n'}
+            <Text style={styles.h2}>Name:</Text>
+            {' '}
+            {profile.name}
+            {'\n'}
+            <Text style={styles.h2}>Country:</Text>
+            {' '}
+            {profile.country}
+            {'\n'}
+            <Text style={styles.h2}>State:</Text>
+            {' '}
+            {profile.state}
+            {'\n'}
+            <Text style={styles.h2}>Street:</Text>
+            {' '}
+            {profile.street}
+            {'\n'}
+            <Text style={styles.h2}>ZIP:</Text>
+            {' '}
+            {profile.zip}
+            {'\n'}
+            <Text style={styles.h2}>Password:</Text>
+            {' '}
+            {profile.password}
+            {'\n'}
+          </Text>
+          <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              Go Back to Profile
+            </Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View>
+          <Text>getProfile() failed</Text>
+        </View>
+      )}
     </View>
   );
 }

@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 200,
     alignItems: 'center',
-    backgroundColor: '#FF8282',
+    backgroundColor: '#FF0000',
     borderRadius: 10,
     paddingVertical: 10,
   },
