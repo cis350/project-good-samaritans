@@ -21,14 +21,14 @@ beforeAll(async () => {
   db = await dbLib.connect(url);
   const date = {
     year: 2022,
-    month: 'May',
+    month: 5,
     day: 7,
   };
   await dbLib.addUser(db, 'testUser', '123 Panda St.', 'NV', 'USA', '89138', 'testPwd', 'Private', date, 0, 0);
   await dbLib.postRequest(db, 'testUser', 'help test');
   await dbLib.addUser(db, 'testUser100', '123 Panda St.', 'NV', 'USA', '89138', 'testPwd100', 'Private', date, 0, 0);
   await dbLib.postRequest(db, 'testUser100', 'help');
-  await dbLib.addMessage(db, 'testUser', 'testUser100', 'hola', 100000);
+  await dbLib.addMessage(db, 'testUser', 'testUser100', 'hola', '100000');
 });
 
 describe('/login/:name/:password endpoint tests', () => {
