@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-const rootURL = 'http://localhost:5000';
+const rootURL = 'http://5d5b-2603-8001-7b00-5d42-bcaa-b02f-c8f2-c670.ngrok.io';
 
 // profile page - sends request to change the privacy setting
 export async function changePrivacy(name, setting) {
