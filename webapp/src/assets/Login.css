@@ -1,114 +1,99 @@
 .Login-background {
-    position: absolute;
-    width: 1512px;
-    height: 1025px;
-    left: 0px;
-    top: 0px;
-    
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    justify-content: center;
+    align-items: center;
     background: #E5DFDF;
+    padding-left: 30%;
+    padding-right: 30%;
+    min-height: 100vh;
 }
 
 .Login-rectangle {
     /* Rectangle 38 */
-
-    position: absolute;
-    width: 511px;
-    height: 273px;
-    left: 500px;
-    top: 411px;
-
+    display: flex;
+    flex-direction: column;
     background: #FFFFFF;
     border: 0.5px solid #000000;
-    box-sizing: border-box;
-    
+    box-sizing: border-box;   
 }
 
+.username{
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.user-input {
+    margin-left: 15%;
+    width: 70%;
+}
+
+.password{
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+.password-input {
+    margin-left: 15%;
+    width: 70%;
+}
+
+.login-buttons {
+    margin: 5% 15% 10% 15%;
+    text-align: center;
+}
+
+#login {
+    background-color: #FF8282;
+    margin-right: 5%;
+    padding: 1% 10% 1% 10%;
+    border: none;
+    border-radius: 5px;
+}
+
+#forgot {
+    border: none;
+    padding: 1% 10% 1% 10%;
+    border-radius: 5px;
+}
+
+.title-container {
+    text-align: center;
+}
 .Login-title {
-    position: absolute;
-    width: 483px;
-    height: 217px;
-    left: 514px;
-    top: 85px;
-    
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
-    font-size: 60px;
+    font-size: 50px;
     line-height: 60px;
-    /* or 100% */
-    display: flex;
-    align-items: center;
-    text-align: center;
     
     color: #000000;
-}
-
-.Login-username {
-    position: absolute;
-    width: 346px;
-    height: 101px;
-    left: 583px;
-    top: 411px;
-    
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.Login-username-enter {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 59.41%;
-    bottom: 0%;
-    
-    background: #EEEEEE;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-}
-
-
-.Login-password {
-
-}
-
-.Login-password-enter {
-    position: absolute;
-    width: 346px;
-    height: 41px;
-    left: 583px;
-    top: 546px;
-    
-    background: #EEEEEE;
-    border: 1px solid #000000;
-    box-sizing: border-box;
 }
 
 .Login-signup-box {
-    position: absolute;
-    width: 280px;
-    height: 40px;
-    left: 616px;
-    top: 718px;
-
+    margin: 10% 20% 10% 20%;
     background: #FFFFFF;
     border: 0.5px solid #000000;
     box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
-.Login-signup-name {
-    width: 234px;
-    height: 18px;
-    left: 639px;
-    top: 729px;
-    
+#info {
+    font-size: 12px;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
+}
+
+#sign-up {
+    border: none;
+    background-color: #FFFFFF;
     font-size: 12px;
-    line-height: 60px;
-    /* or 500% */
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-    color: #000000;
+    color: #FF8282;
+    font-weight: bold;
+
+    font-family: 'Roboto';
+    font-style: normal;
 }

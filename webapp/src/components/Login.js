@@ -115,24 +115,30 @@ function Login() {
     }
     return (
       <div className="Login-background">
-        <h1 className="Login-title">Good Samaritans</h1>
-        <div className="Login-rectangle">
-          <label htmlFor={domId}>
-            Username:
-            {' '}
-            <input name="user" onChange={handleUser} />
-          </label>
-          <label htmlFor={domId}>
-            Password:
-            {' '}
-            <input name="password" onChange={handleUserPass} />
-          </label>
-          <button type="submit" onClick={handleFormSubmit}>Login</button>
-          <button type="button" onClick={() => setForgot(true)}>Forgot Password?</button>
-        </div>
-        <div className="Login-signup-box ">
-          <h2 className="Login-signup-name">Do not have an Account?</h2>
-          <button type="submit" onClick={handleSignUp}>Signup</button>
+        <div className="Login-column">
+          <div className="title-container">
+            <h1 className="Login-title">Good Samaritans</h1>
+          </div>
+          <div className="Login-rectangle">
+            <label className="username" htmlFor={domId}>
+              Username:
+              {' '}
+            </label>
+            <input className="user-input" name="user" onChange={handleUser} />
+            <label className="password" htmlFor={domId}>
+              Password:
+              {' '}
+            </label>
+            <input className="password-input" name="password" onChange={handleUserPass} />
+            <div className="login-buttons">
+              <button id="login" type="submit" onClick={handleFormSubmit}>Login</button>
+              <button id="forgot" type="button" onClick={() => setForgot(true)}>Forgot Password?</button>
+            </div>
+          </div>
+          <div className="Login-signup-box ">
+            <p id="info">Do not have an Account?</p>
+            <button id="sign-up" type="submit" onClick={handleSignUp}>Signup</button>
+          </div>
         </div>
       </div>
     );
