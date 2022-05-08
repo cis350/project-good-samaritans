@@ -19,7 +19,7 @@ import Training from './components/Training';
 
 // create a navigation stack
 const Stack = createNativeStackNavigator();
-Stack.headerLeft = null;
+// Stack.headerLeft = null;
 export default function App() {
   return (
     <NavigationContainer>
@@ -27,7 +27,9 @@ export default function App() {
         <Stack.Group
           screenOptions={() => ({
             presentation: 'modal',
-            headerLeft: () => null,
+            header: () => null,
+            gestureEnabled: false,
+            // headerLeft: () => null,
             // headerTitle: () => null,
           })}
         >

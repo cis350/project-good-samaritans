@@ -1,18 +1,10 @@
+/* eslint-disable no-use-before-define */
 import { React, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, View, Text, TextInput, Button, Alert,
+  StyleSheet, View, Text, TextInput, Alert, TouchableOpacity,
 } from 'react-native';
 import { addUser, getProfile } from '../modules/api';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 function Signup({ navigation }) {
   const [userInput, setUserInput] = useState('');
@@ -65,7 +57,7 @@ function Signup({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>
+      <Text style={styles.title}>
         Enter Account Information
       </Text>
 
@@ -73,6 +65,7 @@ function Signup({ navigation }) {
         Full Name:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setUserInput}
         value={userInput}
       />
@@ -81,6 +74,7 @@ function Signup({ navigation }) {
         Password:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setPwd}
         value={userPwd}
       />
@@ -89,6 +83,7 @@ function Signup({ navigation }) {
         Street:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setUserInputStreet}
         value={userInputStreet}
       />
@@ -97,6 +92,7 @@ function Signup({ navigation }) {
         State:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setUserInputState}
         value={userInputState}
       />
@@ -105,6 +101,7 @@ function Signup({ navigation }) {
         Country:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setUserInputCountry}
         value={userInputCountry}
       />
@@ -113,6 +110,7 @@ function Signup({ navigation }) {
         Zipcode:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setUserInputZIP}
         value={userInputZIP}
       />
@@ -121,16 +119,53 @@ function Signup({ navigation }) {
         Covid vaccination record:
       </Text>
       <TextInput
+        style={styles.textinput}
         onChangeText={setUserInputCOVID}
         value={userInputCOVID}
       />
-      <Button
-        title="Sign Up"
-        onPress={(e) => handleFormSubmit(e)}
-      />
+      <TouchableOpacity onPress={(e) => handleFormSubmit(e)} style={styles.button}>
+        <Text style={styles.buttontext}>
+          Sign up
+        </Text>
+      </TouchableOpacity>
       <StatusBar style={{ align: 'auto' }} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    flex: 1,
+    padding: 24,
+    backgroundColor: '#ffffff',
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    padding: 24,
+  },
+  textinput: {
+    padding: 8,
+    marginTop: 5,
+    marginBottom: 5,
+    borderWidth: 1,
+    borderColor: '#000000',
+    backgroundColor: '#DADADA',
+  },
+  button: {
+    marginTop: 10,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FF0000',
+    borderRadius: 50,
+    paddingVertical: 10,
+  },
+  buttontext: {
+    textAlign: 'center',
+    color: 'white',
+  },
+});
 
 export default Signup;

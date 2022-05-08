@@ -1,6 +1,9 @@
-import { React, useEffect, useState } from 'react';
+/* eslint-disable no-use-before-define */
 import {
-  View, Text, Button,
+  React, useEffect, useState, useRef,
+} from 'react';
+import {
+  View, Text, StyleSheet, TouchableOpacity,
 } from 'react-native';
 import { getProfile } from '../modules/api';
 
@@ -13,12 +16,13 @@ function Account({ route, navigation }) {
   // console.log(currentPrivacy);
   // console.log(currentRequests);
 
-  const [profile, setProfile] = useState({ name: '123' });
-  let result = '';
+  const [profile, setProfile] = useState('');
+  // let result = '';
+  const result = useRef();
 
   useEffect(async () => {
-    result = await getProfile(accountName);
-    setProfile(result);
+    result.current = await getProfile(accountName);
+    setProfile(result.current);
   }, []);
 
   const handleGoBack = () => {
@@ -26,41 +30,73 @@ function Account({ route, navigation }) {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>
-        <b>Account info</b>
-        <br />
-        Name:
-        <br />
+        <Text style={styles.h1}>Account info</Text>
+        {'\n'}
+        <Text style={styles.h2}>Name:</Text>
+        {' '}
         {profile.name}
-        <br />
-        Country:
-        <br />
+        {'\n'}
+        <Text style={styles.h2}>Country:</Text>
+        {' '}
         {profile.country}
-        <br />
-        State:
-        <br />
+        {'\n'}
+        <Text style={styles.h2}>State:</Text>
+        {' '}
         {profile.state}
-        <br />
-        Street:
-        <br />
+        {'\n'}
+        <Text style={styles.h2}>Street:</Text>
+        {' '}
         {profile.street}
-        <br />
-        ZIP:
-        <br />
+        {'\n'}
+        <Text style={styles.h2}>ZIP:</Text>
+        {' '}
         {profile.zip}
-        <br />
-        Password:
-        <br />
+        {'\n'}
+        <Text style={styles.h2}>Password:</Text>
+        {' '}
         {profile.password}
-        <br />
+        {'\n'}
       </Text>
-      <Button
-        title="Go Back to Profile"
-        onPress={(e) => handleGoBack(e)}
-      />
+      <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
+        <Text style={styles.buttontext}>
+          Go Back to Profile
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    padding: 24,
+  },
+  h1: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  h2: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  button: {
+    marginTop: 10,
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#FF0000',
+    borderRadius: 10,
+    paddingVertical: 10,
+  },
+  buttontext: {
+    textAlign: 'center',
+    color: 'white',
+  },
+});
 
 export default Account;

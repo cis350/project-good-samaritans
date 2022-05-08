@@ -1,8 +1,9 @@
+/* eslint-disable no-use-before-define */
 import {
   React, useState,
 } from 'react';
 import {
-  View, Text, TextInput, Button, Alert,
+  View, Text, TextInput, Alert, StyleSheet, TouchableOpacity,
 } from 'react-native';
 import {
   getLoginTrue, getPasswordTrue, changePassword, getProfile,
@@ -59,65 +60,126 @@ function Login({ navigation }) {
 
   // Actual rendering
   if (mistakes >= 3) {
+    setMistakes(0);
     navigation.navigate('Lockout');
   }
   if (forgot) {
     return (
-      <View>
-        <Text>
-          Username:
-        </Text>
-        <TextInput
-          onChangeText={setUserName}
-          value={userName}
-        />
-        <Text>
-          New Password:
-        </Text>
-        <TextInput
-          onChangeText={setUserNewPass}
-          value={userNewPass}
-        />
-        <Button
-          title="Reset Password"
-          onPress={(e) => handleChangePassword(e)}
-        />
+      <View style={styles.container}>
+        <View style={styles.box}>
+          <Text>
+            Username:
+          </Text>
+          <TextInput
+            style={styles.textinput}
+            onChangeText={setUserName}
+            value={userName}
+          />
+          <Text>
+            New Password:
+          </Text>
+          <TextInput
+            style={styles.textinput}
+            onChangeText={setUserNewPass}
+            value={userNewPass}
+          />
+          <TouchableOpacity onPress={(e) => handleChangePassword(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              Reset Password
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
   return (
-    <View>
-      <Text>
-        Full Name:
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        Good Samaritans
       </Text>
-      <TextInput
-        onChangeText={setUserName}
-        value={userName}
-      />
-      <Text>
-        Password:
-      </Text>
-      <TextInput
-        onChangeText={setUserPass}
-        value={userPass}
-      />
-      <Button
-        title="Login"
-        onPress={(e) => handleFormSubmit(e)}
-      />
-      <Button
-        title="Forgot Password?"
-        onPress={() => setForgot(true)}
-      />
-      <Text>
-        Do not have an acount? Signup
-      </Text>
-      <Button
-        title="Signup"
-        onPress={(e) => handleSignUp(e)}
-      />
+      <View style={styles.box}>
+        <Text>
+          Username:
+        </Text>
+        <TextInput
+          style={styles.textinput}
+          onChangeText={setUserName}
+          value={userName}
+        />
+        <Text>
+          Password:
+        </Text>
+        <TextInput
+          style={styles.textinput}
+          onChangeText={setUserPass}
+          value={userPass}
+        />
+        <TouchableOpacity onPress={(e) => handleFormSubmit(e)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            Login
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setForgot(true)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            Forgot Password?
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.box}>
+        <Text>
+          Do not have an account?
+        </Text>
+        <TouchableOpacity onPress={(e) => handleSignUp(e)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            Sign up
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    padding: 24,
+    backgroundColor: '#DADADA',
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    padding: 24,
+  },
+  textinput: {
+    padding: 8,
+    marginTop: 5,
+    marginBottom: 5,
+    borderWidth: 1,
+    borderColor: '#000000',
+    backgroundColor: '#DADADA',
+  },
+  box: {
+    padding: 24,
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#000000',
+    backgroundColor: '#ffffff',
+  },
+  button: {
+    marginTop: 10,
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#FF8282',
+    borderRadius: 10,
+    paddingVertical: 10,
+  },
+  buttontext: {
+    textAlign: 'center',
+    color: 'white',
+  },
+});
 
 export default Login;

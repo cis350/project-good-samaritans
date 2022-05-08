@@ -1,8 +1,11 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-nested-ternary */
 import {
   React, useEffect, useState, useRef,
 } from 'react';
-import { View, Text, Button } from 'react-native';
+import {
+  View, Text, StyleSheet, TouchableOpacity,
+} from 'react-native';
 import {
   changePrivacy, getHelpPosts,
 } from '../modules/api';
@@ -145,97 +148,149 @@ function Profile({ route, navigation }) {
   *//// ///////////////////
 
   return (
-    <View>
+    <View style={styles.container}>
       <View>
-        <Text>Good Samaritans</Text>
+        <Text style={styles.h1}>Good Samaritans</Text>
+      </View>
+      <View>
+        <Text style={styles.h2}>{ name.current }</Text>
       </View>
 
       <View>
-        <Button
-          title="Training"
-          onPress={(e) => handleTraining(e)}
-        />
         <View>
-          <Button
-            title="Message"
-            onPress={(e) => handleMessage(e)}
-          />
-        </View>
-        <View>
-          <Button
-            title="My Help Posts"
-            onPress={(e) => handleMyHelp(e)}
-          />
-        </View>
-        <View>
-          <Text>User Analytics</Text>
-          <Text>
-            <p>
-              Number of Requests Made:
-              {' '}
-              { requestsNo }
-            </p>
-            <p>
-              Number Helped:
-              { helpedNo }
-              {' '}
-            </p>
-            { }
-          </Text>
-        </View>
-      </View>
-
-      <View>
-        <Button
-          title="Help Posts"
-          onPress={(e) => handleHelpButton(e)}
-        />
-        {clickHB ? (
-          <View>
-            <Text>
-              { currentPostName.current }
-              {'\n'}
-              { currentPostDescription.current }
+          <TouchableOpacity onPress={(e) => handleTraining(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              Training
             </Text>
-            <Button
-              title="Respond"
-              onPress={(e) => handleRespond(e)}
-            />
-            <Button
-              title="Next"
-              onPress={(e) => handleNextPost(e)}
-            />
-            <Button
-              title="Prev"
-              onPress={(e) => handlePrevPost(e)}
-            />
+          </TouchableOpacity>
+          <View>
+            <TouchableOpacity onPress={(e) => handleMessage(e)} style={styles.button}>
+              <Text style={styles.buttontext}>
+                Message
+              </Text>
+            </TouchableOpacity>
           </View>
-        ) : (<View />)}
-      </View>
-
-      <View>
-        <View>
-          <Text>{ name.current }</Text>
+          <View>
+            <TouchableOpacity onPress={(e) => handleMyHelp(e)} style={styles.button}>
+              <Text style={styles.buttontext}>
+                My Help Posts
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.analytics}>
+            <Text style={styles.h2}>User Analytics</Text>
+            <View>
+              <Text>
+                Number of Requests Made:
+                {' '}
+                { requestsNo }
+              </Text>
+              <Text>
+                Number Helped:
+                {' '}
+                { helpedNo }
+                {' '}
+              </Text>
+              { }
+            </View>
+          </View>
         </View>
-        <Button
-          title="Account"
-          onPress={(e) => handleAccount(e)}
-        />
-        <Button
-          title={privacy}
-          onPress={(e) => handlePrivacy(e)}
-        />
-      </View>
+        <TouchableOpacity onPress={(e) => handleHelpButton(e)} style={styles.button}>
+          <Text style={styles.buttontext}>
+            Help Posts
+          </Text>
+        </TouchableOpacity>
+        <View>
+          {clickHB ? (
+            <View>
+              <Text>
+                { currentPostName.current }
+                {'\n'}
+                { currentPostDescription.current }
+              </Text>
+              <TouchableOpacity onPress={(e) => handleRespond(e)} style={styles.button}>
+                <Text style={styles.buttontext}>
+                  Respond
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={(e) => handleNextPost(e)} style={styles.button}>
+                <Text style={styles.buttontext}>
+                  Next
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={(e) => handlePrevPost(e)} style={styles.button}>
+                <Text style={styles.buttontext}>
+                  Prev
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (<View />)}
+        </View>
 
-      <View>
-        <Button
-          title="Request"
-          onPress={(e) => handleRequest(e)}
-        />
-      </View>
+        <View>
+          <TouchableOpacity onPress={(e) => handleAccount(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              Account
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={(e) => handlePrivacy(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              {privacy}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
+        <View>
+          <TouchableOpacity onPress={(e) => handleRequest(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              Request
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    padding: 24,
+    // backgroundColor: '#DADADA',
+  },
+  h1: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  h2: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  analytics: {
+    padding: 2,
+    marginTop: 10,
+    textAlign: 'center',
+    borderWidth: 1,
+    borderColor: '#000000',
+    borderRadius: 10,
+    backgroundColor: '#DADADA',
+  },
+  button: {
+    marginTop: 10,
+    width: 200,
+    alignItems: 'center',
+    backgroundColor: '#FF0000',
+    borderRadius: 10,
+    paddingVertical: 10,
+  },
+  buttontext: {
+    textAlign: 'center',
+    color: 'white',
+  },
+});
 
 export default Profile;
