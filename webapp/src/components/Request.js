@@ -2,6 +2,7 @@
 import { React, useRef, useState } from 'react';
 import { incrementRequest, postRequest } from '../modules/api';
 import Profile from './Profile';
+import '../assets/Request.css';
 
 function Request({ accountName, currentPrivacy, currentRequests }) {
   const [requ, setRequ] = useState(false);
@@ -23,9 +24,9 @@ function Request({ accountName, currentPrivacy, currentRequests }) {
   if (requ) {
     if (!goBack) {
       return (
-        <div>
-          <h1>Request sent</h1>
-          <button type="button" onClick={() => { setGoBack(true); }}>Go Back to Profile</button>
+        <div className="request-page">
+          <h1 className="request-title">Request sent</h1>
+          <button className="report-button" type="button" onClick={() => { setGoBack(true); }}>Go Back to Profile</button>
         </div>
       );
     }
@@ -40,20 +41,20 @@ function Request({ accountName, currentPrivacy, currentRequests }) {
     );
   }
   return (
-    <div>
-      <h1>
-        What is your issue
-        {' '}
-        {accountName}
-      </h1>
-      <label htmlFor={domId}>
-        <input name="text" onChange={handleReqText} />
-      </label>
-      <button type="submit" onClick={sendRequest}>
-        <div>
+    <div className="request-section">
+      <div className="request-page">
+        <h1 className="request-title">
+          What is your issue
+          {' '}
+          {accountName}
+        </h1>
+        <label className="help-container" htmlFor={domId}>
+          <input className="help-input" name="text" onChange={handleReqText} />
+        </label>
+        <button className="report-button" type="submit" onClick={sendRequest}>
           Report non-immediate emergency
-        </div>
-      </button>
+        </button>
+      </div>
     </div>
   );
 }
