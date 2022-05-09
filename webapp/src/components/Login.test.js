@@ -44,3 +44,10 @@ test('sign up ', () => {
   expect(startButton2).toBeInTheDocument();
   user.click(startButton2);
 });
+
+test('forgot password', () => {
+  render(<Login />);
+  const startButton2 = screen.getByText(/Forgot Password?/i);
+  expect(startButton2).toBeInTheDocument();
+  user.click(startButton2);
+});

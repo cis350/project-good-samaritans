@@ -1,8 +1,8 @@
 /**
 * @jest-environment jsdom
 */
-// import { React, render, screen } from '@testing-library/react';
-// import App from './App';
+import { React, render, screen } from '@testing-library/react';
+import App from './App';
 import '@testing-library/jest-dom';
 
 /**
@@ -19,3 +19,9 @@ import '@testing-library/jest-dom';
 //   // expect(linkElement).toBeInTheDocument();
 // >>>>>>> 173e36f3d4297fc7f908abcf6e6fd1d0f7de5d12
 // });
+
+test('App: start', () => {
+    render(<App />);
+    const linkElement = screen.getByText('Good Samaritans');
+    expect(linkElement).toBeInTheDocument();
+  });
