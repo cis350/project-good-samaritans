@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 import {
@@ -29,7 +31,7 @@ function Message2({
   }
 
   function showMessages() {
-    const holder = document.getElementById('holder');
+    const holder = document.getElementById('holder2');
     holder.innerHTML = '';
     for (let i = 0; i < arr.length; i += 1) {
       holder.innerHTML += `<p>${arr[i]}</p>`;
@@ -47,11 +49,15 @@ function Message2({
     }
   }
 
+  const interval1 = useRef(null);
   useEffect(() => {
+    // console.log('in messagehelp useeffect');
     // gets all messages from person to message to
     async function handleDone() {
       targetName = secondName;
       arr = [];
+      // console.log(accountName);
+      // console.log(targetName);
       msgHistory = await getMessages(accountName, targetName);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -60,6 +66,7 @@ function Message2({
       }
       showMessages();
     }
+    handleDone();
 
     // adds messages
     async function handleDone2() {
@@ -70,7 +77,7 @@ function Message2({
         targetName2.current,
         d.getTime(),
       );
-      const holder = document.getElementById('holder');
+      const holder = document.getElementById('holder2');
       holder.innerHTML = '';
       handleDone();
     }
@@ -79,13 +86,22 @@ function Message2({
       handleDone2();
       sentTarget.current = false;
     }
-    const interval = setInterval(() => {
+
+    interval1.current = setInterval(() => {
+      // console.log('in messagehelp interval');
       handleDone();
+      // console.log('should be after handleDone');
     }, MINUTE_MS);
-    return () => clearInterval(interval);
+
+    return () => {
+      // console.log('should clear interval');
+      clearInterval(interval1.current);
+    };
   }, [sent]);
 
   if (goBack) {
+    // console.log('in goback-profile');
+    clearInterval(interval1.current);
     return (
       <div className="Profile">
         <Profile
@@ -104,7 +120,7 @@ function Message2({
         </h1>
       </div>
       <div className="messagehelp-input">
-        <div id="holder" />
+        <div id="holder2" />
         <div className="messagehelp">
           <p className="prompthelp">
             Messaging :
