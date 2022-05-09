@@ -4,7 +4,7 @@ import {
   React, useState, useEffect, useRef,
 } from 'react';
 import {
-  changePrivacy, getHelpPosts, soloGetMessages,
+  changePrivacy, getHelpPosts,
 } from '../modules/api';
 import Training from './Training';
 import Request from './Request';
@@ -16,7 +16,7 @@ import '../assets/Profile.css';
 // import Friends from './Friends';
 
 function Profile({
-  accountName, initialPrivacy, requests, helped, msgs,
+  accountName, initialPrivacy, requests, helped,
 }) {
   console.log('rerender');
   const name = useRef(accountName); // name of the user after logging in
@@ -37,10 +37,10 @@ function Profile({
   const [, setRevealPosts] = useState(false);
   const requestsNo = useRef(requests);
   const helpedNo = useRef(helped);
-  const MINUTE_MS = 5000;
-  let currMsgLength = msgs;
-  let curr2 = 0;
-  let counter = 0;
+  // const MINUTE_MS = 5000;
+  // let currMsgLength = msgs;
+  // let curr2 = 0;
+  // let counter = 0;
 
   console.log(`number of requests: ${requestsNo.current}`);
   // console.log(initialPrivacy);
@@ -61,31 +61,31 @@ function Profile({
     }
     initializeBoardPosts();
 
-    async function msgGets() {
-      const curr1 = await soloGetMessages(accountName);
-      curr2 = curr1;
-      return curr1.data.length;
-    }
+    // async function msgGets() {
+    //   const curr1 = await soloGetMessages(accountName);
+    //   curr2 = curr1;
+    //   return curr1.data.length;
+    // }
 
-    const interval = setInterval(() => {
-      async function getms() { curr2 = await msgGets(); }
-      getms();
-      console.log(currMsgLength);
-      console.log(curr2);
-      if (curr2 > currMsgLength) {
-        currMsgLength = curr2;
-        if (counter !== 0) {
-          // eslint-disable-next-line no-alert
-          alert('new message!');
-        }
-        counter += 1;
-      }
-    }, MINUTE_MS);
-    console.log(currMsgLength);
+    // const interval = setInterval(() => {
+    //   async function getms() { curr2 = await msgGets(); }
+    //   getms();
+    //   console.log(currMsgLength);
+    //   console.log(curr2);
+    //   if (curr2 > currMsgLength) {
+    //     currMsgLength = curr2;
+    //     if (counter !== 0) {
+    //       // eslint-disable-next-line no-alert
+    //       alert('new message!');
+    //     }
+    //     counter += 1;
+    //   }
+    // }, MINUTE_MS);
+    // console.log(currMsgLength);
     console.log('in useeffect');
     console.log(helpBoard.current);
     console.log(privacy);
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [privacy, postCount]);
   // console.log('outside useeffect');
   // console.log(helpBoard.current);

@@ -47,9 +47,9 @@ function Request({ accountName, currentPrivacy, currentRequests }) {
         {accountName}
       </h1>
       <label htmlFor={domId}>
-        <input name="text" onChange={handleReqText} />
+        <input id="2" name="text" onChange={handleReqText} />
       </label>
-      <button type="submit" onClick={sendRequest}>
+      <button id="3" type="submit" onClick={sendRequest}>
         <div>
           Report non-immediate emergency
         </div>

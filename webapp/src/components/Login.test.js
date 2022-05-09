@@ -7,15 +7,6 @@ import {
 } from '@testing-library/react';
 import Login from './Login';
 import '@testing-library/jest-dom';
-// eslint-disable-next-line no-unused-vars
-import * as np from '../modules/api';
-
-// jest.mock('../modules/api', () => {
-//   const users = [];
-//   return {
-//     getUsers: jest.fn(() => Promise.resolve(users)),
-//   };
-// });
 
 const getById = queryByAttribute.bind(null, 'id');
 

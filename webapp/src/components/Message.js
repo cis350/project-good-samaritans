@@ -2,7 +2,7 @@ import {
   React, useState, useEffect, useRef,
 } from 'react';
 import {
-  getMessages, addMessage,
+  addMessage,
 } from '../modules/api';
 // eslint-disable-next-line import/no-cycle
 import Profile from './Profile';
@@ -14,46 +14,12 @@ import Profile from './Profile';
 
 function Message({ accountName, currentPrivacy, currentRequests }) {
   const [goBack, setgoBack] = useState(false);
-  const [target, setTarget] = useState(false);
   const targetName = useRef('');
   const targetName2 = useRef('');
-  let msgHistory = '';
-  let arr = [];
   const MINUTE_MS = 5000;
-
-  function handleTarget(e) {
-    targetName.current = e.target.value;
-  }
-
-  function handleTarget2(e) {
-    targetName2.current = e.target.value;
-  }
-
-  function showMessages() {
-    const holder = document.getElementById('holder');
-    holder.innerHTML = '';
-    for (let i = 0; i < arr.length; i += 1) {
-      holder.innerHTML += `<p>${arr[i]}</p><br>`;
-    }
-  }
-
-  // gets all messages from person to message to
-  async function handleDone() {
-    arr = [];
-    msgHistory = await getMessages(accountName, targetName.current);
-    msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
-    for (let i = 0; i < msgHistory.data.length; i += 1) {
-      const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
-      arr.push(temp);
-    }
-
-    setTarget(true);
-    showMessages();
-  }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      handleDone();
     }, MINUTE_MS);
     return () => clearInterval(interval);
   }, []);
@@ -63,7 +29,6 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
     await addMessage(accountName, targetName.current, targetName2.current, (new Date()).getTime());
     const holder = document.getElementById('holder');
     holder.innerHTML = '';
-    handleDone();
   }
 
   // go back to profile
@@ -82,7 +47,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
       </div>
     );
   }
-  if (!target) {
+  if (!true) {
     return (
       <div>
         <h1>
@@ -92,9 +57,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
           !
         </h1>
         <h2> Who would you like to message?</h2>
-        <input id="1" name="target" onChange={handleTarget} />
-        <button id="2" type="submit" onClick={handleDone}>Message</button>
-        <button type="submit" onClick={handleGoBack}>
+        <button id="2" type="submit" onClick={handleGoBack}>
           <div>
             Go Back to Profile
           </div>
@@ -106,9 +69,8 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
     <div>
       <div id="holder" />
       <div>new message:</div>
-      <input name="messageNow" id="4" onChange={handleTarget2} />
       <button type="submit" id="5" onClick={handleDone2}>Message</button>
-      <button type="submit" onClick={handleGoBack}>
+      <button id="2" type="submit" onClick={handleGoBack}>
         <div>
           Go Back to Profile
         </div>

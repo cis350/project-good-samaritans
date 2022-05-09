@@ -13,37 +13,16 @@ import {
 function Message2({ accountName, secondName }) {
   const targetName = secondName;
   const targetName2 = useRef('');
-  let msgHistory = '';
-  let arr = [];
   const d = new Date();
 
   function handleTarget2(e) {
     targetName2.current = e.target.value;
   }
 
-  function showMessages() {
-    const holder = document.getElementById('holder');
-    for (let i = 0; i < arr.length; i += 1) {
-      holder.innerHTML += `<p>${arr[i]}</p><br>`;
-    }
-  }
-
-  async function handleDone() {
-    arr = [];
-    msgHistory = await getMessages(accountName, targetName);
-    msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
-    for (let i = 0; i < msgHistory.data.length; i += 1) {
-      const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
-      arr.push(temp);
-    }
-    showMessages();
-  }
-
   async function handleDone2() {
     await addMessage(accountName, targetName, targetName2.current, d.getTime());
     const holder = document.getElementById('holder');
     holder.innerHTML = '';
-    handleDone();
   }
 
   return (
