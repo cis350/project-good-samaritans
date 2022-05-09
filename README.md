@@ -1,3 +1,4 @@
+## READ ME INSTRUCTIONS
 In our repo, there are five branches - each covering a particular aspect of this app.
 
 1. "heroku-deployment": This branch includes all the code that has been deployed to Heroku. The app's link can be found here: https://good-samaritans.herokuapp.com/. This or "backend-tests-webapp" should be branch where you interact with our app.
