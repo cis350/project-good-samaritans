@@ -51,10 +51,6 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
       btn.addEventListener('click', async (e) => { await deleteHelp(accountName, arr[e.target.id].post, targetName.current); handleCurr(); });
       btn.setAttribute('id', i);
       holder.appendChild(btn);
-
-      // holder.innerHTML += `<p></p>Resolved by?<input name="target"
-      //  onChange={handleTarget} /><button id="${i}" type="button"
-      // onClick={handleRespond}>Mark Resolved</button><br>`;
     }
   }
 
