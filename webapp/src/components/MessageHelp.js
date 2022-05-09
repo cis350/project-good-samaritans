@@ -29,7 +29,7 @@ function Message2({
   }
 
   function showMessages() {
-    const holder = document.getElementById('holder');
+    const holder = document.getElementById('holder2');
     holder.innerHTML = '';
     for (let i = 0; i < arr.length; i += 1) {
       holder.innerHTML += `<p>${arr[i]}</p>`;
@@ -48,10 +48,13 @@ function Message2({
   }
 
   useEffect(() => {
+    // console.log('in messagehelp useeffect');
     // gets all messages from person to message to
     async function handleDone() {
       targetName = secondName;
       arr = [];
+      // console.log(accountName);
+      // console.log(targetName);
       msgHistory = await getMessages(accountName, targetName);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -70,7 +73,7 @@ function Message2({
         targetName2.current,
         d.getTime(),
       );
-      const holder = document.getElementById('holder');
+      const holder = document.getElementById('holder2');
       holder.innerHTML = '';
       handleDone();
     }
@@ -79,13 +82,21 @@ function Message2({
       handleDone2();
       sentTarget.current = false;
     }
-    const interval = setInterval(() => {
+
+    const interval1 = setInterval(() => {
+      // console.log('in messagehelp interval');
       handleDone();
+      // console.log('should be after handleDone');
     }, MINUTE_MS);
-    return () => clearInterval(interval);
+
+    return () => {
+      // console.log('should clear interval');
+      clearInterval(interval1);
+    };
   }, [sent]);
 
   if (goBack) {
+    // console.log('in goback-profile');
     return (
       <div className="Profile">
         <Profile
@@ -104,7 +115,7 @@ function Message2({
         </h1>
       </div>
       <div className="messagehelp-input">
-        <div id="holder" />
+        <div id="holder2" />
         <div className="messagehelp">
           <p className="prompthelp">
             Messaging :
