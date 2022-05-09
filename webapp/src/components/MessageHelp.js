@@ -51,7 +51,6 @@ function Message2({
 
   const interval1 = useRef(null);
   useEffect(() => {
-    // console.log('in messagehelp useeffect');
     // gets all messages from person to message to
     async function handleDone() {
       targetName = secondName;
