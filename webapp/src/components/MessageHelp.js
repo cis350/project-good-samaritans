@@ -47,6 +47,7 @@ function Message2({
     }
   }
 
+  const interval1 = useRef(null);
   useEffect(() => {
     // console.log('in messagehelp useeffect');
     // gets all messages from person to message to
@@ -63,6 +64,7 @@ function Message2({
       }
       showMessages();
     }
+    handleDone();
 
     // adds messages
     async function handleDone2() {
@@ -83,7 +85,7 @@ function Message2({
       sentTarget.current = false;
     }
 
-    const interval1 = setInterval(() => {
+    interval1.current = setInterval(() => {
       // console.log('in messagehelp interval');
       handleDone();
       // console.log('should be after handleDone');
@@ -91,12 +93,13 @@ function Message2({
 
     return () => {
       // console.log('should clear interval');
-      clearInterval(interval1);
+      clearInterval(interval1.current);
     };
   }, [sent]);
 
   if (goBack) {
     // console.log('in goback-profile');
+    clearInterval(interval1.current);
     return (
       <div className="Profile">
         <Profile

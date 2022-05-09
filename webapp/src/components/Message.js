@@ -15,6 +15,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
   const [goBack, setgoBack] = useState(false);
   const [target, setTarget] = useState(false);
   const [, setDone] = useState(false);
+  const message = useRef(false);
   const sentTarget = useRef(false);
   const [sent, setSent] = useState(false);
   const targetName = useRef('');
@@ -39,6 +40,12 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
     }
   }
 
+  function messageDone() {
+    // console.log('in messageDone');
+    message.current = true;
+    setDone(true);
+  }
+
   function handleSent() {
     sentTarget.current = true;
     if (sentTarget.current) {
@@ -50,22 +57,26 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
     }
   }
 
+  const interval = useRef(null);
   useEffect(() => {
-    console.log('in message useeffect');
+    // console.log('in message useeffect');
     // gets all messages from person to message to
     async function handleDone() {
-      arr = [];
-      console.log(accountName);
-      console.log(targetName.current);
-      msgHistory = await getMessages(accountName, targetName.current);
-      msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
-      for (let i = 0; i < msgHistory.data.length; i += 1) {
-        const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
-        arr.push(temp);
-      }
+      // console.log(`setDone to ${done}`);
+      if (message.current && targetName.current !== '') {
+        arr = [];
+        // console.log(accountName);
+        // console.log(targetName.current);
+        msgHistory = await getMessages(accountName, targetName.current);
+        msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
+        for (let i = 0; i < msgHistory.data.length; i += 1) {
+          const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
+          arr.push(temp);
+        }
 
-      setTarget(true);
-      showMessages();
+        setTarget(true);
+        showMessages();
+      }
     }
 
     // adds messages
@@ -85,11 +96,15 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
       handleDone2();
       sentTarget.current = false;
     }
-    const interval = setInterval(() => {
-      console.log('in message interval');
+    interval.current = setInterval(() => {
+      // console.log('in message interval');
       handleDone();
+      // console.log('should be after handleDone');
     }, MINUTE_MS);
-    return () => clearInterval(interval);
+    return () => {
+      // console.log('should clear interval');
+      clearInterval(interval.current);
+    };
   }, [sent]);
 
   // go back to profile
@@ -98,6 +113,8 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
   };
 
   if (goBack) {
+    // console.log('in goback-profile');
+    clearInterval(interval.current);
     return (
       <div className="Profile">
         <Profile
@@ -120,7 +137,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
           <div className="message">
             <p className="prompt">Who would you like to message?</p>
             <input className="input" name="target" onChange={handleTarget} />
-            <button className="submit" type="submit" onClick={() => setDone(true)}>Message</button>
+            <button className="submit" type="submit" onClick={() => messageDone()}>Message</button>
           </div>
         </div>
         <div className="right-column">
