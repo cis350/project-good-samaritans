@@ -11,7 +11,7 @@ In our repo, there are five branches - each covering a particular aspect of this
 
 5. "cypress": This branch includes all of our functional tests. Note: this app simply tests the logic behind our frontend UI, so does not have our most updated CSS. Please refer to "heroku-deployment" or "backend-tests-webapp" for that.
 
-###WIKI: 
+### WIKI: 
 The wiki includes our user stories, initial wireframes and prototypes, sequence diagrams of at least 2 routes, and our API documentation on SwaggerHub.
 
 Thank you!
