@@ -50,6 +50,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
         text.textContent = posts.data[i].post;
         holder.appendChild(text);
 
+
         const text2 = document.createElement('div', null, null);
         text2.textContent = 'resolved by?';
         holder.appendChild(text2);
