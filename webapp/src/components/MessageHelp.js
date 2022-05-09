@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 import {
-  React, useRef, useState,
+  React, useRef, useState, useEffect,
 } from 'react';
 import {
   getMessages, addMessage,
@@ -11,12 +12,16 @@ import Profile from './Profile';
 function Message2({
   accountName, secondName, currentPrivacy, currentRequests,
 }) {
-  const targetName = secondName;
+  let targetName = secondName;
   const targetName2 = useRef('');
   let msgHistory = '';
   let arr = [];
   const d = new Date();
+  const MINUTE_MS = 5000;
 
+  const [sent, setSent] = useState(false);
+
+  const sentTarget = useRef(false);
   const [goBack, setGoBack] = useState(false);
 
   function handleTarget2(e) {
@@ -25,28 +30,60 @@ function Message2({
 
   function showMessages() {
     const holder = document.getElementById('holder');
-    for (let i = 0; i < arr.length; i += 1) {
-      holder.innerHTML += `<p>${arr[i]}</p><br>`;
-    }
-  }
-
-  async function handleDone() {
-    arr = [];
-    msgHistory = await getMessages(accountName, targetName);
-    msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
-    for (let i = 0; i < msgHistory.data.length; i += 1) {
-      const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
-      arr.push(temp);
-    }
-    showMessages();
-  }
-
-  async function handleDone2() {
-    await addMessage(accountName, targetName, targetName2.current, d.getTime());
-    const holder = document.getElementById('holder');
     holder.innerHTML = '';
-    handleDone();
+    for (let i = 0; i < arr.length; i += 1) {
+      holder.innerHTML += `<p>${arr[i]}</p>`;
+    }
   }
+
+  function handleSent() {
+    sentTarget.current = true;
+    if (sentTarget.current) {
+      if (sent) {
+        setSent(false);
+      } else {
+        setSent(true);
+      }
+    }
+  }
+
+  useEffect(() => {
+    // gets all messages from person to message to
+    async function handleDone() {
+      targetName = secondName;
+      arr = [];
+      msgHistory = await getMessages(accountName, targetName);
+      msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
+      for (let i = 0; i < msgHistory.data.length; i += 1) {
+        const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
+        arr.push(temp);
+      }
+      showMessages();
+    }
+
+    // adds messages
+    async function handleDone2() {
+      targetName = secondName;
+      await addMessage(
+        accountName,
+        targetName,
+        targetName2.current,
+        d.getTime(),
+      );
+      const holder = document.getElementById('holder');
+      holder.innerHTML = '';
+      handleDone();
+    }
+
+    if (sentTarget.current) {
+      handleDone2();
+      sentTarget.current = false;
+    }
+    const interval = setInterval(() => {
+      handleDone();
+    }, MINUTE_MS);
+    return () => clearInterval(interval);
+  }, [sent]);
 
   if (goBack) {
     return (
@@ -77,7 +114,7 @@ function Message2({
             new message:
           </p>
           <input className="inputhelp" name="messageNow" onChange={handleTarget2} />
-          <button className="submithelp" type="submit" onClick={handleDone2}>Message</button>
+          <button className="submithelp" type="submit" onClick={handleSent}>Message</button>
         </div>
       </div>
       <div className="righthelp-column">
