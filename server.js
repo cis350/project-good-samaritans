@@ -29,7 +29,7 @@ let db;
 const url = process.env.ATLAS_URI;
 
 // tell express where to find static files
-app.use(express.static(path.join(__dirname, '../webapp/build')));
+app.use(express.static(path.join(__dirname, './webapp/build')));
 
 // login page - logged in successfully
 app.get('/login/:name/:password', async (req, resp) => {
@@ -258,7 +258,7 @@ app.get('/message/:name1/', async (req, resp) => {
 
 // wildcard endpoint - send react app
 app.get('*', (_req, resp) => {
-  resp.sendFile(path.join(__dirname, '../webapp/build/index.html'));
+  resp.sendFile(path.join(__dirname, './webapp/build/index.html'));
 });
 
 // Start server
