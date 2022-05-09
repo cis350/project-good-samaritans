@@ -29,6 +29,17 @@
 
 .profile-button {
     width: 35%;
+    font-family: 'Roboto';
+    font-style: normal;
+    border-radius: 8px;
+    border: 1px solid;
+    margin: 3%;
+    padding: 2% 5% 2% 5%;
+    color: #000000;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border-color: #FF8282;
+    font-size: 15px;
 }
 
 .analytics {
@@ -75,6 +86,15 @@
 
 .post-buttons {
     margin-top: 30%;
+    margin-right: 1%;
+    border: none;
+    border-radius: 10px;
+    background-color: #FF8282;
+    
+    color: white;
+    width: 20%;
+
+    padding: 2% 0% 2% 0%;
 }
 
 .right-section {

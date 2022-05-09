@@ -1,3 +1,13 @@
+.account-section {
+    display: grid;
+    background: #E9E9E9;
+    grid-template-columns: 1fr 7fr 1fr;
+    font-family: 'Roboto';
+    font-style: normal;
+    width: 100vw;
+    height: 100vh;
+}
+
 .account-page {
     display: flex;
     flex-direction: column;
@@ -8,6 +18,9 @@
     min-height: 100vh;
     padding-left: 20%;
     padding-right: 20%;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
 }
 
 .account-title-container {

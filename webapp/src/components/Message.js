@@ -105,7 +105,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
             {accountName}
             !
           </h1>
-          <button className="profile-button" type="submit" onClick={handleGoBack}>
+          <button className="goback-button" type="submit" onClick={handleGoBack}>
             Go Back to Profile
           </button>
         </div>
@@ -134,7 +134,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
           {accountName}
           !
         </h1>
-        <button className="profile-button" type="submit" onClick={handleGoBack}>
+        <button className="goback-button" type="submit" onClick={handleGoBack}>
           Go Back to Profile
         </button>
       </div>

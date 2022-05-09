@@ -4,6 +4,8 @@
     grid-template-columns: 1fr 2fr 1fr;
     font-family: 'Roboto';
     font-style: normal;
+    width: 100vw;
+    height: 100vh;
 }
 
 .left-column {
@@ -62,7 +64,7 @@
     text-align: center;
 }
 
-.profile-button {
+.goback-button {
     font-family: 'Roboto';
     font-style: normal;
     border-radius: 8px;

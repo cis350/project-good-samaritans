@@ -30,47 +30,49 @@ function Account({ accountName, currentPrivacy, currentRequests }) {
     );
   }
   return (
-    <div className="account-page">
-      <div className="account-title-container">
-        <h1 className="account-title">Account Info</h1>
-      </div>
-      <div className="account-container">
-        <p className="info-title">Name:</p>
-        <div className="info-box">
-          {profile.name}
+    <div className="account-section">
+      <div className="account-page">
+        <div className="account-title-container">
+          <h1 className="account-title">Account Info</h1>
         </div>
-        <p className="info-title">Password:</p>
-        <div className="info-box">
-          {profile.password}
-        </div>
-        <p className="info-title">Street:</p>
-        <div className="info-box">
-          {profile.street}
-        </div>
-        <div className="info-state-country">
-          <div className="state-account">
-            <p className="state-info">State:</p>
-            <div className="state-box">
-              {profile.state}
+        <div className="account-container">
+          <p className="info-title">Name:</p>
+          <div className="info-box">
+            {profile.name}
+          </div>
+          <p className="info-title">Password:</p>
+          <div className="info-box">
+            {profile.password}
+          </div>
+          <p className="info-title">Street:</p>
+          <div className="info-box">
+            {profile.street}
+          </div>
+          <div className="info-state-country">
+            <div className="state-account">
+              <p className="state-info">State:</p>
+              <div className="state-box">
+                {profile.state}
+              </div>
+            </div>
+            <div className="country-account">
+              <p className="country-info">Country:</p>
+              <div className="country-box">
+                {profile.country}
+              </div>
             </div>
           </div>
-          <div className="country-account">
-            <p className="country-info">Country:</p>
-            <div className="country-box">
-              {profile.country}
-            </div>
+          <p className="info-title">Zip:</p>
+          <div className="info-box">
+            {profile.zip}
           </div>
         </div>
-        <p className="info-title">Zip:</p>
-        <div className="info-box">
-          {profile.zip}
-        </div>
+        <button className="submit-button" type="submit" onClick={handleGoBack}>
+          <div>
+            Go Back to Profile
+          </div>
+        </button>
       </div>
-      <button className="submit-button" type="submit" onClick={handleGoBack}>
-        <div>
-          Go Back to Profile
-        </div>
-      </button>
     </div>
   );
 }
