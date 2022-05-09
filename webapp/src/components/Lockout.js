@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/no-cycle */
 import {
   React, useState, useEffect,

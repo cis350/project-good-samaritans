@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/no-cycle */
 import { React, useEffect, useState } from 'react';
 import Profile from './Profile';
