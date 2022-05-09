@@ -209,49 +209,44 @@ function Profile({
 
   return (
     <div className="Profile">
-      <div className="title">
-        <h1>Good Samaritans</h1>
-      </div>
-      <div className="leftButtons">
+      <div className="left-section">
+        <h1 className="title">
+          Good Samaritans
+        </h1>
         <button className="profile-button" id="training" type="button" onClick={handleTraining}>
           Training
         </button>
-        <div className="message">
-          <button className="message-button" type="button" onClick={handleMessage}>
-            Message
-          </button>
-        </div>
-        <div className="myHelp">
-          <button className="message-button" type="button" onClick={handleMyHelp}>
-            My Help Posts
-          </button>
-        </div>
+        <button className="profile-button" type="button" onClick={handleMessage}>
+          Message
+        </button>
+        <button className="profile-button" type="button" onClick={handleMyHelp}>
+          My Help Posts
+        </button>
         <div className="analytics">
           <h3>User Analytics</h3>
           <p>Number of Requests Made: </p>
-          {' '}
           { requestsNo.current }
           <p>Number Helped: </p>
           { helpedNo.current }
           { }
         </div>
       </div>
-      <div className="middleButtons">
-        <button type="button" onClick={handleHelpButton}>Help Posts</button>
+      <div className="middle-section">
+        <button className="help-posts" type="button" onClick={handleHelpButton}>Help Posts</button>
         {clickedHelpBoardButton.current ? (
-          <div>
+          <div className="post-section">
             {' '}
             { currentPostName.current }
             <br />
             { currentPostDescription.current }
             <br />
-            <button type="button" onClick={handleRespond}>Respond</button>
-            <button type="button" onClick={handleNextPost}>Next</button>
-            <button type="button" onClick={handlePrevPost}>Prev</button>
+            <button className="post-buttons" type="button" onClick={handleRespond}>Respond</button>
+            <button className="post-buttons" type="button" onClick={handleNextPost}>Next</button>
+            <button className="post-buttons" type="button" onClick={handlePrevPost}>Prev</button>
           </div>
-        ) : (<div />)}
+        ) : (<div className="post-section" />)}
       </div>
-      <div className="rightButtons">
+      <div className="right-section">
         <div className="profileName">
           <h3>{ name.current }</h3>
         </div>
