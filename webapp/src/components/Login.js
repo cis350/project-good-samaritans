@@ -13,7 +13,6 @@ import Lockout from './Lockout';
 // import Forgot from './Forgot';
 
 function Login() {
-  console.log('render');
   const [started, setStarted] = useState(false);
   const userName = useRef('');
   const userPass = useRef('');
@@ -51,11 +50,9 @@ function Login() {
     try {
       const se = await soloGetMessages(userName.current);
       msgLength = se.data.length;
-      console.log(msgLength);
       loggedIn = await getLoginTrue(userName.current, userPass.current);
       passwordCheck = await getPasswordTrue(userName.current, userPass.current);
 
-      console.log(`handleFormSubmit loggedin: ${loggedIn}`);
       if (loggedIn) {
         const result = await getProfile(userName.current);
         setPrivacy(result.privacy);

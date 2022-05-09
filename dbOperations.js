@@ -8,7 +8,6 @@ const connect = async (url) => {
       url,
       { useNewUrlParser: true, useUnifiedTopology: true },
     )).db();
-    console.log(`Connected to the database: ${conn.databaseName}`);
     return conn;
   } catch (err) {
     throw new Error('could not connect to the db');
@@ -97,7 +96,6 @@ const incrementRequest = async (db, user) => {
 const getHelpPosts = async (db) => {
   try {
     const result = await db.collection('Help').find().toArray();
-    // console.log(result);
     return result;
   } catch (err) {
     throw new Error('could not get help board');
@@ -112,10 +110,8 @@ const getSpecificHelp = async (db, user) => {
         name: user,
       },
     ).toArray();
-    console.log(result);
     return result;
   } catch (err) {
-    console.log(err);
     throw new Error('could not find user');
   }
 };
@@ -137,7 +133,6 @@ const deleteHelp = async (db, user, message, helper) => {
 
     return result2;
   } catch (err) {
-    console.log(err);
     throw new Error('could not find user');
   }
 };
@@ -166,7 +161,6 @@ const postRequest = async (db, user, request) => {
       await db.collection('Help').insertOne({ name: user, post: request });
     }
   } catch (err) {
-    console.log(err);
     throw new Error('could not add request');
   }
 };
@@ -193,7 +187,6 @@ const addUser = async (
     );
     return result;
   } catch (err) {
-    console.log(err);
     throw new Error('could not add user');
   }
 };
@@ -208,7 +201,6 @@ const getProfile = async (db, user) => {
     );
     return result;
   } catch (err) {
-    console.log(err);
     throw new Error('could not find user');
   }
 };
@@ -225,7 +217,6 @@ const addMessage = async (db, name, name2, message, time) => {
     );
     return result;
   } catch (err) {
-    console.log(err);
     throw new Error('could not add message');
   }
 };
@@ -240,7 +231,6 @@ const getMessages = async (db, name, name2) => {
     ).toArray();
     return result;
   } catch (err) {
-    console.log(err);
     throw new Error('could not find history of messages');
   }
 };
@@ -255,7 +245,6 @@ const soloGetMessages = async (db, name) => {
     ).toArray();
     return result;
   } catch (err) {
-    console.log(err);
     throw new Error('could not find history of messages');
   }
 };
@@ -277,14 +266,3 @@ module.exports = {
   deleteHelp,
   soloGetMessages,
 };
-
-// const main = async () => {
-//   const url = process.env.ATLAS_URI;
-//   const db = await connect(url);
-//   const login = await getLoginTrue(db, 'Bob', 'abcd');
-//   console.log(login);
-//   const loginfail = await getLoginTrue(db, 'Bob', 'dududu');
-//   console.log(loginfail);
-// };
-
-// main();

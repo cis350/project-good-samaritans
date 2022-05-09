@@ -1,21 +1,23 @@
+/* eslint-disable import/no-cycle */
 import {
-  React, useRef,
+  React, useRef, useState,
 } from 'react';
 import {
   getMessages, addMessage,
 } from '../modules/api';
-//   import Training from './Training';
-//   import Request from './Request';
-//   import Account from './Account';
-//   import '../assets/Profile.css';
-// import Friends from './Friends';
+import '../assets/MessageHelp.css';
+import Profile from './Profile';
 
-function Message2({ accountName, secondName }) {
+function Message2({
+  accountName, secondName, currentPrivacy, currentRequests,
+}) {
   const targetName = secondName;
   const targetName2 = useRef('');
   let msgHistory = '';
   let arr = [];
   const d = new Date();
+
+  const [goBack, setGoBack] = useState(false);
 
   function handleTarget2(e) {
     targetName2.current = e.target.value;
@@ -46,16 +48,50 @@ function Message2({ accountName, secondName }) {
     handleDone();
   }
 
-  return (
-    <div>
-      <div>
-        Messaging :
-        {targetName}
+  if (goBack) {
+    return (
+      <div className="Profile">
+        <Profile
+          accountName={accountName}
+          initialPrivacy={currentPrivacy}
+          requests={currentRequests}
+        />
       </div>
-      <div id="holder" />
-      <div>new message:</div>
-      <input name="messageNow" onChange={handleTarget2} />
-      <button type="submit" onClick={handleDone2}>Message</button>
+    );
+  }
+  return (
+    <div className="messagehelp-page">
+      <div className="lefthelp-column">
+        <h1 className="title">
+          Good Samaritans
+        </h1>
+      </div>
+      <div className="messagehelp-input">
+        <div id="holder" />
+        <div className="messagehelp">
+          <p className="prompthelp">
+            Messaging :
+            {targetName}
+          </p>
+          <p className="prompthelp">
+            new message:
+          </p>
+          <input className="inputhelp" name="messageNow" onChange={handleTarget2} />
+          <button className="submithelp" type="submit" onClick={handleDone2}>Message</button>
+        </div>
+      </div>
+      <div className="righthelp-column">
+        <h1>
+          Hello
+          {' '}
+          {accountName}
+          !
+        </h1>
+        <button className="gobackhelp-button" type="submit" onClick={() => setGoBack(true)}>
+          Go Back to Profile
+        </button>
+      </div>
+
     </div>
   );
 }

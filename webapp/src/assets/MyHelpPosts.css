@@ -35,3 +35,20 @@
     
     color: #000000;
 }
+
+#holder {
+    height: 40%;
+}
+
+.resolved-button {
+    font-family: 'Roboto';
+    font-style: normal;
+    border: none;
+    border-radius: 8px;
+    margin: 3%;
+    padding: 1% 7% 1% 7%;
+    background-color: #FF8282;
+
+    color: #FFFFFF;
+    font-size: 15px;
+}

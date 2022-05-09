@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
 import {
   React, useState, useEffect, useRef,
 } from 'react';

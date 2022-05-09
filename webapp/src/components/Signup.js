@@ -46,7 +46,6 @@ function Signup() {
     userInputCOVID.current = e.target.value;
   }
 
-  // remove console.log for eslint later
   async function handleFormSubmit() {
     try {
       exists = await getProfile(userInput.current);

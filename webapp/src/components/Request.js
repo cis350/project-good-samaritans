@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/no-cycle */
 import { React, useRef, useState } from 'react';
 import { incrementRequest, postRequest } from '../modules/api';
@@ -15,7 +17,6 @@ function Request({ accountName, currentPrivacy, currentRequests }) {
 
   // Gonna change this after adding routes
   function sendRequest() {
-    // console.log('sent request');
     postRequest(accountName, reqPost.current);
     incrementRequest(accountName);
     setRequ(true);

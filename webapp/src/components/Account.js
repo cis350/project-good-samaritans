@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-cycle */
 import { React, useEffect, useState } from 'react';
 import Profile from './Profile';
@@ -7,11 +9,14 @@ import '../assets/Account.css';
 function Account({ accountName, currentPrivacy, currentRequests }) {
   const [profile, setProfile] = useState({ name: '123' });
   const [goBack, setgoBack] = useState(false);
-  let result = '';
+  // let result = '';
 
-  useEffect(async () => {
-    result = await getProfile(accountName);
-    setProfile(result);
+  useEffect(() => {
+    async function retrieveProfile() {
+      const result = await getProfile(accountName);
+      setProfile(result);
+    }
+    retrieveProfile();
   }, []);
 
   const handleGoBack = () => {

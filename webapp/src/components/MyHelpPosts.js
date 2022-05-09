@@ -1,10 +1,14 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prop-types */
 import {
   React, useEffect, useRef, useState,
 } from 'react';
 import { deleteHelp, getSpecificHelp } from '../modules/api';
 import '../assets/MyHelpPosts.css';
+import Profile from './Profile';
 
-function MyHelpPosts({ accountName }) {
+function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
   let posts = '';
   // eslint-disable-next-line no-unused-vars
   let arr = [];
@@ -12,9 +16,10 @@ function MyHelpPosts({ accountName }) {
   const [curr, setCurr] = useState(0);
   const MINUTE_MS = 5000;
 
+  const [goBack, setGoBack] = useState(false);
+
   function handleTarget(e) {
     targetName.current = e.target.value;
-    console.log(targetName.current);
   }
 
   function handleCurr() {
@@ -62,11 +67,26 @@ function MyHelpPosts({ accountName }) {
   }, []);
 
   return (
-    <div className="section">
-      <div className="my-help-posts">
-        <h1 className="helppost-title">Your Help Posts:</h1>
-        <div id="holder" />
-      </div>
+    <div>
+      {goBack ? (
+        <div className="Profile">
+          <Profile
+            accountName={accountName}
+            initialPrivacy={currentPrivacy}
+            requests={currentRequests + 1}
+          />
+        </div>
+      ) : (
+        <div className="section">
+          <div className="my-help-posts">
+            <h1 className="helppost-title">Your Help Posts:</h1>
+            <div id="holder" />
+            <div className="resolved-section">
+              <button className="resolved-button" type="button" onClick={() => { setGoBack(true); }}>Go Back to Profile</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
