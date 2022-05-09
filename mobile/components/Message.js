@@ -17,6 +17,7 @@ function Message({ route, navigation }) {
   const [goBack, setgoBack] = useState(false);
   const [target, setTarget] = useState(false);
   const [, setDone] = useState(false);
+  const message = useRef(false);
   const sentTarget = useRef(false);
   const [sent, setSent] = useState(false);
   const [tName, setTargetName] = useState('');
@@ -27,6 +28,7 @@ function Message({ route, navigation }) {
   let arr = [];
   const MINUTE_MS = 5000;
   const [showMsg, setShowMsg] = useState([]);
+  const interval = useRef(null);
 
   if (tName !== '') {
     targetName.current = tName;
@@ -45,6 +47,11 @@ function Message({ route, navigation }) {
     setShowMsg(msg);
   }
 
+  function messageDone() {
+    message.current = true;
+    setDone(true);
+  }
+
   function handleSent() {
     sentTarget.current = true;
     if (sentTarget.current) {
@@ -59,17 +66,19 @@ function Message({ route, navigation }) {
   useEffect(() => {
     // gets all messages from person to message to
     async function handleDone() {
-      arr = [];
-      msgHistory = await getMessages(accountName, targetName.current);
-      msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
-      for (let i = 0; i < msgHistory.data.length; i += 1) {
-        const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
-        const index = i;
-        arr.push({ id: index, data: temp });
-      }
+      if (message.current && targetName.current !== '') {
+        arr = [];
+        msgHistory = await getMessages(accountName, targetName.current);
+        msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
+        for (let i = 0; i < msgHistory.data.length; i += 1) {
+          const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
+          const index = i;
+          arr.push({ id: index, data: temp });
+        }
 
-      setTarget(true);
-      showMessages();
+        setTarget(true);
+        showMessages();
+      }
     }
 
     // adds messages
@@ -88,10 +97,12 @@ function Message({ route, navigation }) {
       handleDone2();
       sentTarget.current = false;
     }
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       handleDone();
     }, MINUTE_MS);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval.current);
+    };
   }, [sent]);
 
   // go back to profile
@@ -101,6 +112,7 @@ function Message({ route, navigation }) {
 
   if (goBack) {
     // WARNINGS KINDA JANK
+    clearInterval(interval.current);
     navigation.goBack();
   }
   if (!target) {
@@ -119,7 +131,7 @@ function Message({ route, navigation }) {
           value={tName}
         />
 
-        <TouchableOpacity onPress={() => setDone(true)} style={styles.button}>
+        <TouchableOpacity onPress={(e) => messageDone(e)} style={styles.button}>
           <Text style={styles.buttontext}>
             Message
           </Text>

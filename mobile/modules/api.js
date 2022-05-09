@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-// const rootURL = 'http://a184-2603-8001-7b00-5d42-8bd-2714-99a7-9534.ngrok.io';
+// const rootURL = 'http://2c4b-2603-8001-7b00-5d42-8bd-2714-99a7-9534.ngrok.io';
 
 const rootURL = 'http://localhost:5000';
 
@@ -73,6 +73,18 @@ export async function getProfile(name) {
   }
 }
 
+export async function getAccount(name) {
+  if (!name) {
+    throw new Error('no user given');
+  }
+
+  try {
+    const result = await axios.get(`${rootURL}/account/${name}`);
+    return result.data.data;
+  } catch (err) {
+    throw err;
+  }
+}
 export async function addMessage(name, name2, message, time) {
   if (!name || !name2 || !message || !time) {
     throw new Error('field error');

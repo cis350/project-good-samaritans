@@ -19,11 +19,11 @@ function Message2({ route, navigation }) {
   const sentTarget = useRef(false);
   const [sent, setSent] = useState(false);
   const [targetName2, setTargetName2] = useState('');
-  // const targetName2 = useRef('');
   let msgHistory = '';
   let arr = [];
   const MINUTE_MS = 5000;
   const [showMsg, setShowMsg] = useState([]);
+  const interval1 = useRef(null);
 
   function showMessages() {
     const msg = arr.map((element) => (
@@ -77,10 +77,14 @@ function Message2({ route, navigation }) {
       handleDone2();
       sentTarget.current = false;
     }
-    const interval = setInterval(() => {
+
+    interval1.current = setInterval(() => {
       handleDone();
     }, MINUTE_MS);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearInterval(interval1.current);
+    };
   }, [sent]);
 
   // go back to profile
@@ -90,6 +94,7 @@ function Message2({ route, navigation }) {
 
   if (goBack) {
     // WARNINGS KINDA JANK
+    clearInterval(interval1.current);
     navigation.goBack();
   }
   return (

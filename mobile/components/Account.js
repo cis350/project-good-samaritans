@@ -5,7 +5,7 @@ import {
 import {
   View, Text, StyleSheet, TouchableOpacity,
 } from 'react-native';
-import { getProfile } from '../modules/api';
+import { getAccount } from '../modules/api';
 
 function Account({ route, navigation }) {
   const {
@@ -19,7 +19,7 @@ function Account({ route, navigation }) {
   useEffect(() => {
     async function handleGet() {
       try {
-        const result = await getProfile(accountName);
+        const result = await getAccount(accountName);
         if (result !== undefined) {
           setProfile(result);
           setLoading(false);
@@ -67,17 +67,17 @@ function Account({ route, navigation }) {
             {profile.password}
             {'\n'}
           </Text>
+          <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
+            <Text style={styles.buttontext}>
+              Go Back to Profile
+            </Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <View>
-          <Text>getProfile() failed</Text>
+          <Text>Loading</Text>
         </View>
       )}
-      <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
-        <Text style={styles.buttontext}>
-          Go Back to Profile
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }
