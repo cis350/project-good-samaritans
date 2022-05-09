@@ -3,6 +3,9 @@ const express = require('express');
 
 const app = express();
 
+// import path
+const path = require('path');
+
 const cors = require('cors');
 require('dotenv').config({ path: './config.env' });
 
@@ -25,10 +28,8 @@ let db;
 // MongoDB URL
 const url = process.env.ATLAS_URI;
 
-// Root endpoint
-app.get('/', (_req, resp) => {
-  resp.json({ message: 'project good samaritans backend' });
-});
+// tell express where to find static files
+app.use(express.static(path.join(__dirname, '../webapp/build')));
 
 // login page - logged in successfully
 app.get('/login/:name/:password', async (req, resp) => {
@@ -255,8 +256,13 @@ app.get('/message/:name1/', async (req, resp) => {
   }
 });
 
+// wildcard endpoint - send react app
+app.get('*', (_req, resp) => {
+  resp.sendFile(path.join(__dirname, '../webapp/build/index.html'));
+});
+
 // Start server
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   // perform a database connection when server starts
   db = await dbo.connect(url);
