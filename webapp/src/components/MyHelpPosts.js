@@ -2,6 +2,7 @@ import {
   React, useEffect, useRef, useState,
 } from 'react';
 import { deleteHelp, getSpecificHelp } from '../modules/api';
+import '../assets/MyHelpPosts.css';
 
 function MyHelpPosts({ accountName }) {
   let posts = '';
@@ -61,9 +62,11 @@ function MyHelpPosts({ accountName }) {
   }, []);
 
   return (
-    <div>
-      <h1>Your Help Posts:</h1>
-      <div id="holder" />
+    <div className="section">
+      <div className="my-help-posts">
+        <h1 className="helppost-title">Your Help Posts:</h1>
+        <div id="holder" />
+      </div>
     </div>
   );
 }

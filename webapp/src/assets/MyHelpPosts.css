@@ -1,4 +1,4 @@
-.request-section {
+.section {
     display: grid;
     background: #E9E9E9;
     grid-template-columns: 1fr 7fr 1fr;
@@ -8,7 +8,7 @@
     height: 100vh;
 }
 
-.request-page {
+.my-help-posts {
 
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
 
 }
 
-.request-title {
+.helppost-title {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -34,21 +34,4 @@
     text-align: center;
     
     color: #000000;
-}
-
-.help-input {
-    border: 1px solid;
-}
-
-.report-button {
-    font-family: 'Roboto';
-    font-style: normal;
-    border: none;
-    border-radius: 8px;
-    margin: 3%;
-    padding: 1% 7% 1% 7%;
-    background-color: #FF8282;
-
-    color: #FFFFFF;
-    font-size: 15px;
 }

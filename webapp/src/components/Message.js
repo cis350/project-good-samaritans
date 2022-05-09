@@ -11,6 +11,7 @@ import Profile from './Profile';
 //   import Account from './Account';
 //   import '../assets/Profile.css';
 // import Friends from './Friends';
+import '../assets/Message.css';
 
 function Message({ accountName, currentPrivacy, currentRequests }) {
   const [goBack, setgoBack] = useState(false);
@@ -33,7 +34,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
     const holder = document.getElementById('holder');
     holder.innerHTML = '';
     for (let i = 0; i < arr.length; i += 1) {
-      holder.innerHTML += `<p>${arr[i]}</p><br>`;
+      holder.innerHTML += `<p>${arr[i]}</p>`;
     }
   }
 
@@ -84,35 +85,59 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
   }
   if (!target) {
     return (
-      <div>
+      <div className="message-page">
+        <div className="left-column">
+          <h1 className="title">
+            Good Samaritans
+          </h1>
+        </div>
+        <div className="message-input">
+          <div className="message">
+            <p className="prompt">Who would you like to message?</p>
+            <input className="input" name="target" onChange={handleTarget} />
+            <button className="submit" type="submit" onClick={handleDone}>Message</button>
+          </div>
+        </div>
+        <div className="right-column">
+          <h1>
+            Hello
+            {' '}
+            {accountName}
+            !
+          </h1>
+          <button className="goback-button" type="submit" onClick={handleGoBack}>
+            Go Back to Profile
+          </button>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="message-page">
+      <div className="left-column">
+        <h1 className="title">
+          Good Samaritans
+        </h1>
+      </div>
+      <div className="message-input">
+        <div id="holder" />
+        <div className="message">
+          <p className="prompt">new message:</p>
+          <input className="input" name="messageNow" onChange={handleTarget2} />
+          <button className="submit" type="submit" onClick={handleDone2}>Message</button>
+        </div>
+      </div>
+      <div className="right-column">
         <h1>
           Hello
           {' '}
           {accountName}
           !
         </h1>
-        <h2> Who would you like to message?</h2>
-        <input name="target" onChange={handleTarget} />
-        <button type="submit" onClick={handleDone}>Message</button>
-        <button type="submit" onClick={handleGoBack}>
-          <div>
-            Go Back to Profile
-          </div>
+        <button className="goback-button" type="submit" onClick={handleGoBack}>
+          Go Back to Profile
         </button>
       </div>
-    );
-  }
-  return (
-    <div>
-      <div id="holder" />
-      <div>new message:</div>
-      <input name="messageNow" onChange={handleTarget2} />
-      <button type="submit" onClick={handleDone2}>Message</button>
-      <button type="submit" onClick={handleGoBack}>
-        <div>
-          Go Back to Profile
-        </div>
-      </button>
     </div>
   );
 }

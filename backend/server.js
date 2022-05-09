@@ -74,21 +74,6 @@ app.put('/user/:name/privacy', async (req, resp) => {
   }
 });
 
-// profile page - getFriends endpoint(get the user's friends)
-// app.get('/friends/:name', async (req, resp) => {
-//   if (!req.params.name || req.params.name.length === 0) {
-//     resp.status(404).json({ error: 'username not provided' });
-//     return;
-//   }
-
-//   try {
-//     const results = await dbo.getFriends(db, req.params.name);
-//     resp.status(200).json({ data: results });
-//   } catch (err) {
-//     resp.status(400).json({ error: 'try again later' });
-//   }
-// });
-
 // profile page - getHelpPosts endpoint(get the help board of posts)
 app.get('/help', async (_req, resp) => {
   try {
@@ -99,20 +84,6 @@ app.get('/help', async (_req, resp) => {
     resp.status(500).json({ error: 'try again later' });
   }
 });
-
-// profile page - getSamaritanTexts endpoint(find who the user is currently helping/texting)
-// app.get('/texts/:name', async (req, resp) => {
-//   if (!req.params.name || req.params.name.length === 0) {
-//     resp.status(404).json({ error: 'username not provided' });
-//     return;
-//   }
-//   try {
-//     const results = await dbo.getSamaritanTexts(db, req.params.name);
-//     resp.status(200).json({ data: results });
-//   } catch (err) {
-//     resp.status(400).json({ error: 'try again later' });
-//   }
-// });
 
 // request page - post request in Help db
 app.post('/request/:name/:post', async (req, resp) => {
@@ -285,9 +256,11 @@ app.get('/message/:name1/', async (req, resp) => {
 });
 
 // Start server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 10000;
 app.listen(port, async () => {
   // perform a database connection when server starts
   db = await dbo.connect(url);
   console.log(`Server is running on port: ${port}`);
 });
+
+module.exports = app;

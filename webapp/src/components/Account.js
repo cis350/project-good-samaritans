@@ -2,6 +2,7 @@
 import { React, useEffect, useState } from 'react';
 import Profile from './Profile';
 import { getProfile } from '../modules/api';
+import '../assets/Account.css';
 
 function Account({ accountName, currentPrivacy, currentRequests }) {
   const [profile, setProfile] = useState({ name: '123' });
@@ -29,38 +30,49 @@ function Account({ accountName, currentPrivacy, currentRequests }) {
     );
   }
   return (
-    <div>
-      <b>Account info</b>
-      <br />
-      Name:
-      <br />
-      {profile.name}
-      <br />
-      Country:
-      <br />
-      {profile.country}
-      <br />
-      State:
-      <br />
-      {profile.state}
-      <br />
-      Street:
-      <br />
-      {profile.street}
-      <br />
-      ZIP:
-      <br />
-      {profile.zip}
-      <br />
-      Password:
-      <br />
-      {profile.password}
-      <br />
-      <button type="submit" onClick={handleGoBack}>
-        <div>
-          Go Back to Profile
+    <div className="account-section">
+      <div className="account-page">
+        <div className="account-title-container">
+          <h1 className="account-title">Account Info</h1>
         </div>
-      </button>
+        <div className="account-container">
+          <p className="info-title">Name:</p>
+          <div className="info-box">
+            {profile.name}
+          </div>
+          <p className="info-title">Password:</p>
+          <div className="info-box">
+            {profile.password}
+          </div>
+          <p className="info-title">Street:</p>
+          <div className="info-box">
+            {profile.street}
+          </div>
+          <div className="info-state-country">
+            <div className="state-account">
+              <p className="state-info">State:</p>
+              <div className="state-box">
+                {profile.state}
+              </div>
+            </div>
+            <div className="country-account">
+              <p className="country-info">Country:</p>
+              <div className="country-box">
+                {profile.country}
+              </div>
+            </div>
+          </div>
+          <p className="info-title">Zip:</p>
+          <div className="info-box">
+            {profile.zip}
+          </div>
+        </div>
+        <button className="submit-button" type="submit" onClick={handleGoBack}>
+          <div>
+            Go Back to Profile
+          </div>
+        </button>
+      </div>
     </div>
   );
 }

@@ -3,9 +3,10 @@ import {
   React, useState, useEffect,
 } from 'react';
 import Login from './Login';
+import '../assets/Lockout.css';
 
 function Lockout() {
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(60);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +25,14 @@ function Lockout() {
         <div className="Login">
           <Login />
         </div>
-      ) : (<h1>ACCOUNT LOCKED OUT</h1>) }
+      ) : (
+        <div className="lockout-page">
+          <div className="lockout-title-container">
+            <h1 className="Lockout-title">Good Samaritans</h1>
+          </div>
+          <p id="description">Your account has been temporarily locked due to multiple invalid logins. Please try again later.</p>
+        </div>
+      ) }
     </div>
   );
 }
