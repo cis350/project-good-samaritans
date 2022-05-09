@@ -51,9 +51,12 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
   }
 
   useEffect(() => {
+    console.log('in message useeffect');
     // gets all messages from person to message to
     async function handleDone() {
       arr = [];
+      console.log(accountName);
+      console.log(targetName.current);
       msgHistory = await getMessages(accountName, targetName.current);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -83,6 +86,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
       sentTarget.current = false;
     }
     const interval = setInterval(() => {
+      console.log('in message interval');
       handleDone();
     }, MINUTE_MS);
     return () => clearInterval(interval);

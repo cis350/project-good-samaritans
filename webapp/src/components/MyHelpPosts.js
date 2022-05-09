@@ -76,7 +76,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
         <div className="section">
           <div className="my-help-posts">
             <h1 className="helppost-title">Your Help Posts:</h1>
-            <div id="holder" />
+            <div id="holder3" />
             <div className="resolved-section">
               <button className="resolved-button" type="button" onClick={() => { setGoBack(true); }}>Go Back to Profile</button>
             </div>
