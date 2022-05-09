@@ -55,8 +55,6 @@ function Message2({
     async function handleDone() {
       targetName = secondName;
       arr = [];
-      // console.log(accountName);
-      // console.log(targetName);
       msgHistory = await getMessages(accountName, targetName);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
