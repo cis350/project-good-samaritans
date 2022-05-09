@@ -1,7 +1,8 @@
 /* eslint-disable no-useless-catch */
 const axios = require('axios');
 
-const rootURL = 'http://localhost:5000';
+const rootURL = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+  ? 'http://localhost:11000' : '';
 
 // profile page - sends request to change the privacy setting
 export async function changePrivacy(name, setting) {
