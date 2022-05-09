@@ -3,7 +3,7 @@ import {
   React, useState, useEffect, useRef,
 } from 'react';
 import {
-  View, Text, TextInput, StyleSheet, TouchableOpacity,
+  View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView,
 } from 'react-native';
 import {
   getMessages, addMessage,
@@ -80,6 +80,7 @@ function Message({ route, navigation }) {
         targetName2.current,
         (new Date()).getTime(),
       );
+      setTargetName2('');
       handleDone();
     }
 
@@ -134,8 +135,10 @@ function Message({ route, navigation }) {
   }
   return (
     <View style={styles.container}>
-      <View>
-        {showMsg}
+      <View style={styles.msgboxH}>
+        <ScrollView style={styles.msgbox}>
+          {showMsg}
+        </ScrollView>
       </View>
 
       <Text style={styles.h1}>new message: </Text>
@@ -208,6 +211,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000000',
     backgroundColor: '#DADADA',
+  },
+  msgbox: {
+    width: 300,
+  },
+  msgboxH: {
+    height: 300,
   },
 });
 

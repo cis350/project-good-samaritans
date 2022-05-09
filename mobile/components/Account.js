@@ -67,17 +67,17 @@ function Account({ route, navigation }) {
             {profile.password}
             {'\n'}
           </Text>
-          <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
-            <Text style={styles.buttontext}>
-              Go Back to Profile
-            </Text>
-          </TouchableOpacity>
         </View>
       ) : (
         <View>
           <Text>getProfile() failed</Text>
         </View>
       )}
+      <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
+        <Text style={styles.buttontext}>
+          Go Back to Profile
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -15,7 +15,7 @@ function MyHelpPosts({ route, navigation }) {
   const [posts, setPosts] = useState('');
   const [goBack, setGoBack] = useState(false);
   const [noPost, setNoPost] = useState(true);
-  const MINUTE_MS = 5000;
+  // const MINUTE_MS = 5000;
 
   function handleGoBack() {
     setGoBack(true);
@@ -42,14 +42,14 @@ function MyHelpPosts({ route, navigation }) {
     }
     handleGet();
 
-    // Come back to this later
-    if (hlp !== undefined) {
-      const interval = setInterval(() => {
-        handleGet();
-      }, MINUTE_MS);
-      return () => clearInterval(interval);
-    }
-    return 0;
+    // // Come back to this later
+    // if (hlp !== undefined) {
+    //   const interval = setInterval(() => {
+    //     handleGet();
+    //   }, MINUTE_MS);
+    //   return () => clearInterval(interval);
+    // }
+    // return 0;
   }, []);
 
   if (goBack) {
