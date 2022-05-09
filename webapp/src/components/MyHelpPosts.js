@@ -37,8 +37,6 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
   }
 
   async function handleGet() {
-    // console.log(`targetName.current ${targetName.current}`);
-    // console.log(`!resolved.current ${!resolved.current}`);
     if (targetName.current === '' || !resolved.current) {
       // console.log('in here');
       posts = await getSpecificHelp(accountName);
