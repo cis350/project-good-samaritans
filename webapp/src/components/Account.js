@@ -16,7 +16,7 @@ function Account({ accountName, currentPrivacy, currentRequests }) {
       setProfile(result);
     }
     retrieveProfile();
-  }, []);
+  });
 
   const handleGoBack = () => {
     setgoBack(true);

@@ -51,10 +51,13 @@ function Message2({
 
   const interval1 = useRef(null);
   useEffect(() => {
+    // console.log('in messagehelp useeffect');
     // gets all messages from person to message to
     async function handleDone() {
       targetName = secondName;
       arr = [];
+      // console.log(accountName);
+      // console.log(targetName);
       msgHistory = await getMessages(accountName, targetName);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -85,6 +88,7 @@ function Message2({
     }
 
     interval1.current = setInterval(() => {
+      // console.log('in messagehelp interval');
       handleDone();
       // console.log('should be after handleDone');
     }, MINUTE_MS);
