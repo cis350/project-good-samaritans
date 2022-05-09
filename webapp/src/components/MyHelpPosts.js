@@ -64,7 +64,6 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
         holder.appendChild(btn);
       }
     } else {
-      // console.log('should not render resolve button');
       const holder = document.getElementById('holder3');
       holder.innerHTML = 'Resolved';
     }
@@ -80,7 +79,6 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
   }, []);
 
   if (goBack) {
-    // console.log('in goback-profile');
     clearInterval(interval3.current);
     return (
       <div className="Profile">

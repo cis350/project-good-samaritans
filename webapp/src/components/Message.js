@@ -41,7 +41,6 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
   }
 
   function messageDone() {
-    // console.log('in messageDone');
     message.current = true;
     setDone(true);
   }
@@ -59,14 +58,10 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
 
   const interval = useRef(null);
   useEffect(() => {
-    // console.log('in message useeffect');
     // gets all messages from person to message to
     async function handleDone() {
-      // console.log(`setDone to ${done}`);
       if (message.current && targetName.current !== '') {
         arr = [];
-        // console.log(accountName);
-        // console.log(targetName.current);
         msgHistory = await getMessages(accountName, targetName.current);
         msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
         for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -97,12 +92,9 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
       sentTarget.current = false;
     }
     interval.current = setInterval(() => {
-      // console.log('in message interval');
       handleDone();
-      // console.log('should be after handleDone');
     }, MINUTE_MS);
     return () => {
-      // console.log('should clear interval');
       clearInterval(interval.current);
     };
   }, [sent]);
@@ -113,7 +105,6 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
   };
 
   if (goBack) {
-    // console.log('in goback-profile');
     clearInterval(interval.current);
     return (
       <div className="Profile">

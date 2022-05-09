@@ -155,7 +155,7 @@ function Signup() {
       );
     }
     return (
-      <div className="Profile">
+      <div>
         <Login />
       </div>
     );
