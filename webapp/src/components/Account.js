@@ -9,6 +9,7 @@ import '../assets/Account.css';
 function Account({ accountName, currentPrivacy, currentRequests }) {
   const [profile, setProfile] = useState({ name: '123' });
   const [goBack, setgoBack] = useState(false);
+  // let result = '';
 
   useEffect(() => {
     async function retrieveProfile() {
@@ -16,7 +17,7 @@ function Account({ accountName, currentPrivacy, currentRequests }) {
       setProfile(result);
     }
     retrieveProfile();
-  });
+  }, []);
 
   const handleGoBack = () => {
     setgoBack(true);
