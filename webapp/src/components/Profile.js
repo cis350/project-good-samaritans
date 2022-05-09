@@ -217,12 +217,12 @@ function Profile({
           Training
         </button>
         <div className="message">
-          <button className="message-button" type="button" onClick={handleMessage}>
+          <button id="17" className="message-button" type="button" onClick={handleMessage}>
             Message
           </button>
         </div>
         <div className="myHelp">
-          <button className="message-button" type="button" onClick={handleMyHelp}>
+          <button id="16" className="message-button" type="button" onClick={handleMyHelp}>
             My Help Posts
           </button>
         </div>

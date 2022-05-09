@@ -102,14 +102,14 @@ function Login() {
           <label htmlFor={domId}>
             Username:
             {' '}
-            <input name="user" onChange={handleUser} />
+            <input id="1" name="user" onChange={handleUser} />
           </label>
           <label htmlFor={domId}>
             New Password:
             {' '}
-            <input name="password" onChange={handleNewUserPass} />
+            <input id="2" name="password" onChange={handleNewUserPass} />
           </label>
-          <button type="button" onClick={handleChangePassword}>Reset Password</button>
+          <button type="button" id="3" onClick={handleChangePassword}>Reset Password</button>
         </div>
       );
     }
@@ -120,14 +120,14 @@ function Login() {
           <label htmlFor={domId}>
             Username:
             {' '}
-            <input name="user" onChange={handleUser} />
+            <input id="1" name="user" onChange={handleUser} />
           </label>
           <label htmlFor={domId}>
             Password:
             {' '}
-            <input name="password" onChange={handleUserPass} />
+            <input id="2" name="password" onChange={handleUserPass} />
           </label>
-          <button type="submit" onClick={handleFormSubmit}>Login</button>
+          <button type="submit" id="3" onClick={handleFormSubmit}>Login</button>
           <button type="button" onClick={() => setForgot(true)}>Forgot Password?</button>
         </div>
         <div className="Login-signup-box ">
