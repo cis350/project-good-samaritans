@@ -21,6 +21,7 @@ function Message2({
   const d = new Date();
   const MINUTE_MS = 5000;
 
+  const initial = useRef(true);
   const [sent, setSent] = useState(false);
 
   const sentTarget = useRef(false);
@@ -51,13 +52,10 @@ function Message2({
 
   const interval1 = useRef(null);
   useEffect(() => {
-    // console.log('in messagehelp useeffect');
     // gets all messages from person to message to
     async function handleDone() {
       targetName = secondName;
       arr = [];
-      // console.log(accountName);
-      // console.log(targetName);
       msgHistory = await getMessages(accountName, targetName);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -66,7 +64,10 @@ function Message2({
       }
       showMessages();
     }
-    handleDone();
+    if (initial.current) {
+      handleDone();
+      initial.current = false;
+    }
 
     // adds messages
     async function handleDone2() {
@@ -88,19 +89,15 @@ function Message2({
     }
 
     interval1.current = setInterval(() => {
-      // console.log('in messagehelp interval');
       handleDone();
-      // console.log('should be after handleDone');
     }, MINUTE_MS);
 
     return () => {
-      // console.log('should clear interval');
       clearInterval(interval1.current);
     };
   }, [sent]);
 
   if (goBack) {
-    // console.log('in goback-profile');
     clearInterval(interval1.current);
     return (
       <div className="Profile">
