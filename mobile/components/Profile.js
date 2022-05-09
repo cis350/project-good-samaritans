@@ -210,9 +210,9 @@ function Profile({ route, navigation }) {
                 {' '}
               </Text>
               <View style={styles.parentbutton}>
-                <TouchableOpacity onPress={(e) => handleRespond(e)} style={styles.helpbutton}>
+                <TouchableOpacity onPress={(e) => handlePrevPost(e)} style={styles.helpbutton}>
                   <Text style={styles.buttontext}>
-                    Respond
+                    Prev
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={(e) => handleNextPost(e)} style={styles.helpbutton}>
@@ -220,9 +220,9 @@ function Profile({ route, navigation }) {
                     Next
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={(e) => handlePrevPost(e)} style={styles.helpbutton}>
+                <TouchableOpacity onPress={(e) => handleRespond(e)} style={styles.helpbutton}>
                   <Text style={styles.buttontext}>
-                    Prev
+                    Respond
                   </Text>
                 </TouchableOpacity>
               </View>
