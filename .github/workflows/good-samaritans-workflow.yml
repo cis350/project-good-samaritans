@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Good Samaritans CI
 
 on:
   push:
