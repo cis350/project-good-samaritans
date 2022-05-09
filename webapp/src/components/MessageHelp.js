@@ -85,7 +85,6 @@ function Message2({
     }
 
     interval1.current = setInterval(() => {
-      // console.log('in messagehelp interval');
       handleDone();
       // console.log('should be after handleDone');
     }, MINUTE_MS);
