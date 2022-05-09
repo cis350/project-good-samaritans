@@ -29,7 +29,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
   async function handleGet() {
     posts = await getSpecificHelp(accountName);
     arr = posts.data;
-    const holder = document.getElementById('holder');
+    const holder = document.getElementById('holder3');
     holder.innerHTML = '';
     for (let i = 0; i < posts.data.length; i += 1) {
       const text = document.createElement('div', null, posts.data[i].post);
