@@ -91,42 +91,42 @@ function Signup() {
     return (
       <div>
         <h1>Enter Account Information</h1>
-        <label htmlFor={domId}>
+        <label id="112" htmlFor={domId}>
           Full Name:
           {' '}
-          <input name="user" onChange={handleUser} />
+          <input id="113" name="user" onChange={handleUser} />
         </label>
         <label htmlFor={domId}>
           Password:
           {' '}
-          <input name="password" onChange={handleUserPwd} />
+          <input id="114" name="password" onChange={handleUserPwd} />
         </label>
         <label htmlFor={domId}>
           Street:
           {' '}
-          <input name="street" onChange={handleUserStreet} />
+          <input id="115" name="street" onChange={handleUserStreet} />
         </label>
         <label htmlFor={domId}>
           State:
           {' '}
-          <input name="state" onChange={handleUserState} />
+          <input id="116" name="state" onChange={handleUserState} />
         </label>
         <label htmlFor={domId}>
           Country:
           {' '}
-          <input name="country" onChange={handleUserCountry} />
+          <input id="117" name="country" onChange={handleUserCountry} />
         </label>
         <label htmlFor={domId}>
           Zipcode:
           {' '}
-          <input name="zip" onChange={handleUserZIP} />
+          <input id="118" name="zip" onChange={handleUserZIP} />
         </label>
         <label htmlFor={domId}>
           COVID vaccination record:
           {' '}
-          <input name="user" onChange={handleUserCOVID} />
+          <input id="119" name="user" onChange={handleUserCOVID} />
         </label>
-        <button type="submit" onClick={handleFormSubmit}>Sign Up</button>
+        <button id="120" type="submit" onClick={handleFormSubmit}>Sign Up</button>
       </div>
     );
   }
@@ -136,7 +136,7 @@ function Signup() {
       return (
         <div>
           <h1>REGISTRATION SUCCESSFUL</h1>
-          <button type="button" onClick={() => { setLogin(true); }}>Login</button>
+          <button id="121" type="button" onClick={() => { setLogin(true); }}>Login</button>
         </div>
       );
     }

@@ -105,7 +105,25 @@ describe('us', () => {
             cy.get('button[id="17"]').click()
             cy.get('input[id="21"]').type('Bob Oke').should('have.value', 'Bob Oke')
             cy.get('button[id="22"]').click()
+            cy.get('input[id="24"]').type('11').should('have.value', 'Bob Oke11')
             cy.get('button[id="23"]').click()
         })
+
+        it('registration', () => {
+            // We use the `cy.get()` command to get all elements that match the selector.
+            // Then, we use `should` to assert that there are two matched items,
+            // which are the two default items.
+            cy.get('button[id="100"]').click()
+            cy.get('input[id="113"]').type('Monkeyyyy').should('have.value', 'Monkeyyyy')
+            cy.get('input[id="114"]').type('password').should('have.value', 'password')
+            cy.get('input[id="115"]').type('10').should('have.value', '10')
+            cy.get('input[id="116"]').type('CA').should('have.value', 'CA')
+            cy.get('input[id="117"]').type('USA').should('have.value', 'USA')
+            cy.get('input[id="118"]').type('10093').should('have.value', '10093')
+            cy.get('input[id="119"]').type('N').should('have.value', 'N')
+            cy.get('button[id="120"]').click()
+            //should be able to click login if successful register
+            cy.get('button[id="121"]').click()
+            })
     
     })

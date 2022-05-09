@@ -132,7 +132,7 @@ function Login() {
         </div>
         <div className="Login-signup-box ">
           <h2 className="Login-signup-name">Do not have an Account?</h2>
-          <button type="submit" onClick={handleSignUp}>Signup</button>
+          <button id="100" type="submit" onClick={handleSignUp}>Signup</button>
         </div>
       </div>
     );
