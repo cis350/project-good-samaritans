@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import {
-  React, useState,
+  React, useState, useRef, useEffect,
 } from 'react';
 import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
@@ -9,17 +9,21 @@ import {
   getMessages, addMessage,
 } from '../modules/api';
 
-function Message2({ route }) {
+function Message2({ route, navigation }) {
   const {
     accountName, secondName,
   } = route.params;
 
-  const targetName = secondName;
+  const [goBack, setgoBack] = useState(false);
+  let targetName = secondName;
+  const sentTarget = useRef(false);
+  const [sent, setSent] = useState(false);
   const [targetName2, setTargetName2] = useState('');
+  // const targetName2 = useRef('');
   let msgHistory = '';
   let arr = [];
+  const MINUTE_MS = 5000;
   const [showMsg, setShowMsg] = useState([]);
-  const d = new Date();
 
   function showMessages() {
     const msg = arr.map((element) => (
@@ -30,9 +34,22 @@ function Message2({ route }) {
     setShowMsg(msg);
   }
 
-  async function handleDone() {
-    arr = [];
-    try {
+  function handleSent() {
+    sentTarget.current = true;
+    if (sentTarget.current) {
+      if (sent) {
+        setSent(false);
+      } else {
+        setSent(true);
+      }
+    }
+  }
+
+  useEffect(() => {
+    // gets all messages from person to message to
+    async function handleDone() {
+      targetName = secondName;
+      arr = [];
       msgHistory = await getMessages(accountName, targetName);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
@@ -41,33 +58,46 @@ function Message2({ route }) {
         arr.push({ id: index, data: temp });
       }
       showMessages();
-    } catch {
-      throw new Error('bad messaging 1: handleDone failed');
     }
-  }
 
-  async function handleDone2() {
-    try {
-      await addMessage(accountName, targetName, targetName2, d.getTime());
+    // adds messages
+    async function handleDone2() {
+      targetName = secondName;
+      await addMessage(
+        accountName,
+        targetName,
+        targetName2,
+        (new Date()).getTime(),
+      );
       handleDone();
-    } catch {
-      throw new Error('bad messaging 2: handleDone2 failed');
     }
-  }
 
+    if (sentTarget.current) {
+      handleDone2();
+      sentTarget.current = false;
+    }
+    const interval = setInterval(() => {
+      handleDone();
+    }, MINUTE_MS);
+    return () => clearInterval(interval);
+  }, [sent]);
+
+  // go back to profile
+  const handleGoBack = () => {
+    setgoBack(true);
+  };
+
+  if (goBack) {
+    // WARNINGS KINDA JANK
+    navigation.goBack();
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.h1}>
-        Messaging:
-        {' '}
-        {targetName}
-      </Text>
-
       <View>
         {showMsg}
       </View>
 
-      <Text style={styles.h2}>new message: </Text>
+      <Text style={styles.h1}>new message: </Text>
 
       <TextInput
         style={styles.textinput}
@@ -75,9 +105,15 @@ function Message2({ route }) {
         value={targetName2}
       />
 
-      <TouchableOpacity onPress={(e) => handleDone2(e)} style={styles.button}>
+      <TouchableOpacity onPress={(e) => handleSent(e)} style={styles.button}>
         <Text style={styles.buttontext}>
           Message
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={(e) => handleGoBack(e)} style={styles.button}>
+        <Text style={styles.buttontext}>
+          Go Back to Profile
         </Text>
       </TouchableOpacity>
     </View>
@@ -95,12 +131,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 5,
-    // marginLeft: '45%',
-    // // marginBottom: 15,
-    // marginRight: '5%',
-    // maxWidth: '50%',
-    // alignSelf: 'flex-end',
-    // // maxWidth: 500,
   },
   h1: {
     fontSize: 30,

@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import {
-  React, useState, useEffect,
+  React, useState, useEffect, useRef,
 } from 'react';
 import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
@@ -9,10 +9,6 @@ import {
   getMessages, addMessage,
 } from '../modules/api';
 
-// const {
-//   accountName, currentPrivacy, currentRequests,
-// } = route.params;
-
 function Message({ route, navigation }) {
   const {
     accountName,
@@ -20,12 +16,25 @@ function Message({ route, navigation }) {
 
   const [goBack, setgoBack] = useState(false);
   const [target, setTarget] = useState(false);
-  const [targetName, setTargetName] = useState('');
-  const [targetName2, setTargetName2] = useState('');
+  const [, setDone] = useState(false);
+  const sentTarget = useRef(false);
+  const [sent, setSent] = useState(false);
+  const [tName, setTargetName] = useState('');
+  const [tName2, setTargetName2] = useState('');
+  const targetName = useRef('');
+  const targetName2 = useRef('');
   let msgHistory = '';
   let arr = [];
-  const [showMsg, setShowMsg] = useState([]);
   const MINUTE_MS = 5000;
+  const [showMsg, setShowMsg] = useState([]);
+
+  if (tName !== '') {
+    targetName.current = tName;
+  }
+
+  if (tName2 !== '') {
+    targetName2.current = tName2;
+  }
 
   function showMessages() {
     const msg = arr.map((element) => (
@@ -36,56 +45,61 @@ function Message({ route, navigation }) {
     setShowMsg(msg);
   }
 
-  // gets all messages from person to message to
-  async function handleDone() {
-    arr = [];
-    console.log('target:', targetName);
-    console.log('account:', accountName);
-    try {
-      msgHistory = await getMessages(accountName, targetName);
+  function handleSent() {
+    sentTarget.current = true;
+    if (sentTarget.current) {
+      if (sent) {
+        setSent(false);
+      } else {
+        setSent(true);
+      }
+    }
+  }
+
+  useEffect(() => {
+    // gets all messages from person to message to
+    async function handleDone() {
+      arr = [];
+      msgHistory = await getMessages(accountName, targetName.current);
       msgHistory.data.sort((a, b) => a.tme.localeCompare(b.tme));
       for (let i = 0; i < msgHistory.data.length; i += 1) {
         const temp = `${msgHistory.data[i].from}: ${msgHistory.data[i].msg}`;
         const index = i;
         arr.push({ id: index, data: temp });
       }
+
       setTarget(true);
       showMessages();
-    } catch {
-      throw new Error('bad messaging 1: handleDone failed');
     }
-  }
 
-  // adds messages
-  async function handleDone2() {
-    try {
-      await addMessage(accountName, targetName, targetName2, (new Date()).getTime());
+    // adds messages
+    async function handleDone2() {
+      await addMessage(
+        accountName,
+        targetName.current,
+        targetName2.current,
+        (new Date()).getTime(),
+      );
       handleDone();
-    } catch {
-      throw new Error('bad messaging 2: handleDone2 failed');
     }
-  }
 
-  // updates live messages
-  useEffect(() => {
+    if (sentTarget.current) {
+      handleDone2();
+      sentTarget.current = false;
+    }
     const interval = setInterval(() => {
-      // targetName still blank for some reasons
-      if (targetName !== '') {
-        handleDone();
-      } else {
-        console.log('NOT UPDATING CORRECTLY');
-      }
+      handleDone();
     }, MINUTE_MS);
     return () => clearInterval(interval);
-  }, []);
+  }, [sent]);
 
-  // go back to profile page
+  // go back to profile
   const handleGoBack = () => {
     setgoBack(true);
   };
 
   if (goBack) {
-    // DOESN'T WORK
+    // WARNINGS KINDA JANK
     navigation.goBack();
   }
   if (!target) {
@@ -101,10 +115,10 @@ function Message({ route, navigation }) {
         <TextInput
           style={styles.textinput}
           onChangeText={setTargetName}
-          value={targetName}
+          value={tName}
         />
 
-        <TouchableOpacity onPress={(e) => handleDone(e)} style={styles.button}>
+        <TouchableOpacity onPress={() => setDone(true)} style={styles.button}>
           <Text style={styles.buttontext}>
             Message
           </Text>
@@ -129,10 +143,10 @@ function Message({ route, navigation }) {
       <TextInput
         style={styles.textinput}
         onChangeText={setTargetName2}
-        value={targetName2}
+        value={tName2}
       />
 
-      <TouchableOpacity onPress={(e) => handleDone2(e)} style={styles.button}>
+      <TouchableOpacity onPress={(e) => handleSent(e)} style={styles.button}>
         <Text style={styles.buttontext}>
           Message
         </Text>
@@ -158,12 +172,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 5,
-    // marginLeft: '45%',
-    // // marginBottom: 15,
-    // marginRight: '5%',
-    // maxWidth: '50%',
-    // alignSelf: 'flex-end',
-    // // maxWidth: 500,
   },
   h1: {
     fontSize: 30,

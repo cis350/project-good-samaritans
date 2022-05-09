@@ -199,10 +199,15 @@ function Profile({ route, navigation }) {
         <View>
           {clickHB ? (
             <View>
-              <Text>
+              <Text style={styles.h2}>
+                {' '}
                 { currentPostName.current }
-                {'\n'}
+                {': '}
+              </Text>
+              <Text style={styles.h3}>
+                {' '}
                 { currentPostDescription.current }
+                {' '}
               </Text>
               <View style={styles.parentbutton}>
                 <TouchableOpacity onPress={(e) => handleRespond(e)} style={styles.helpbutton}>
@@ -269,6 +274,11 @@ const styles = StyleSheet.create({
   },
   h2: {
     fontSize: 20,
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  h3: {
+    fontSize: 15,
     fontWeight: 'bold',
     padding: 5,
   },

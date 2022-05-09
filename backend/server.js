@@ -17,14 +17,15 @@ app.use(
 // tell express to use cors
 app.use(cors({
   credentials: true,
-  // origin: 'http://localhost:19006',
+  // origin: ['http://localhost:19006', 'http://localhost:5000'],
   origin: true,
 }));
 
 // NOT WORKING
-app.use((_req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:19006'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Credentials', 'true');
+  // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
