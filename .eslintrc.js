@@ -12,5 +12,8 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
+    'react/jsx-filename-extension': 'off',
+    'react/prop-types': 'off',
+    'no-console': 'off',
   },
 };
