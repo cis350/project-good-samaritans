@@ -7,7 +7,7 @@ on:
     branches: [ webapp+testing ]
 
 jobs:
-  build:
+  lint-test-build:
 
     runs-on: ubuntu-latest
 
