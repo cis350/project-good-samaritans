@@ -79,7 +79,6 @@ app.put('/user/:name/privacy', async (req, resp) => {
 app.get('/help', async (_req, resp) => {
   try {
     const results = await dbo.getHelpPosts(db);
-    // console.log(results);
     resp.status(200).json({ data: results });
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
