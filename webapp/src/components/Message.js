@@ -47,6 +47,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
       </div>
     );
   }
+  // eslint-disable-next-line no-constant-condition
   if (false) {
     return (
       <div>
