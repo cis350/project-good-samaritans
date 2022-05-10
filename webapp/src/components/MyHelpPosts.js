@@ -14,7 +14,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
   let arr = [];
   const targetName = useRef('');
   const [curr, setCurr] = useState(0);
-  const MINUTE_MS = 20000;
+  const MINUTE_MS = 10000;
 
   const [goBack, setGoBack] = useState(false);
 
@@ -85,7 +85,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
         <Profile
           accountName={accountName}
           initialPrivacy={currentPrivacy}
-          requests={currentRequests + 1}
+          requests={currentRequests}
         />
       </div>
     );
