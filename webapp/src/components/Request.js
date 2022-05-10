@@ -6,7 +6,7 @@ import { incrementRequest, postRequest } from '../modules/api';
 import Profile from './Profile';
 import '../assets/Request.css';
 
-function Request({ accountName, currentPrivacy, currentRequests }) {
+function Request({ accountName, currentPrivacy, currentRequests, currentHelped }) {
   const [requ, setRequ] = useState(false);
   const [goBack, setGoBack] = useState(false);
   const reqPost = useRef('');
@@ -37,6 +37,7 @@ function Request({ accountName, currentPrivacy, currentRequests }) {
           accountName={accountName}
           initialPrivacy={currentPrivacy}
           requests={currentRequests + 1}
+          helped={currentHelped}
         />
       </div>
     );

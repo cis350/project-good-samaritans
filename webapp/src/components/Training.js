@@ -6,7 +6,7 @@ import Profile from './Profile';
 import { getProfile } from '../modules/api';
 import '../assets/Training.css';
 
-function Training({ accountName, currentPrivacy, currentRequests }) {
+function Training({ accountName, currentPrivacy, currentRequests, currentHelped }) {
   const [profile, setProfile] = useState({ name: '123' });
   const [goBack, setgoBack] = useState(false);
   let result = '';
@@ -27,6 +27,7 @@ function Training({ accountName, currentPrivacy, currentRequests }) {
           accountName={profile.name}
           initialPrivacy={currentPrivacy}
           requests={currentRequests}
+          helped={currentHelped}
         />
       </div>
     );

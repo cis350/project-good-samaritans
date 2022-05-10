@@ -9,7 +9,7 @@ import { deleteHelp, getSpecificHelp } from '../modules/api';
 import '../assets/MyHelpPosts.css';
 import Profile from './Profile';
 
-function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
+function MyHelpPosts({ accountName, currentPrivacy, currentRequests, currentHelped }) {
   let posts = '';
   let arr = [];
   const targetName = useRef('');
@@ -88,6 +88,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
           accountName={accountName}
           initialPrivacy={currentPrivacy}
           requests={currentRequests}
+          helped={currentHelped}
         />
       </div>
     );

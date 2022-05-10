@@ -12,7 +12,7 @@ import '../assets/MessageHelp.css';
 import Profile from './Profile';
 
 function Message2({
-  accountName, secondName, currentPrivacy, currentRequests,
+  accountName, secondName, currentPrivacy, currentRequests, currentHelped
 }) {
   let targetName = secondName;
   const targetName2 = useRef('');
@@ -105,6 +105,7 @@ function Message2({
           accountName={accountName}
           initialPrivacy={currentPrivacy}
           requests={currentRequests}
+          helped={currentHelped}
         />
       </div>
     );

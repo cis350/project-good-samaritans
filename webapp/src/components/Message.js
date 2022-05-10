@@ -11,7 +11,7 @@ import {
 import Profile from './Profile';
 import '../assets/Message.css';
 
-function Message({ accountName, currentPrivacy, currentRequests }) {
+function Message({ accountName, currentPrivacy, currentRequests, currentHelped }) {
   const [goBack, setgoBack] = useState(false);
   const [target, setTarget] = useState(false);
   const [, setDone] = useState(false);
@@ -121,6 +121,7 @@ function Message({ accountName, currentPrivacy, currentRequests }) {
           accountName={accountName}
           initialPrivacy={currentPrivacy}
           requests={currentRequests}
+          helped={currentHelped}
         />
       </div>
     );

@@ -146,6 +146,7 @@ function Profile({
         accountName={accountName}
         currentPrivacy={privacy}
         currentRequests={requestsNo.current}
+        currentHelped={helpedNo.current}
       />
     );
   }
@@ -155,6 +156,7 @@ function Profile({
         accountName={accountName}
         currentPrivacy={privacy}
         currentRequests={requestsNo.current}
+        currentHelped={helpedNo.current}
       />
     );
   }
@@ -164,6 +166,7 @@ function Profile({
         accountName={accountName}
         currentPrivacy={privacy}
         currentRequests={requestsNo.current}
+        currentHelped={helpedNo.current}
       />
     );
   }
@@ -173,6 +176,7 @@ function Profile({
         accountName={accountName}
         currentPrivacy={privacy}
         currentRequests={requestsNo.current}
+        currentHelped={helpedNo.current}
       />
     );
   }
@@ -183,6 +187,7 @@ function Profile({
         accountName={accountName}
         currentPrivacy={privacy}
         currentRequests={requestsNo.current}
+        currentHelped={helpedNo.current}
       />
     );
   }
@@ -194,6 +199,7 @@ function Profile({
         secondName={currentPostName.current}
         currentPrivacy={privacy}
         currentRequests={requestsNo.current}
+        currentHelped={helpedNo.current}
       />
     );
   }
