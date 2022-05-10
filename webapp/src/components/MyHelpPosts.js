@@ -14,7 +14,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
   let arr = [];
   const targetName = useRef('');
   const [curr, setCurr] = useState(0);
-  const MINUTE_MS = 20000;
+  const MINUTE_MS = 10000;
 
   const [goBack, setGoBack] = useState(false);
 
