@@ -104,7 +104,6 @@ test('changePrivacy works', async () => {
   db.collection('Users').remove({ name: 'cottoncandy' });
   await dbModule.addUser(db, 'cottoncandy', 'cottoncandy', 'cottoncandy', 'cottoncandy', 'cottoncandy', 'cottoncandy', 'Private', 'cottoncandy', 0, 0);
   let user = await dbModule.getProfile(db, 'cottoncandy');
-  console.log(user);
   expect(user.privacy).not.toBe('Public');
   await dbModule.changePrivacy(db, 'cottoncandy', 'Public');
   user = await dbModule.getProfile(db, 'cottoncandy');
