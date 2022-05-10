@@ -14,7 +14,6 @@ function Request({ accountName, currentPrivacy, currentRequests }) {
 
   // Gonna change this after adding routes
   function sendRequest() {
-    // console.log('sent request');
     postRequest(accountName, reqPost.current);
     incrementRequest(accountName);
     setRequ(true);

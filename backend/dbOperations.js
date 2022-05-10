@@ -82,21 +82,10 @@ const incrementRequest = async (db, user) => {
   }
 };
 
-// get the friends of a user
-// const getFriends = async (db, user) => {
-//   try {
-//     const result = await db.collection('Users').findOne({ name: user });
-//     return result.friends;
-//   } catch (err) {
-//     throw new Error('could not get friends');
-//   }
-// };
-
 // get the help board w/ posts
 const getHelpPosts = async (db) => {
   try {
     const result = await db.collection('Help').find().toArray();
-    // console.log(result);
     return result;
   } catch (err) {
     throw new Error('could not get help board');
@@ -137,16 +126,6 @@ const deleteHelp = async (db, user, message, helper) => {
     throw new Error('could not find user');
   }
 };
-
-// get the samaritan texts of a user
-// const getSamaritanTexts = async (db, user) => {
-//   try {
-//     const result = await db.collection('Users').findOne({ name: user });
-//     return result.texts;
-//   } catch (err) {
-//     throw new Error('could not get samaritan texts of user');
-//   }
-// };
 
 // post a request to the Help DB
 const postRequest = async (db, user, request) => {
@@ -267,14 +246,3 @@ module.exports = {
   deleteHelp,
   soloGetMessages,
 };
-
-// const main = async () => {
-//   const url = process.env.ATLAS_URI;
-//   const db = await connect(url);
-//   const login = await getLoginTrue(db, 'Bob', 'abcd');
-//   console.log(login);
-//   const loginfail = await getLoginTrue(db, 'Bob', 'dududu');
-//   console.log(loginfail);
-// };
-
-// main();

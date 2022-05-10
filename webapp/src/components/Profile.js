@@ -13,15 +13,12 @@ import Message from './Message';
 import Message2 from './MessageHelp';
 import MyHelpPosts from './MyHelpPosts';
 import '../assets/Profile.css';
-// import Friends from './Friends';
 
 function Profile({
   accountName, initialPrivacy, requests, helped,
 }) {
   const name = useRef(accountName); // name of the user after logging in
-  // const [friends, setFriends] = useState(false); // event if friends button was clicked
   const [training, setTraining] = useState(false); // event if the training button was clicked
-  // const [tab, setTab] = useState('board'); // board or samaritan
   const [account, setAccount] = useState(false); // event if the account button was clicked
   const [privacy, setPrivacy] = useState(initialPrivacy);
   const [request, setRequest] = useState(false);
@@ -36,10 +33,6 @@ function Profile({
   const [, setRevealPosts] = useState(false);
   const requestsNo = useRef(requests);
   const helpedNo = useRef(helped);
-  // const MINUTE_MS = 5000;
-  // let currMsgLength = msgs;
-  // let curr2 = 0;
-  // let counter = 0;
 
   useEffect(() => {
     async function privacyChange() {
@@ -50,32 +43,7 @@ function Profile({
       helpBoard.current = await getHelpPosts();
     }
     initializeBoardPosts();
-
-    // async function msgGets() {
-    //   const curr1 = await soloGetMessages(accountName);
-    //   curr2 = curr1;
-    //   return curr1.data.length;
-    // }
-
-    // const interval = setInterval(() => {
-    //   async function getms() { curr2 = await msgGets(); }
-    //   getms();
-    //   console.log(currMsgLength);
-    //   console.log(curr2);
-    //   if (curr2 > currMsgLength) {
-    //     currMsgLength = curr2;
-    //     if (counter !== 0) {
-    //       // eslint-disable-next-line no-alert
-    //       alert('new message!');
-    //     }
-    //     counter += 1;
-    //   }
-    // }, MINUTE_MS);
-    // console.log(currMsgLength);
-    // return () => clearInterval(interval);
   }, [privacy, postCount]);
-  // console.log('outside useeffect');
-  // console.log(helpBoard.current);
 
   const handlePrivacy = () => {
     if (privacy === 'Private') {
@@ -102,7 +70,6 @@ function Profile({
   };
 
   const handleHelpButton = () => {
-    // currLength = helpBoard.current.length;
     clickedHelpBoardButton.current = true;
     const x = helpBoard.current;
     currentPostName.current = x[postCount].name;
@@ -137,11 +104,6 @@ function Profile({
   const handleRespond = () => {
     setRespond(true);
   };
-
-  // const handleSamaritanTexts = async () => {
-  //   setTab('samaritan');
-  //   samaritanTexts.current = await getSamaritanTexts(name.current);
-  // };
 
   if (training) { // Goes to training page
     return (
