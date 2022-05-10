@@ -87,7 +87,7 @@ function MyHelpPosts({ accountName, currentPrivacy, currentRequests }) {
         <Profile
           accountName={accountName}
           initialPrivacy={currentPrivacy}
-          requests={currentRequests + 1}
+          requests={currentRequests}
         />
       </div>
     );
