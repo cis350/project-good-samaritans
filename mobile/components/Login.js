@@ -3,13 +3,14 @@ import {
   React, useState,
 } from 'react';
 import {
-  View, Text, TextInput, Alert, StyleSheet, TouchableOpacity,
+  View, Text, TextInput, Alert, StyleSheet, TouchableOpacity, LogBox,
 } from 'react-native';
 import {
   getLoginTrue, getPasswordTrue, changePassword, getProfile,
 } from '../modules/api';
 
 function Login({ navigation }) {
+  LogBox.ignoreAllLogs();
   const [userName, setUserName] = useState('');
   const [userPass, setUserPass] = useState('');
   const [userNewPass, setUserNewPass] = useState('');

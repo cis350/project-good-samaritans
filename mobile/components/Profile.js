@@ -4,7 +4,7 @@ import {
   React, useEffect, useState, useRef,
 } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity,
+  View, Text, StyleSheet, TouchableOpacity, LogBox,
 } from 'react-native';
 import {
   changePrivacy, getHelpPosts,
@@ -14,7 +14,7 @@ function Profile({ route, navigation }) {
   const {
     accountName, initialPrivacy, requests, helped,
   } = route.params;
-
+  LogBox.ignoreAllLogs();
   // const [account, setAccount] = useState(false);
   // const [request, setRequest] = useState(false);
   // const [message, setMessage] = useState(false);
