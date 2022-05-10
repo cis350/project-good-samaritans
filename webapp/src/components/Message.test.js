@@ -19,7 +19,7 @@ import * as np from '../modules/api';
 
 const getById = queryByAttribute.bind(null, 'id');
 
-test('login start', () => {
+test('login start', async () => {
   const dom = render(<Message />);
   const startButton = getById(dom.container, '2');
   expect(startButton).toBeInTheDocument();

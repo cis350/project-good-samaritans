@@ -10,13 +10,13 @@ import '@testing-library/jest-dom';
 
 const getById = queryByAttribute.bind(null, 'id');
 
-test('login start', () => {
+test('login start', async () => {
   render(<Login />);
   const linkElement = screen.getByText(/Good Samaritans/i);
   expect(linkElement).toBeInTheDocument();
 });
 
-test('sign in ', () => {
+test('sign in ', async () => {
   const dom = render(<Login />);
   const userfield = getById(dom.container, '3');
   user.type(userfield, 'Monkey');
@@ -29,14 +29,14 @@ test('sign in ', () => {
   user.click(startButton);
 });
 
-test('sign up ', () => {
+test('sign up ', async () => {
   render(<Login />);
   const startButton2 = screen.getByText(/Signup/i);
   expect(startButton2).toBeInTheDocument();
   user.click(startButton2);
 });
 
-test('forgot password', () => {
+test('forgot password', async () => {
   render(<Login />);
   const startButton2 = screen.getByText(/Forgot Password?/i);
   expect(startButton2).toBeInTheDocument();

@@ -10,13 +10,13 @@ import '@testing-library/jest-dom';
 
 const getById = queryByAttribute.bind(null, 'id');
 
-test('fill 1', () => {
+test('fill 1', async () => {
   render(<Request accountName="Monkey" currentPrivacy="public" currentRequests="3" />);
   const linkElement = screen.getByText(/What is your issue/i);
   expect(linkElement).toBeInTheDocument();
 });
 
-test('fill 2', () => {
+test('fill 2', async () => {
   const dom = render(<Request accountName="Monkey" currentPrivacy="public" currentRequests="3" />);
   const userfield = getById(dom.container, '2');
   user.type(userfield, 'ok');

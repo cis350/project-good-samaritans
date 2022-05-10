@@ -16,7 +16,7 @@ const getById = queryByAttribute.bind(null, 'id');
 //   expect(linkElement).toBeInTheDocument();
 // });
 
-test('sign in ', () => {
+test('sign in ', async () => {
   const dom = render(<Signup />);
   const userfield = getById(dom.container, '1');
   user.type(userfield, 'Monkey');

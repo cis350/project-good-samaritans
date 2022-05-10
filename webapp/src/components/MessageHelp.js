@@ -2,7 +2,7 @@ import {
   React, useRef,
 } from 'react';
 import {
-  getMessages, addMessage,
+  addMessage,
 } from '../modules/api';
 //   import Training from './Training';
 //   import Request from './Request';

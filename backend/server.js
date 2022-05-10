@@ -289,7 +289,6 @@ const port = process.env.PORT || 5000;
 app.listen(port, async () => {
   // perform a database connection when server starts
   db = await dbo.connect(url);
-  console.log(`Server is running on port: ${port}`);
 });
 
 module.exports = app;

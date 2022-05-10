@@ -20,8 +20,8 @@ import '@testing-library/jest-dom';
 // >>>>>>> 173e36f3d4297fc7f908abcf6e6fd1d0f7de5d12
 // });
 
-test('App: start', () => {
-    render(<App />);
-    const linkElement = screen.getByText('Good Samaritans');
-    expect(linkElement).toBeInTheDocument();
-  });
+test('App: start', async () => {
+  render(<App />);
+  const linkElement = screen.getByText('Good Samaritans');
+  expect(linkElement).toBeInTheDocument();
+});

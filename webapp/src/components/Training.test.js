@@ -7,7 +7,7 @@ import {
 import Training from './Training';
 import '@testing-library/jest-dom';
 
-test('fill 1', () => {
+test('fill 1', async () => {
   render(<Training accountName="Monkey" currentPrivacy="public" currentRequests="3" />);
   const linkElement = screen.getByText(/Training Page/i);
   expect(linkElement).toBeInTheDocument();

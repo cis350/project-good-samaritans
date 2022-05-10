@@ -18,7 +18,6 @@ import '../assets/Profile.css';
 function Profile({
   accountName, initialPrivacy, requests, helped,
 }) {
-  console.log('rerender');
   const name = useRef(accountName); // name of the user after logging in
   // const [friends, setFriends] = useState(false); // event if friends button was clicked
   const [training, setTraining] = useState(false); // event if the training button was clicked
@@ -42,15 +41,6 @@ function Profile({
   // let curr2 = 0;
   // let counter = 0;
 
-  console.log(`number of requests: ${requestsNo.current}`);
-  // console.log(initialPrivacy);
-  // console.log(`initial: ${privacy}`);
-  // const MINUTE_MS = 5000;
-  // let currLength;
-  // const [clickedHelpBoardButton, setHelpButton] = useState(false);
-
-  // const friendsList = Storage.getFriends(name.current); -
-  // const friendsList = getFriends(name.current);
   useEffect(() => {
     async function privacyChange() {
       await changePrivacy(name.current, privacy);
@@ -82,9 +72,6 @@ function Profile({
     //   }
     // }, MINUTE_MS);
     // console.log(currMsgLength);
-    console.log('in useeffect');
-    console.log(helpBoard.current);
-    console.log(privacy);
     // return () => clearInterval(interval);
   }, [privacy, postCount]);
   // console.log('outside useeffect');
@@ -92,10 +79,8 @@ function Profile({
 
   const handlePrivacy = () => {
     if (privacy === 'Private') {
-      console.log('chaging privacy');
       setPrivacy('Public');
     } else {
-      console.log('else privacy');
       setPrivacy('Private');
     }
   };
