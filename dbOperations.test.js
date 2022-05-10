@@ -4,7 +4,7 @@ const dbModule = require('./dbOperations');
 // import environment variables
 require('dotenv').config({ path: './config.env' });
 
-// declare db object
+// declare db objects
 let db;
 
 // MongoDB URL
