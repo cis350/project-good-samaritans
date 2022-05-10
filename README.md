@@ -1,7 +1,7 @@
 ## READ ME INSTRUCTIONS
 In our repo, there are five branches - each covering a particular aspect of this app.
 
-1. "heroku-deployment": This branch includes all the code that has been deployed to Heroku. The app's link can be found here: https://good-samaritans.herokuapp.com/. This or "backend-tests-webapp" should be the branches where you interact with our full app.
+1. "heroku-deployment": This branch includes all the code that has been deployed to Heroku. The app's link can be found here: https://good-samaritans.herokuapp.com/. This should be the branch where you interact with our full app.
 
 2. "backend-tests-webapp": This branch includes all of our backend tests that exceed >60% code coverage as well as our webapp where the backend has been connected with frontend. Simply, go to the root directory, type "npm start" and go to your localhost:11000 to access and interact with the app. This branch also includes our Continuous Integration under .github/workflows/node-workflow.yml. To see our code coverage, please navigate to Actions and check our latest push "minor fixes" for this branch; code coverage can be found under "npm test".
 
