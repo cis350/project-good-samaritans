@@ -19,7 +19,7 @@ jobs:
           node-version: 16
       - name: npm install and build
         run: |
-          cd ./backend && npm install
+          cd ./backend && npm install && npm run lint
           cd ..
           cd ./webapp && npm install && npm run lint
           cd ..
