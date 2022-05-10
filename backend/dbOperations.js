@@ -112,10 +112,10 @@ const getSpecificHelp = async (db, user) => {
         name: user,
       },
     ).toArray();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     throw new Error('could not find user');
   }
 };
@@ -137,7 +137,7 @@ const deleteHelp = async (db, user, message, helper) => {
 
     return result2;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     throw new Error('could not find user');
   }
 };

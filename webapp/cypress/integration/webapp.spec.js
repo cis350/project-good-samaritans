@@ -114,7 +114,7 @@ describe('us', () => {
             // Then, we use `should` to assert that there are two matched items,
             // which are the two default items.
             cy.get('button[id="100"]').click()
-            cy.get('input[id="113"]').type('Monkeyyyy').should('have.value', 'Monkeyyyy')
+            cy.get('input[id="113"]').type('Monkeyyyyyyyy').should('have.value', 'Monkeyyyyyyyy')
             cy.get('input[id="114"]').type('password').should('have.value', 'password')
             cy.get('input[id="115"]').type('10').should('have.value', '10')
             cy.get('input[id="116"]').type('CA').should('have.value', 'CA')
