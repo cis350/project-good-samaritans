@@ -27,4 +27,4 @@ jobs:
           cd ..
           cd ./backend && npm start & npx wait-on http://localhost:5000
       - name: run frontend tests
-        run: cd ./webapp && jest --coverage --forceExit
+        run: cd ./webapp && npm test
