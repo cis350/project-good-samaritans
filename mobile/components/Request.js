@@ -7,7 +7,7 @@ import { incrementRequest, postRequest } from '../modules/api';
 
 function Request({ route, navigation }) {
   const {
-    accountName, currentPrivacy, currentRequests,
+    accountName, currentPrivacy, currentRequests, helped,
   } = route.params;
 
   const [requ, setRequ] = useState(false);
@@ -25,6 +25,7 @@ function Request({ route, navigation }) {
       accountName,
       initialPrivacy: currentPrivacy,
       requests: nexreq,
+      helped,
     });
   };
 

@@ -76,6 +76,7 @@ function Profile({ route, navigation }) {
       accountName,
       currentPrivacy: privacy,
       currentRequests: requestsNo,
+      helped,
     });
   };
 
